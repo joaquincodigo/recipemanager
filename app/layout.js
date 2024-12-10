@@ -1,8 +1,8 @@
 import "./globals.css";
-
 import { SearchProvider } from "../app/context/SearchContext";
-
 import SearchBar from "./components/SearchBar";
+import TopBanner from "./components/TopBanner";
+
 
 export const metadata = {
   title: "Recipe Manager",
@@ -12,21 +12,15 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={` antialiased`}>
-
+      <body className={`antialiased`}>
         <SearchProvider>
-
-          <header>
-            <p>IM A PLACEHOLDER IN LAYOUT IM NOT A COMPONENT</p>
+          <header className="bg-[#7FC37E] flex flex-col md:flex-row justify-between pe-2">
+            <TopBanner/> 
             <SearchBar />
           </header>
 
-          <main>
-            {children}
-          </main>
-
+          <main>{children}</main>
         </SearchProvider>
-
       </body>
     </html>
   );

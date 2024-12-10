@@ -5,7 +5,7 @@ import { createContext, useContext, useState } from 'react';
 const SearchContext = createContext()
 
 export function SearchProvider({ children }) {
-	const [query, setQuery] = useState('');
+	const [query, setQuery] = useState("");
 
 	const handleSearch = (searchQuery) => setQuery(searchQuery);
 
