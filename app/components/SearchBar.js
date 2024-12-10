@@ -9,7 +9,7 @@ export default function SearchBar({ onSearch }) {
 
   return (
 
-    <div className="relative flex items-center w-72 h-7 my-auto">
+    <div className="relative flex items-center w-72 h-7">
       <input
         type="text"
         onChange={(e) => handleSearch(e.target.value)}
