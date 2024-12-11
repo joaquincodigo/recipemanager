@@ -2,10 +2,20 @@ import React from "react";
 
 export default function RecipeCard({ recipe }) {
   return (
-    <div className="p-4 border rounded-lg bg-red-400">
-      <h2 className="text-xl font-semibold">{recipe.title}</h2>
-      <p>{recipe.description}</p>
-      <img src={recipe.image} />
+    <div className="p-2 w-52 border rounded-lg">
+
+      <div className="relative w-full aspect-[5/4] overflow-hidden rounded-lg">
+        <img src={recipe.image} alt="Image" className="absolute inset-0 h-full w-full object-cover" />
+      </div>
+      
+      <h2
+        className="mt-3 font-semibold">
+        {recipe.title}
+      </h2>
+
+      <p className="text-sm mt-0.5">
+        {recipe.description}
+      </p>
     </div>
   );
 }
