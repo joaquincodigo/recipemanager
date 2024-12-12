@@ -8,8 +8,7 @@ export default function SearchBar({ onSearch }) {
   const { query, handleSearch } = useSearch();
 
   return (
-
-    <div className="relative flex items-center w-72 h-7">
+    <div className="flex relative items-center w-72 h-7 ">
       <input
         type="text"
         onChange={(e) => handleSearch(e.target.value)}

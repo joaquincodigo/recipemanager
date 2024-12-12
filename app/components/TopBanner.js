@@ -4,15 +4,21 @@ import React from "react";
 
 export default function TopBanner() {
   return (
-    <Image
-      src={
-        window.innerWidth < 768 //MD breakpoint
-          ? "/images/top-banner-mobile.gif"
-          : "/images/top-banner-pc.gif"
-      }
-      width={150}
-      height={150}
-      alt="Top Banner"
-    />
+    <>
+      <Image
+        src={"/images/top-banner-mobile.gif"}
+        width={150}
+        height={150}
+        alt="Top Banner"
+        className="md:hidden"
+      />
+      <Image
+        src={"/images/top-banner-pc.gif"}
+        width={140}
+        height={140}
+        alt="Top Banner"
+        className="hidden md:inline"
+      />
+    </>
   );
 }
