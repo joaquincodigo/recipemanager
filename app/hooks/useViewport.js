@@ -1,6 +1,8 @@
+'use client'
 import { useState, useEffect } from 'react';
 
-// Custom hook to track viewport size (mobile vs desktop)
+// This hooks returns if the viewport isMobile or not
+
 const useViewport = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
