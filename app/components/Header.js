@@ -1,8 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import React, { useEffect } from "react";
-import { FaRegClock } from "react-icons/fa";
 
 import SearchBar from "./SearchBar";
 import TopBanner from "./TopBanner";
@@ -18,11 +17,25 @@ export default function Header() {
   // Header hiding when scrolling down and re-appearing when scrolling up
   const [isVisible, setIsVisible] = useState(true);
   const [lastScroll, setLastScroll] = useState(0);
+  const searchInputRef = useRef(null);
 
   const toggleSearchInput = () => {
     setIsSearchInputOpen((prevState) => !prevState);
   };
 
+  const searchbarFocus = () => {
+    setTimeout(() => {
+      searchInputRef.current.focus();
+    }, 50);
+  };
+
+  const handleSearchButtonClick = () => {
+    toggleSearchInput();
+    searchbarFocus();
+    console.log("testing search click button handler");
+  };
+
+  // Handling the hide-unhide bevahior of the header
   useEffect(() => {
     let timeoutId; // To store the timeout ID for debouncing
 
@@ -34,9 +47,7 @@ export default function Header() {
         const scrollThreshold = 50; // Minimum scroll distance to hide/show header
 
         if (Math.abs(currentScroll - lastScroll) > scrollThreshold) {
-          // If the scroll distance is larger than the threshold
           if (currentScroll > lastScroll && currentScroll > scrollThreshold) {
-            // Hide the header when scrolling down
             setIsVisible(false);
           } else {
             // Show the header when scrolling up
@@ -45,7 +56,7 @@ export default function Header() {
 
           setLastScroll(currentScroll);
         }
-      }, 10); // Delay in ms (adjust this value as needed)
+      }, 10);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -58,7 +69,7 @@ export default function Header() {
 
   return (
     <header
-      className={`bg-[#7FC37E] flex justify-between h-8 md:h-9 px-3 py-0.5 items-center transition-transform duration-300 ease-in-out ${
+      className={`bg-[#7FC37E] flex justify-between h-9 px-3 py-0.5 items-center transition-transform duration-300 ease-in-out ${
         isVisible ? "translate-y-0" : "-translate-y-full"
       } sticky top-0 z-10`}
     >
@@ -67,7 +78,7 @@ export default function Header() {
         // WITH SEARCHBAR OPEN
         isSearchInputOpen ? (
           <div className="w-full flex gap-2 justify-center">
-            <SearchBar />
+            <SearchBar searchInputRef={searchInputRef} />
             <button onClick={toggleSearchInput} className="text-white">
               Cancel
             </button>
@@ -77,7 +88,7 @@ export default function Header() {
           <div className="w-full flex justify-between">
             <TopBanner />
             <div className="flex gap-1">
-              <SearchButton handleClick={toggleSearchInput} />
+              <SearchButton handleClick={handleSearchButtonClick} />
               <ProfileAvatar />
             </div>
           </div>
