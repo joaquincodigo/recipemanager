@@ -41,13 +41,13 @@ export default function Home() {
     <div className="p-3">
       <div
         className="
-        px-16
 
         grid
         gap-4
         justify-items-center
 
         grid-cols-1
+        w-full
 
         md:grid-cols-3
 

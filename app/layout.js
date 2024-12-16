@@ -20,7 +20,7 @@ const schibstedGrotesk = Schibsted_Grotesk({
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className="schibstedGrotesk.variable">
-      <body className={`antialiased`}>
+      <body className={"antialiased bg-[#FEFEE2]"}>
         <SearchProvider>
           <Header />
           <main>

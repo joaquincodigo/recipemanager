@@ -13,7 +13,7 @@ export default function SearchBar({ onSearch }) {
         type="text"
         onChange={(e) => handleSearch(e.target.value)}
         placeholder="Search"
-        className="pl-3 pb-0.5 pr-3 rounded-full bg-white w-full h-full text-sm focus:ring-2 focus:outline"
+        className="pl-3 pb-0.5 pr-3 rounded-full bg-[#FEFEE2] w-full h-full text-sm focus:ring-2 focus:outline"
       />
       <FaSearch className="absolute right-3 text-gray-400" />
     </div>

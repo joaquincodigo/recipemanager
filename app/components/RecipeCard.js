@@ -2,7 +2,7 @@ import React from "react";
 
 export default function RecipeCard({ recipe }) {
   return (
-    <div className="p-2 w-52 border rounded-lg">
+    <div className="p-2 w-full h-full border rounded-lg bg-white">
 
       <div className="relative w-full aspect-[5/4] overflow-hidden rounded-lg">
         <img src={recipe.image} alt="Image" className="absolute inset-0 h-full w-full object-cover" />

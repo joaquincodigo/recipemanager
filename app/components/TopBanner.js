@@ -14,8 +14,8 @@ export default function TopBanner() {
       />
       <Image
         src={"/images/top-banner-pc.gif"}
-        width={140}
-        height={140}
+        width={125}
+        height={125}
         alt="Top Banner"
         className="hidden md:inline"
       />
