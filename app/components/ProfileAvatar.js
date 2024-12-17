@@ -6,11 +6,12 @@ export default function ProfileAvatar() {
 		// <Image
 		// The Next.js Image component can absolutely be used for images with a URL as their source. You simply need to allow the domain hosting the image in your next.config.js file.
 		<img
-      src="https://placehold.co/50x50/800080/FFF"
+      src="/images/profile-dummy.jpg"
       width={30}
       height={30}
-      alt="Picture of the author"
-			className="rounded-full"
+      alt="Profile Picture"
+      className="rounded-full object-cover w-7 h-7 ring-1 ring-[#FEFEE2] ring-offset-1 ring-offset-[#7FC37E]"
+
     />
   );
 }

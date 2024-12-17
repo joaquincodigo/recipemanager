@@ -7,8 +7,8 @@ export default function TopBanner() {
     <>
       <Image
         src={"/images/top-banner-mobile.gif"}
-        width={150}
-        height={150}
+        width={180}
+        height={180}
         alt="Top Banner"
         className="md:hidden"
       />

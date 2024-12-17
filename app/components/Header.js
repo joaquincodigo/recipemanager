@@ -44,7 +44,7 @@ export default function Header() {
 
       timeoutId = setTimeout(() => {
         const currentScroll = window.scrollY;
-        const scrollThreshold = 50; // Minimum scroll distance to hide/show header
+        const scrollThreshold = 10; // Minimum scroll distance to hide/show header
 
         if (Math.abs(currentScroll - lastScroll) > scrollThreshold) {
           if (currentScroll > lastScroll && currentScroll > scrollThreshold) {
@@ -69,7 +69,7 @@ export default function Header() {
 
   return (
     <header
-      className={`bg-[#7FC37E] flex justify-between h-9 px-3 py-0.5 items-center transition-transform duration-300 ease-in-out ${
+      className={`bg-[#7FC37E] flex justify-between h-14 px-3 py-0.5 items-center transition-transform duration-300 ease-in-out ${
         isVisible ? "translate-y-0" : "-translate-y-full"
       } sticky top-0 z-10`}
     >
@@ -77,7 +77,7 @@ export default function Header() {
       {isMobile ? (
         // WITH SEARCHBAR OPEN
         isSearchInputOpen ? (
-          <div className="w-full flex gap-2 justify-center">
+          <div className="w-full flex gap-2 justify-center items-center">
             <SearchBar searchInputRef={searchInputRef} />
             <button onClick={toggleSearchInput} className="text-white">
               Cancel
@@ -85,9 +85,9 @@ export default function Header() {
           </div>
         ) : (
           // WITH SEARCHBAR CLOSED
-          <div className="w-full flex justify-between">
+          <div className="w-full flex justify-between items-center">
             <TopBanner />
-            <div className="flex gap-1">
+            <div className="flex gap-4">
               <SearchButton handleClick={handleSearchButtonClick} />
               <ProfileAvatar />
             </div>
