@@ -1,10 +1,12 @@
-'use client'
+"use client";
 
 import "./globals.css";
+import { useState } from "react";
 import { SearchProvider } from "../app/context/SearchContext";
 import { Schibsted_Grotesk } from "next/font/google";
 
 import Header from "./components/Header";
+import Drawer from "./components/Drawer";
 
 const schibstedGrotesk = Schibsted_Grotesk({
   subsets: ["latin"],
@@ -18,14 +20,29 @@ const schibstedGrotesk = Schibsted_Grotesk({
 // };
 
 export default function RootLayout({ children }) {
+  
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  const toggleDrawer = () => {
+    setIsDrawerOpen(!isDrawerOpen);
+  };
+
+  const closeDrawer = () => {
+    setIsDrawerOpen(false);
+  };
+
   return (
     <html lang="en" className="schibstedGrotesk.variable">
-      <body className={"antialiased bg-[#FEFEE2] overflow-y-scroll overflow-x-hidden"}>
+      <body
+        className={
+          "antialiased bg-[#FEFEE2] overflow-y-scroll overflow-x-hidden"
+        }
+      >
         <SearchProvider>
-          <Header />
-          <main>
-            {children}
-          </main>
+          <Header toggleDrawer={toggleDrawer} />
+
+          <Drawer closeDrawer={closeDrawer} isDrawerOpen={isDrawerOpen} />
+          <main>{children}</main>
         </SearchProvider>
       </body>
     </html>
