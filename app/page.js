@@ -3,7 +3,9 @@
 import { useEffect, useState } from "react";
 import { useSearch } from "./context/SearchContext";
 import { fetchRecipes } from "../utils/recipes";
+
 import RecipeCard from "./components/RecipeCard";
+import Drawer from "./components/Drawer"
 
 export default function Home() {
   const [recipes, setRecipes] = useState([]);
@@ -50,10 +52,13 @@ export default function Home() {
         w-full
 
         md:grid-cols-3
-
+      
         lg:grid-cols-4
         "
       >
+        
+
+
         {filteredRecipes.map((recipe) => (
           <RecipeCard recipe={recipe} key={recipe.id} />
         ))}

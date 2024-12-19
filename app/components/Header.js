@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import React, { useEffect } from "react";
 
+import Drawer from "./Drawer";
 import SearchBar from "./SearchBar";
 import TopBanner from "./TopBanner";
 import SearchButton from "./SearchButton";
@@ -17,6 +18,7 @@ export default function Header() {
   // Header hiding when scrolling down and re-appearing when scrolling up
   const [isVisible, setIsVisible] = useState(true);
   const [lastScroll, setLastScroll] = useState(0);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const searchInputRef = useRef(null);
 
   const toggleSearchInput = () => {
@@ -33,6 +35,14 @@ export default function Header() {
     toggleSearchInput();
     searchbarFocus();
     console.log("testing search click button handler");
+  };
+
+  const toggleDrawer = () => {
+    setIsDrawerOpen(!isDrawerOpen)
+  };
+
+  const closeDrawer = () => {
+    setIsDrawerOpen(false)
   };
 
   // Handling the hide-unhide bevahior of the header
@@ -73,6 +83,8 @@ export default function Header() {
         isVisible ? "translate-y-0" : "-translate-y-full"
       } sticky top-0 z-10`}
     >
+      {isDrawerOpen && <Drawer closeDrawer={closeDrawer} />}
+
       {/* MOBILE */}
       {isMobile ? (
         // WITH SEARCHBAR OPEN
@@ -89,7 +101,7 @@ export default function Header() {
             <TopBanner />
             <div className="flex gap-4">
               <SearchButton handleClick={handleSearchButtonClick} />
-              <ProfileAvatar />
+              <ProfileAvatar onClick={toggleDrawer} />
             </div>
           </div>
         )
@@ -98,7 +110,7 @@ export default function Header() {
         <>
           <TopBanner />
           <SearchBar />
-          <ProfileAvatar />
+          <ProfileAvatar onClick={toggleDrawer} />
         </>
       )}
     </header>
