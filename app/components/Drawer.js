@@ -1,6 +1,9 @@
 "use client";
 
 import { AiOutlineClose } from "react-icons/ai";
+import { FaGear } from "react-icons/fa6";
+import ProfileAvatar from "./ProfileAvatar";
+import { LuCookingPot } from "react-icons/lu";
 
 export default function Drawer({ closeDrawer, isDrawerOpen }) {
   return (
@@ -33,8 +36,9 @@ export default function Drawer({ closeDrawer, isDrawerOpen }) {
           right-0
           h-screen
           w-64
-          bg-white
-          shadow-lg
+          bg-[#FEFEE2]
+          ${isDrawerOpen ? "shadow-lg" : "shadow-none"}
+          ${isDrawerOpen ? "shadow-black" : "shadow-none"}
           z-50
           transform
           transition-transform
@@ -44,15 +48,35 @@ export default function Drawer({ closeDrawer, isDrawerOpen }) {
         {/* Drawer Contents */}
 
         {/* Close Button */}
-        <button onClick={closeDrawer} className="p-1 rounded-full hover:bg-gray-200 transition-colors duration-300 ease-in-out">
+        <button
+          onClick={closeDrawer}
+          className="p-1 rounded-full hover:bg-gray-200 transition-colors duration-300 ease-in-out"
+        >
           <AiOutlineClose className="w-6 h-6 text-gray-600 hover:text-black transition-colors duration-300 ease-in-out" />
         </button>
 
-        {/* Rest of the content */}
-        <div className="">
-          <h2 className="text-lg font-bold">User Options</h2>
+        {/* User Header */}
+        <div className=" flex flex-col items-center gap-y-2">
+          <ProfileAvatar size={20} />
+          <h2 className="text-lg font-bold mb-12">Hello User!</h2>
         </div>
 
+        {/* Option List */}
+        <ul className="flex flex-col mx-auto w-max gap-y-6">
+          <li className="flex items-center">
+            <span className="me-3">
+              <LuCookingPot />
+            </span>
+            <p className="font-semibold">My Recipes</p>
+          </li>
+
+          <li className="flex items-center">
+            <span className="me-3">
+              <FaGear />
+            </span>
+            <p className="font-semibold">Settings</p>
+          </li>
+        </ul>
       </div>
     </>
   );

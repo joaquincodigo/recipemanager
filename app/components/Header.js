@@ -3,7 +3,6 @@
 import { useRef, useState } from "react";
 import React, { useEffect } from "react";
 
-import Drawer from "./Drawer";
 import SearchBar from "./SearchBar";
 import TopBanner from "./TopBanner";
 import SearchButton from "./SearchButton";
@@ -33,7 +32,6 @@ export default function Header({ toggleDrawer }) {
   const handleSearchButtonClick = () => {
     toggleSearchInput();
     searchbarFocus();
-    console.log("testing search click button handler");
   };
 
   // Handling the hide-unhide bevahior of the header
@@ -70,9 +68,22 @@ export default function Header({ toggleDrawer }) {
 
   return (
     <header
-      className={`bg-[#7FC37E] flex justify-between h-14 px-3 py-0.5 items-center transition-transform duration-300 ease-in-out ${
-        isVisible ? "translate-y-0" : "-translate-y-full"
-      } sticky top-0 z-10`}
+      className={`
+      bg-[#7FC37E]
+      flex
+      justify-between
+      h-14
+      w-screen 
+      px-3
+      py-0.5
+      items-center
+      transition-transform
+      duration-300
+      ease-in-out
+      sticky
+      top-0
+      z-10
+      ${isVisible ? "translate-y-0" : "-translate-y-full"}`}
     >
       {/* MOBILE */}
       {isMobile ? (
@@ -90,7 +101,7 @@ export default function Header({ toggleDrawer }) {
             <TopBanner />
             <div className="flex gap-4">
               <SearchButton handleClick={handleSearchButtonClick} />
-              <ProfileAvatar onClick={toggleDrawer} />
+              <ProfileAvatar onClick={toggleDrawer} size={7} />
             </div>
           </div>
         )
@@ -99,7 +110,7 @@ export default function Header({ toggleDrawer }) {
         <>
           <TopBanner />
           <SearchBar />
-          <ProfileAvatar onClick={toggleDrawer} />
+          <ProfileAvatar onClick={toggleDrawer} size={7} />
         </>
       )}
     </header>
