@@ -4,6 +4,8 @@ import { AiOutlineClose } from "react-icons/ai";
 import { FaGear } from "react-icons/fa6";
 import ProfileAvatar from "./ProfileAvatar";
 import { LuCookingPot } from "react-icons/lu";
+import Link from 'next/link'
+ 
 
 export default function Drawer({ closeDrawer, isDrawerOpen }) {
   return (
@@ -37,6 +39,7 @@ export default function Drawer({ closeDrawer, isDrawerOpen }) {
           h-screen
           w-64
           bg-[#FEFEE2]
+          text-black
           ${isDrawerOpen ? "shadow-lg" : "shadow-none"}
           ${isDrawerOpen ? "shadow-black" : "shadow-none"}
           z-50
@@ -63,19 +66,33 @@ export default function Drawer({ closeDrawer, isDrawerOpen }) {
 
         {/* Option List */}
         <ul className="flex flex-col mx-auto w-max gap-y-6">
-          <li className="flex items-center">
+
+          <li className="flex items-center" onClick={closeDrawer}>
+
             <span className="me-3">
               <LuCookingPot />
             </span>
-            <p className="font-semibold">My Recipes</p>
+
+            <Link className="font-semibold" href="/my-recipes">
+              My Recipes
+            </Link>
+            
           </li>
 
-          <li className="flex items-center">
+          
+
+          <li className="flex items-center" onClick={closeDrawer}>
+
             <span className="me-3">
               <FaGear />
             </span>
-            <p className="font-semibold">Settings</p>
+
+            <Link className="font-semibold" href="/settings">
+              Settings
+            </Link>
+
           </li>
+
         </ul>
       </div>
     </>

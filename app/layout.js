@@ -1,7 +1,7 @@
 "use client";
 
 import "./globals.css";
-import { useState } from "react";
+import { useEffect, useState, useRef} from "react";
 import { SearchProvider } from "../app/context/SearchContext";
 import { Schibsted_Grotesk } from "next/font/google";
 
@@ -20,8 +20,8 @@ const schibstedGrotesk = Schibsted_Grotesk({
 // };
 
 export default function RootLayout({ children }) {
-  
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const startTouchX = useRef(0);
 
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
@@ -30,6 +30,36 @@ export default function RootLayout({ children }) {
   const closeDrawer = () => {
     setIsDrawerOpen(false);
   };
+
+  const handleTouchStart = (e) => {
+    startTouchX.current = e.touches[0].clientX
+  };
+
+  const handleTouchMove = (e) => {
+    const currentTouchX = e.touches[0].clientX;
+    const deltaTouchX = currentTouchX - startTouchX.current; // Declare before using
+    console.log("CurrentX=", currentTouchX);
+    console.log("DeltaX=", deltaTouchX);
+    if (deltaTouchX > 100) {
+      closeDrawer();
+    }
+  };
+
+  const handleTouchEnd = (e) => {
+    startTouchX.current = 0
+  };
+
+  useEffect(() => {
+    document.body.addEventListener("touchstart", handleTouchStart);
+    document.body.addEventListener("touchmove", handleTouchMove);
+    document.body.addEventListener("touchend", handleTouchEnd);
+
+    return () => {
+      document.body.removeEventListener("touchstart", handleTouchStart);
+      document.body.removeEventListener("touchmove", handleTouchMove);
+      document.body.removeEventListener("touchend", handleTouchEnd);
+    };
+  }, [isDrawerOpen]);
 
   return (
     <html lang="en" className="schibstedGrotesk.variable">

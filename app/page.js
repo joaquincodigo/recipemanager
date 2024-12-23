@@ -5,9 +5,8 @@ import { useSearch } from "./context/SearchContext";
 import { fetchRecipes } from "../utils/recipes";
 
 import RecipeCard from "./components/RecipeCard";
-import Drawer from "./components/Drawer"
 
-export default function Home() {
+export default function HomePage() {
   const [recipes, setRecipes] = useState([]);
   const [filteredRecipes, setFilteredRecipes] = useState([]);
   const { query } = useSearch();
@@ -34,10 +33,6 @@ export default function Home() {
         )
       : setFilteredRecipes(recipes);
   }, [query, recipes]);
-
-  console.log("query", query);
-  console.log("filteredRecipes", filteredRecipes);
-  console.log("Recipes", recipes);
 
   return (
     <div className="p-3">
