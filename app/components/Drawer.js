@@ -37,8 +37,8 @@ export default function Drawer({ closeDrawer, isDrawerOpen }) {
           top-0
           right-0
           h-screen
-          w-64
-          bg-[#FEFEE2]
+          w-48
+          bg-white
           text-black
           ${isDrawerOpen ? "shadow-lg" : "shadow-none"}
           ${isDrawerOpen ? "shadow-black" : "shadow-none"}

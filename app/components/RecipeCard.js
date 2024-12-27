@@ -1,9 +1,11 @@
+import Link from "next/link";
 import React from "react";
 import { IoIosTimer } from "react-icons/io";
 
 
 export default function RecipeCard({ recipe }) {
   return (
+    <Link href={`/recipe/${recipe.id}`} >
     <div className="p-2 w-full h-full border rounded-lg bg-white">
 
       <div className="relative w-full aspect-[5/4] overflow-hidden rounded-lg mb-3">
@@ -19,11 +21,12 @@ export default function RecipeCard({ recipe }) {
         {recipe.description}
       </p>
 
-      <div>
-        {/* {recipe-preptime} */}
-        <IoIosTimer className="text-4xl text-slate-500" />
+      <div className="bg-red-300 w-16">
+       <IoIosTimer className="bg-blue-300 text-4xl text-slate-500" />
+        <p className="bg-green-300">{recipe.preptime}</p>
       </div>
 
     </div>
+</Link>
   );
 }

@@ -38,8 +38,6 @@ export default function RootLayout({ children }) {
   const handleTouchMove = (e) => {
     const currentTouchX = e.touches[0].clientX;
     const deltaTouchX = currentTouchX - startTouchX.current; // Declare before using
-    console.log("CurrentX=", currentTouchX);
-    console.log("DeltaX=", deltaTouchX);
     if (deltaTouchX > 100) {
       closeDrawer();
     }
@@ -65,7 +63,7 @@ export default function RootLayout({ children }) {
     <html lang="en" className="schibstedGrotesk.variable">
       <body
         className={
-          "antialiased bg-[#FEFEE2] overflow-y-scroll overflow-x-hidden"
+          "antialiased bg-white overflow-y-scroll overflow-x-hidden"
         }
       >
         <SearchProvider>

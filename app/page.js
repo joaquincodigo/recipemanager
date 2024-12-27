@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useSearch } from "./context/SearchContext";
-import { fetchRecipes } from "../utils/recipes";
+import { fetchRecipes } from "../utils/fetchRecipes";
 
 import RecipeCard from "./components/RecipeCard";
 
@@ -24,7 +24,6 @@ export default function HomePage() {
       .trim()
       .toLowerCase()
       .replace(/[^\w\s]/g, "");
-    //localhost:3000/
     http: query
       ? setFilteredRecipes(
           recipes.filter((recipe) =>
