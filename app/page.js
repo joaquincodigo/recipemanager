@@ -37,17 +37,11 @@ export default function HomePage() {
     <div className="p-3">
       <div
         className="
-
         grid
-        gap-4
-        justify-items-center
-
         grid-cols-1
         w-full
-
-        md:grid-cols-3
-      
-        lg:grid-cols-4
+        gap-4
+        justify-items-center
         "
       >
         
