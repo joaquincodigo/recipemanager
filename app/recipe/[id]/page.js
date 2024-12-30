@@ -35,13 +35,13 @@ export default function RecipePage({ params }) {
   return (
     <div className="p-3 pb-10">
       {/* TITLE AND PREVIEW */}
-      <section className="mb-6">
+      <section className="mb-12">
         <img
           className="w-full rounded-lg mb-3"
           src={recipe?.image}
           alt="The finished recipe"
         />
-        <h1 className="font-bold text-2xl mb-3">
+        <h1 className="font-bold text-4xl mb-3">
           {recipe?.title.charAt(0).toUpperCase() +
             recipe?.title.slice(1).toLowerCase()}
         </h1>
@@ -68,6 +68,18 @@ export default function RecipePage({ params }) {
         </ul>
       </section>
 
+      {/* PREPARATIONS STEPS  */}
+      <section className="mb-6">
+        <h2 className="font-bold text-xl mb-3">Preparation Steps</h2>
+        <ul>
+          {recipe.preparation_steps.map((step, index) => (
+            <li className="ms-5 list-decimal" key={index}>
+              {recipe.preparation_steps[index]}
+            </li>
+          ))}
+        </ul>
+      </section>
+
       {/* CATEGORY */}
       <section className="mb-6">
         <h2 className="font-bold text-xl mb-3">Category</h2>
@@ -76,15 +88,29 @@ export default function RecipePage({ params }) {
         </ul>
       </section>
 
-
-      {/* TODO  */}
-      {/* PREPARATIONS STEPS preparation_steps */}
       {/* SERVINGS servings*/}
-      {/* DIFFICULTY difficulty*/}
+      <section className="mb-6">
+        <h2 className="font-bold text-xl mb-3">Yield</h2>
+        <ul>
+          <li className="ms-5 list-disc">{recipe?.servings} servings</li>
+        </ul>
+      </section>
 
-            {/* // REMOVE */}
-      <div className="DEBUGG text-sm text-gray-400">Current ID: {recipe?.id}</div>
-            {/* // REMOVE */}
+      {/* CATEGORY */}
+      <section className="mb-6">
+        <h2 className="font-bold text-xl mb-3">Category</h2>
+        <ul>
+          <li className="ms-5 list-disc">{recipe?.category}</li>
+        </ul>
+      </section>
+
+      {/* DIFFICULTY */}
+      <section className="mb-6">
+        <h2 className="font-bold text-xl mb-3">Difficulty</h2>
+        <ul>
+          <li className="ms-5 list-disc">{recipe?.difficulty}</li>
+        </ul>
+      </section>
     </div>
   );
 }
