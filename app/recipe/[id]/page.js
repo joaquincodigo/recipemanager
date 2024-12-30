@@ -29,39 +29,62 @@ export default function RecipePage({ params }) {
     fetchData();
   }, [params]);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>An error has ocurred</p>;
+  if (loading) return <p>Loading...</p>; // TODO SPINNER
+  if (error) return <p>An error has ocurred</p>; // TODO ERROR ICON
+
   return (
-    <div className="p-3">
-      <img
-        className="w-full rounded-lg mb-3"
-        src={recipe?.image}
-        alt="The finished recipe"
-      />
+    <div className="p-3 pb-10">
+      {/* TITLE AND PREVIEW */}
+      <section className="mb-6">
+        <img
+          className="w-full rounded-lg mb-3"
+          src={recipe?.image}
+          alt="The finished recipe"
+        />
+        <h1 className="font-bold text-2xl mb-3">
+          {recipe?.title.charAt(0).toUpperCase() +
+            recipe?.title.slice(1).toLowerCase()}
+        </h1>
+        <p>{recipe?.description}</p>
+      </section>
 
-      <h1 className="font-bold text-2xl mb-3">{recipe?.title}</h1>
-
-      <p className="mb-6">{recipe?.description}</p>
-
-
-      <div className="text-xl font-bold">
-        Ingredients:
+      {/* PREPARATION TIME */}
+      <section className="mb-6">
+        <h2 className="font-bold text-xl mb-3">Preparation time</h2>
         <ul>
+          <li className="ms-5 list-disc">{recipe?.preparation_time} minutes</li>
+        </ul>
+      </section>
+
+      {/* INGREDIENTS */}
+      <section className="mb-6">
+        <h2 className="mb-3 text-xl font-bold">Ingredients</h2>
+        <ul className="mb-3">
           {recipe?.ingredients?.map((ingredient, index) => (
-            <li className="text-base font-normal list-disc" key={index}>{ingredient}</li>
+            <li className="ms-5 list-disc" key={index}>
+              {ingredient}
+            </li>
           ))}
         </ul>
-      </div>
+      </section>
 
-			
-      <div>
-        Category:
-        <div className="bg-[#7FC37E] text-white rounded inline-flex px-0.5 py-0.2">{recipe?.category}</div>
-      </div>
+      {/* CATEGORY */}
+      <section className="mb-6">
+        <h2 className="font-bold text-xl mb-3">Category</h2>
+        <ul>
+          <li className="ms-5 list-disc">{recipe?.category}</li>
+        </ul>
+      </section>
 
-      <p>Preparation time: {recipe?.preparation_time} minutes</p>
 
-      <div className="text-sm text-gray-400">Current ID: {recipe?.id}</div>
+      {/* TODO  */}
+      {/* PREPARATIONS STEPS preparation_steps */}
+      {/* SERVINGS servings*/}
+      {/* DIFFICULTY difficulty*/}
+
+            {/* // REMOVE */}
+      <div className="DEBUGG text-sm text-gray-400">Current ID: {recipe?.id}</div>
+            {/* // REMOVE */}
     </div>
   );
 }
