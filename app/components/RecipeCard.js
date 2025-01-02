@@ -6,6 +6,8 @@ import { BiCategory } from "react-icons/bi";
 export default function RecipeCard({ recipe }) {
   return (
     <Link className="w-full" href={`/recipe/${recipe.id}`}>
+
+      {/* IMAGE */}
       <div className="p-2 h-full border rounded-lg bg-white">
         <div className="relative w-full aspect-[5/4] overflow-hidden rounded-lg mb-3">
           <img

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { fetchRecipeById } from "../../../utils/fetchRecipes";
+import { IoIosTimer } from "react-icons/io";
 
 export default function RecipePage({ params }) {
   const [recipe, setRecipe] = useState(null);
@@ -51,8 +52,9 @@ export default function RecipePage({ params }) {
       {/* PREPARATION TIME */}
       <section className="mb-6">
         <h2 className="font-bold text-xl mb-3">Preparation time</h2>
-        <ul>
-          <li className="ms-5 list-disc">{recipe?.preparation_time} minutes</li>
+        <ul className="flex items-center">
+          <IoIosTimer className="text-2xl font-extrabold text-slate-500 mr-1" />
+          <li>{recipe?.preparation_time} minutes</li>
         </ul>
       </section>
 
@@ -92,7 +94,7 @@ export default function RecipePage({ params }) {
                     font-bold
                     mr-3
                     bg-white
-                    text-[#929292]
+                    text-slate-500
                   "
               >
                 {index + 1}

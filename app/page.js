@@ -50,21 +50,6 @@ export default function HomePage() {
         {filteredRecipes.map((recipe) => (
           <RecipeCard recipe={recipe} key={recipe.id} />
         ))}
-
-        {/* TESTING */}
-        {filteredRecipes.map((recipe) => (
-          <RecipeCard recipe={recipe} key={recipe.id} />
-        ))}
-        {filteredRecipes.map((recipe) => (
-          <RecipeCard recipe={recipe} key={recipe.id} />
-        ))}
-        {filteredRecipes.map((recipe) => (
-          <RecipeCard recipe={recipe} key={recipe.id} />
-        ))}
-        {filteredRecipes.map((recipe) => (
-          <RecipeCard recipe={recipe} key={recipe.id} />
-        ))}
-        {/* TESTING */}
       </div>
     </div>
   );
