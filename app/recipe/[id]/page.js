@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import { fetchRecipeById } from "../../../utils/fetchRecipes";
 import { IoIosTimer } from "react-icons/io";
+import { RiRestaurantLine } from "react-icons/ri";
+import { GrRestaurant } from "react-icons/gr";
 
 export default function RecipePage({ params }) {
   const [recipe, setRecipe] = useState(null);
@@ -106,19 +108,14 @@ export default function RecipePage({ params }) {
         </ul>
       </section>
 
-      {/* CATEGORY */}
-      <section className="mb-6">
-        <h2 className="font-bold text-xl mb-3">Category</h2>
-        <ul>
-          <li className="ms-5 list-disc">{recipe?.category}</li>
-        </ul>
-      </section>
-
-      {/* SERVINGS servings*/}
+      {/* SERVINGS */}
       <section className="mb-6">
         <h2 className="font-bold text-xl mb-3">Yield</h2>
         <ul>
-          <li className="ms-5 list-disc">{recipe?.servings} servings</li>
+          <li className="flex items-center">
+            <RiRestaurantLine className="text-2xl font-extrabold text-slate-500 mr-1" />
+            {recipe?.servings} servings
+          </li>
         </ul>
       </section>
 
