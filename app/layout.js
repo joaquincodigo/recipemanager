@@ -60,17 +60,17 @@ export default function RootLayout({ children }) {
   }, [isDrawerOpen]);
 
   return (
-    <html lang="en" className="schibstedGrotesk.variable">
+    <html lang="en" className="schibstedGrotesk.variable h-full">
       <body
         className={
-          "antialiased bg-white overflow-y-scroll overflow-x-hidden"
+          "antialiased bg-white overflow-y-scroll overflow-x-hidden h-full"
         }
       >
         <SearchProvider>
           <Header toggleDrawer={toggleDrawer} />
 
           <Drawer closeDrawer={closeDrawer} isDrawerOpen={isDrawerOpen} />
-          <main>{children}</main>
+          <main className="h-full">{children}</main>
         </SearchProvider>
       </body>
     </html>

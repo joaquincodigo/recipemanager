@@ -1,7 +1,8 @@
 export default function Spinner() {
   return (
     // OUTER CONTAINER
-    <div className="relative flex">
+    <div className="w-16 h-16 relative flex">
+
       {/* LAYER 1 CONTAINER */}
 
       <div className="absolute w-16 h-16 flex flex-col animate-spin">

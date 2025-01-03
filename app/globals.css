@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 :root {
   --font-schibsted-grotesk: "Schibsted Grotesk", sans-serif;
 }
