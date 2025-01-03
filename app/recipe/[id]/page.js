@@ -46,17 +46,30 @@ export default function RecipePage({ params }) {
 
   return (
     <div className="p-3 pb-10">
-      {/* TITLE AND PREVIEW */}
+      {/* IMAGE */}
       <section className="mb-12">
         <img
           className="w-full rounded-lg mb-3"
           src={recipe?.image}
           alt="The finished recipe"
         />
+
+        {/* TITLE */}
         <h1 className="font-bold text-4xl mb-3">
-          {recipe?.title.charAt(0).toUpperCase() +
-            recipe?.title.slice(1).toLowerCase()}
+          {recipe?.title
+            .split(" ") // Split the title into individual words
+            .map(
+              (word) =>
+                // Check if the word is entirely uppercase (e.g., "BBQ")
+                word === word.toUpperCase()
+                  ? word // If it is, keep the word as is
+                  : word.charAt(0).toUpperCase() + word.slice(1).toLowerCase() // Otherwise, capitalize the first letter and make the rest lowercase
+            )
+            .join(" ")}{" "}
+          {/* Join the words back together into a single string */}
         </h1>
+
+        {/* DESCRIPTION */}
         <p>{recipe?.description}</p>
       </section>
 
