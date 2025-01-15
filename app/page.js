@@ -44,7 +44,6 @@ export default function HomePage() {
         justify-items-center
         "
       >
-        
 
 
         {filteredRecipes.map((recipe) => (

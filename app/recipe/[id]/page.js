@@ -4,9 +4,10 @@ import { useState, useEffect } from "react";
 import { fetchRecipeById } from "../../../utils/fetchRecipes";
 import Spinner from "../../components/Spinner";
 
-import { IoIosTimer } from "react-icons/io";
-import { RiRestaurantLine } from "react-icons/ri";
-import { GrRestaurant } from "react-icons/gr";
+import { ClockIcon } from "@heroicons/react/24/outline";
+import { ChartPieIcon } from "@heroicons/react/24/outline";
+import { ChevronDoubleUpIcon } from "@heroicons/react/24/outline";
+import { TagIcon } from "@heroicons/react/24/outline";
 
 export default function RecipePage({ params }) {
   const [recipe, setRecipe] = useState(null);
@@ -77,7 +78,7 @@ export default function RecipePage({ params }) {
       <section className="mb-6">
         <h2 className="font-bold text-xl mb-3">Preparation time</h2>
         <ul className="flex items-center">
-          <IoIosTimer className="text-2xl font-extrabold text-slate-500 mr-1" />
+          <ClockIcon className="w-6 h-6 text-slate-500 me-0.5" />
           <li>{recipe?.preparation_time} minutes</li>
         </ul>
       </section>
@@ -135,7 +136,7 @@ export default function RecipePage({ params }) {
         <h2 className="font-bold text-xl mb-3">Yield</h2>
         <ul>
           <li className="flex items-center">
-            <RiRestaurantLine className="text-2xl font-extrabold text-slate-500 mr-1" />
+            <ChartPieIcon className="w-6 h-6 text-slate-500 me-0.5" />
             {recipe?.servings} servings
           </li>
         </ul>
@@ -145,7 +146,10 @@ export default function RecipePage({ params }) {
       <section className="mb-6">
         <h2 className="font-bold text-xl mb-3">Category</h2>
         <ul>
-          <li className="ms-5 list-disc">{recipe?.category}</li>
+          <li className="flex items-center">
+            <TagIcon className="w-6 h-6 text-slate-500 me-0.5" />
+            {recipe?.category}
+          </li>
         </ul>
       </section>
 
@@ -153,7 +157,10 @@ export default function RecipePage({ params }) {
       <section className="mb-6">
         <h2 className="font-bold text-xl mb-3">Difficulty</h2>
         <ul>
-          <li className="ms-5 list-disc">{recipe?.difficulty}</li>
+          <li className="flex items-center">
+            <ChevronDoubleUpIcon className="w-6 h-6 text-slate-500 me-0.5" />
+            {recipe?.difficulty}
+          </li>
         </ul>
       </section>
     </div>

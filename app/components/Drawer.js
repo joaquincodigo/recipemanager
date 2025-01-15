@@ -1,11 +1,13 @@
 "use client";
 
-import { AiOutlineClose } from "react-icons/ai";
-import { FaGear } from "react-icons/fa6";
+import { XMarkIcon } from "@heroicons/react/24/outline";
+import { Cog8ToothIcon } from "@heroicons/react/24/outline";
+import { BookOpenIcon } from "@heroicons/react/24/outline";
+import { HeartIcon } from "@heroicons/react/24/outline";
+
 import ProfileAvatar from "./ProfileAvatar";
-import { LuCookingPot } from "react-icons/lu";
-import Link from 'next/link'
- 
+
+import Link from "next/link";
 
 export default function Drawer({ closeDrawer, isDrawerOpen }) {
   return (
@@ -55,7 +57,7 @@ export default function Drawer({ closeDrawer, isDrawerOpen }) {
           onClick={closeDrawer}
           className="p-1 rounded-full hover:bg-gray-200 transition-colors duration-300 ease-in-out"
         >
-          <AiOutlineClose className="w-6 h-6 text-gray-600 hover:text-black transition-colors duration-300 ease-in-out" />
+          <XMarkIcon className="w-7 h-7 text-gray-600 hover:text-black transition-colors duration-300 ease-in-out" />
         </button>
 
         {/* User Header */}
@@ -66,33 +68,35 @@ export default function Drawer({ closeDrawer, isDrawerOpen }) {
 
         {/* Option List */}
         <ul className="flex flex-col mx-auto w-max gap-y-6">
-
           <li className="flex items-center" onClick={closeDrawer}>
-
             <span className="me-3">
-              <LuCookingPot />
+              <BookOpenIcon className="w-6 h-6" />
             </span>
 
             <Link className="font-semibold" href="/my-recipes">
-              My Recipes
+              My recipes
             </Link>
-            
           </li>
 
-          
+          <li className="flex items-center" onClick={closeDrawer}>
+            <span className="me-3">
+              <HeartIcon className="w-6 h-6" />
+            </span>
+
+            <Link className="font-semibold" href="/">
+              Favorites list
+            </Link>
+          </li>
 
           <li className="flex items-center" onClick={closeDrawer}>
-
             <span className="me-3">
-              <FaGear />
+              <Cog8ToothIcon className="w-6 h-6" />
             </span>
 
             <Link className="font-semibold" href="/settings">
               Settings
             </Link>
-
           </li>
-
         </ul>
       </div>
     </>

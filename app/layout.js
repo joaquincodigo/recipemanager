@@ -37,7 +37,7 @@ export default function RootLayout({ children }) {
 
   const handleTouchMove = (e) => {
     const currentTouchX = e.touches[0].clientX;
-    const deltaTouchX = currentTouchX - startTouchX.current; // Declare before using
+    const deltaTouchX = currentTouchX - startTouchX.current;
     if (deltaTouchX > 100) {
       closeDrawer();
     }

@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useSearch } from "../context/SearchContext";
-import { FaSearch } from "react-icons/fa";
+import {MagnifyingGlassIcon} from "@heroicons/react/24/outline";
 
 export default function SearchBar({ onSearch, searchInputRef }) {
   const { query, handleSearch } = useSearch();
@@ -28,7 +28,7 @@ export default function SearchBar({ onSearch, searchInputRef }) {
           focus:ring-offset-1
           "
       />
-      <FaSearch className="absolute right-3 text-gray-400" />
+      <MagnifyingGlassIcon className="absolute w-5 h-5 right-3 bottom-[9px] text-gray-400" />
     </div>
   );
 }

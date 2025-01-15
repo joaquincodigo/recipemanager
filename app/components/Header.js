@@ -43,7 +43,7 @@ export default function Header({ toggleDrawer }) {
 
       timeoutId = setTimeout(() => {
         const currentScroll = window.scrollY;
-        const scrollThreshold = 10; // Minimum scroll distance to hide/show header
+        const scrollThreshold = 40; // Minimum scroll distance to hide/show header
 
         if (Math.abs(currentScroll - lastScroll) > scrollThreshold) {
           if (currentScroll > lastScroll && currentScroll > scrollThreshold) {
