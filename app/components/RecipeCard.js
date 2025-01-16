@@ -1,7 +1,11 @@
 import Link from "next/link";
 import React from "react";
+
 import { ClockIcon } from '@heroicons/react/24/outline';
 import { TagIcon } from '@heroicons/react/24/outline';
+import { HeartIcon } from '@heroicons/react/24/outline';
+import { HeartIcon as HeartFilledIcon} from '@heroicons/react/24/solid';
+
 
 export default function RecipeCard({ recipe }) {
   return (
@@ -49,6 +53,11 @@ export default function RecipeCard({ recipe }) {
           <div className="flex">
             <TagIcon className="w-6 h-6 text-slate-500 me-0.5" />
             <p className="font-semibold text-slate-500">{recipe.category}</p>
+          </div>
+
+          {/* FAVORITED */}
+          <div className="flex">
+            <HeartIcon className="w-6 h-6 text-slate-500 me-0.5" />
           </div>
         </div>
       </div>
