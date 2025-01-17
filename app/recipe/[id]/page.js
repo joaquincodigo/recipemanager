@@ -1,14 +1,12 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { fetchRecipeById } from "../../../utils/fetchRecipes";
 import Spinner from "../../components/Spinner";
 
 import { ClockIcon } from "@heroicons/react/24/outline";
 import { ChartPieIcon } from "@heroicons/react/24/outline";
 import { ChevronDoubleUpIcon } from "@heroicons/react/24/outline";
 import { TagIcon } from "@heroicons/react/24/outline";
-import { resolve } from "styled-jsx/css";
 
 export default function RecipePage({ params }) {
   const [recipe, setRecipe] = useState(null);
@@ -19,14 +17,13 @@ export default function RecipePage({ params }) {
     const fetchData = async () => {
       try {
         const resolvedParams = await params; // Params is a promise in NextJS 15+
-        const response = await fetch (`/api/recipe/${resolvedParams.id}`)
-        const data = await response.json()
+        const response = await fetch(`/api/recipe/${resolvedParams.id}`);
+        const data = await response.json();
 
         console.log("THIS IS THE RECIPE OBJECT:", data["recipe"]);
         if (!data.recipe) {
           throw new Error("Recipe not found"); // Explicitly throw an error for missing recipe
         }
-        
 
         setRecipe(data["recipe"]);
       } catch (err) {

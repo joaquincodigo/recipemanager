@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { useSearch } from "./context/SearchContext";
-import { fetchRecipes } from "../utils/fetchRecipes";
 
 import RecipeCard from "./components/RecipeCard";
 
