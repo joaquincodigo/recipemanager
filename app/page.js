@@ -13,8 +13,9 @@ export default function HomePage() {
 
   useEffect(() => {
     const loadRecipes = async () => {
-      const data = await fetchRecipes();
-      setRecipes(data);
+      const response = await fetch("/api/recipes");
+      const data = await response.json();
+      setRecipes(data.recipes);
     };
     loadRecipes();
   }, []);
