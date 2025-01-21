@@ -1,8 +1,9 @@
 "use client";
 
 import "./globals.css";
-import { useEffect, useState, useRef} from "react";
-import { SearchProvider } from "../app/context/SearchContext";
+import { useEffect, useState, useRef } from "react";
+import { AuthProvider } from "./context/AuthContext";
+import { SearchProvider } from "./context/SearchContext";
 import { Schibsted_Grotesk } from "next/font/google";
 
 import Header from "./components/Header";
@@ -32,7 +33,7 @@ export default function RootLayout({ children }) {
   };
 
   const handleTouchStart = (e) => {
-    startTouchX.current = e.touches[0].clientX
+    startTouchX.current = e.touches[0].clientX;
   };
 
   const handleTouchMove = (e) => {
@@ -44,9 +45,10 @@ export default function RootLayout({ children }) {
   };
 
   const handleTouchEnd = (e) => {
-    startTouchX.current = 0
+    startTouchX.current = 0;
   };
 
+  // Drawer hide on slide touch
   useEffect(() => {
     document.body.addEventListener("touchstart", handleTouchStart);
     document.body.addEventListener("touchmove", handleTouchMove);
@@ -66,12 +68,17 @@ export default function RootLayout({ children }) {
           "antialiased bg-white overflow-y-scroll overflow-x-hidden h-full"
         }
       >
-        <SearchProvider>
-          <Header toggleDrawer={toggleDrawer} />
+        <AuthProvider>
+          <SearchProvider>
 
-          <Drawer closeDrawer={closeDrawer} isDrawerOpen={isDrawerOpen} />
-          <main className="h-full">{children}</main>
-        </SearchProvider>
+            <Header toggleDrawer={toggleDrawer} />
+
+            <Drawer closeDrawer={closeDrawer} isDrawerOpen={isDrawerOpen} />
+
+            <main className="h-full">{children}</main>
+
+          </SearchProvider>
+        </AuthProvider>
       </body>
     </html>
   );
