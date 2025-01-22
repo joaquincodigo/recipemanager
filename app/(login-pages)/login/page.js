@@ -16,8 +16,10 @@ export default function LoginPage() {
   return (
     <form>
       <div className="p-3 flex flex-col gap-y-6">
-        {/* LOGO */}
-        {/* TODO: ADD LOGO AFTER YOU FINISH IT */}
+
+        {/* +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/}
+        {/* TODO: ADD LOGO AFTER YOU FINISH IT  */}
+        {/* +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/}
 
         <PauseCircleIcon className="h-24 w-24 text-slate-500 mx-auto" />
 
@@ -56,7 +58,7 @@ export default function LoginPage() {
             <input
               className="p-3 rounded-md border border-slate-400 w-full"
               placeholder="Enter your password"
-              type="password"
+              type={showPassword ? "text" : "password"}
               name="password"
               id="password"
               autoComplete="current-password"
