@@ -24,28 +24,38 @@ export default function LoginPage() {
         {/* HEADING */}
         <h1 className="text-xl text-center font-bold">Login</h1>
 
-        {/* LOGIN */}
-        <div className="flex flex-col gap-y-1">
-          <label htmlFor="email">Enter your mail</label>
-          <input
-            className="p-3 rounded-md border border-slate-400"
-            placeholder="Mail"
-            type="email"
-            id="email"
-            name="email"
-            autoComplete="username"
-            required
-          />
-        </div>
+        <div className="flex flex-col gap-y-8">
+          {/* MAIL */}
+          <div className="relative">
+            <label
+              className="absolute left-2 -top-3 px-2 z-10 text-slate-800 bg-white"
+              htmlFor="email"
+            >
+              Mail
+            </label>
+            <input
+              className="p-3 rounded-md border border-slate-400"
+              placeholder="Enter your mail"
+              type="email"
+              id="email"
+              name="email"
+              autoComplete="username"
+              required
+            />
+          </div>
 
-        <div className="flex flex-col gap-y-1">
           {/* PASSWORD */}
-          <label htmlFor="password">Enter your password</label>
           <div className="relative w-full">
+            <label
+              className="absolute left-2 -top-3 px-2 z-10 text-slate-800 bg-white"
+              htmlFor="password"
+            >
+              Password
+            </label>
             {/* PASSWORD INPUT */}
             <input
               className="p-3 rounded-md border border-slate-400 w-full"
-              placeholder="Password"
+              placeholder="Enter your password"
               type="password"
               name="password"
               id="password"
@@ -70,9 +80,12 @@ export default function LoginPage() {
           </div>
         </div>
 
+        {/* FORGOT PASSWORD? */}
         <Link href="/login" className="text-[#099107]">
           Forgot your password?
         </Link>
+
+        {/* LOGIN BUTTON */}
         <button className="p-3 text-white font-bold rounded-md bg-[#7FC37E]">
           Login
         </button>
