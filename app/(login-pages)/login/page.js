@@ -1,6 +1,8 @@
 "use client";
-import { useState } from "react";
 import Link from "next/link";
+
+import { useAuth } from "../../context/AuthContext";
+import { useState } from "react";
 
 import { EyeIcon } from "@heroicons/react/24/outline";
 import { EyeSlashIcon } from "@heroicons/react/24/outline";
@@ -8,19 +10,41 @@ import { PauseCircleIcon } from "@heroicons/react/24/solid";
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
+  const { supabase, user } = useAuth();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
-  return (
-    <form>
-      <div className="p-3 flex flex-col gap-y-6">
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
+    console.log("Im handleSubmit");
+
+    const formData = new FormData(event.target);
+    const email = formData.get("email");
+    const password = formData.get("password");
+
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password,
+    });
+
+    if (error) {
+      console.error("Login error:", error.message);
+    } else {
+      console.log("Login successful:", data);
+    }
+
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <div className="p-3 flex flex-col gap-y-6">
+        <button className="bg-blue-500 text-white" onClick={()=>{console.log("The current user is:", user.email)}}>Log User</button>
         {/* +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/}
         {/* TODO: ADD LOGO AFTER YOU FINISH IT  */}
         {/* +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/}
-
         <PauseCircleIcon className="h-24 w-24 text-slate-500 mx-auto" />
 
         {/* HEADING */}
@@ -64,7 +88,6 @@ export default function LoginPage() {
               autoComplete="current-password"
               required
             />
-
             {/* REVEAL PASSWORD BUTTON */}
             <button
               className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-600 transition-transform duration-600 ease-in-out"
@@ -83,7 +106,12 @@ export default function LoginPage() {
         </div>
 
         {/* FORGOT PASSWORD? */}
-        <Link href="/login" className="text-[#099107]">
+
+        {/* +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/}
+        {/* TODO: Add functionality: password recovery  */}
+        {/* +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/}
+
+        <Link href="/home" className="text-[#099107]">
           Forgot your password?
         </Link>
 

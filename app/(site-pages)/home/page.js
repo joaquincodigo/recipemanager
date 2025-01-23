@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useSearch } from "../../context/SearchContext";
+import { useAuth } from "../../context/AuthContext";
 
 import RecipeCard from "../../components/RecipeCard";
 
@@ -33,9 +34,10 @@ export default function HomePage() {
       : setFilteredRecipes(recipes);
   }, [query, recipes]);
 
+
   return (
     <div className="p-3">
-      <div
+     <div
         className="
         grid
         grid-cols-1
@@ -44,8 +46,6 @@ export default function HomePage() {
         justify-items-center
         "
       >
-
-
         {filteredRecipes.map((recipe) => (
           <RecipeCard recipe={recipe} key={recipe.id} />
         ))}

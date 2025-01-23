@@ -1,44 +1,43 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 import { supabase } from "../../lib/supabase";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  // The user will be stored in a state
   const [user, setUser] = useState(null);
 
-  // Fetching the user data from SupaBase
   useEffect(() => {
-    const getUser = async () => {
-      const response = await supabase.auth.getUser();
-      const user = response.data.user;
-      setUser(user);
+    const initializeAuth = async () => {
+      const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
+
+      if (sessionError) {
+        console.error("Error fetching session:", sessionError);
+        setUser(null);
+        return;
+      }
+
+      const session = sessionData.session;
+      setUser(session?.user ?? null);
+
+      // Listen for auth state changes
+      const { data: listener } = supabase.auth.onAuthStateChange(
+        (event, session) => {
+          setUser(session?.user ?? null);
+        }
+      );
+
+      return () => {
+        listener.subscription.unsubscribe();
+      };
     };
 
-    getUser();
-
-    // Listening for Auth State Changes
-    const response = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user || null); // The session, if there is one, contains the user
-    });
-    const subscription = response.data.subscription;
-
-    // CleanUp
-    return () => {
-      subscription.unsubscribe();
-    };
+    initializeAuth();
   }, []);
 
   return (
-    <AuthContext.Provider
-      value={{
-        user,
-        signIn: supabase.auth.signInWithPassword,
-        signOut: supabase.auth.signOut,
-      }}
-    >
+    <AuthContext.Provider value={{ user, supabase }}>
       {children}
     </AuthContext.Provider>
   );
