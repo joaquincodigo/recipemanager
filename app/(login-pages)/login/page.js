@@ -2,14 +2,17 @@
 import Link from "next/link";
 
 import { useAuth } from "../../context/AuthContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { EyeIcon } from "@heroicons/react/24/outline";
 import { EyeSlashIcon } from "@heroicons/react/24/outline";
 import { PauseCircleIcon } from "@heroicons/react/24/solid";
 
 export default function LoginPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [showMailWarning, setShowMailWarning] = useState(false);
   const { supabase, user } = useAuth();
 
   const togglePasswordVisibility = () => {
@@ -35,13 +38,33 @@ export default function LoginPage() {
     } else {
       console.log("Login successful:", data);
     }
-
   };
+
+  const handleMailInput = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handlePasswordInput = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const validateEmail = () => {
+    console.log("validateEmail triggered");
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const isMailValid = regex.test(email);
+    if (!isMailValid) {
+      setShowMailWarning(true);
+    }
+  };
+
+  useEffect(() => {
+    console.log("UseEffect Triggered");
+    console.log(showMailWarning);
+  }, [showMailWarning]);
 
   return (
     <form onSubmit={handleSubmit}>
       <div className="p-3 flex flex-col gap-y-6">
-        <button className="bg-blue-500 text-white" onClick={()=>{console.log("The current user is:", user.email)}}>Log User</button>
         {/* +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/}
         {/* TODO: ADD LOGO AFTER YOU FINISH IT  */}
         {/* +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/}
@@ -54,19 +77,45 @@ export default function LoginPage() {
           {/* MAIL */}
           <div className="relative">
             <label
-              className="absolute left-2 -top-3 px-2 z-10 text-slate-800 bg-white"
+              className={`
+                absolute
+                left-2
+                -top-3
+                px-2
+                z-10
+                rounded-full
+                bg-white
+                ${showMailWarning ? "text-red-600" : "text-slate-800"}
+              `}
               htmlFor="email"
             >
-              Mail
+              {showMailWarning ? "Invalid mail" : "Mail"}
             </label>
             <input
-              className="p-3 rounded-md border border-slate-400"
+              className={`
+                p-3
+                rounded-md
+                border
+                focus:outline-none 
+                focus:ring-2
+                focus:ring-[#7FC37E]
+                ${
+                  showMailWarning
+                    ? "border-red-600 border-2"
+                    : "border-slate-400"
+                }
+              `}
               placeholder="Enter your mail"
               type="email"
               id="email"
               name="email"
               autoComplete="username"
               required
+              onChange={(e) => handleMailInput(e)}
+              onBlur={validateEmail}
+              onFocus={() => {
+                setShowMailWarning(false);
+              }}
             />
           </div>
 
@@ -80,12 +129,22 @@ export default function LoginPage() {
             </label>
             {/* PASSWORD INPUT */}
             <input
-              className="p-3 rounded-md border border-slate-400 w-full"
+              className="
+              p-3
+              rounded-md
+              border
+              border-slate-400
+              w-full
+              focus:outline-none 
+              focus:ring-2
+              focus:ring-[#7FC37E]
+              "
               placeholder="Enter your password"
               type={showPassword ? "text" : "password"}
               name="password"
               id="password"
               autoComplete="current-password"
+              onChange={(e) => handlePasswordInput(e)}
               required
             />
             {/* REVEAL PASSWORD BUTTON */}

@@ -1,15 +1,20 @@
 "use client";
 
+import Link from "next/link";
+import ProfileAvatar from "./ProfileAvatar";
+import {useAuth} from "../context/AuthContext"
+
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Cog8ToothIcon } from "@heroicons/react/24/outline";
 import { BookOpenIcon } from "@heroicons/react/24/outline";
 import { HeartIcon } from "@heroicons/react/24/outline";
 
-import ProfileAvatar from "./ProfileAvatar";
 
-import Link from "next/link";
 
 export default function Drawer({ closeDrawer, isDrawerOpen }) {
+
+  const { supabase, user } = useAuth();
+
   return (
     <>
       {/* Black Overlay */}
