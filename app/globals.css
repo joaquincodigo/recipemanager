@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  input:-webkit-autofill {
+    background-color: transparent !important;
+  }
+  .autofill-bg-transparent:-webkit-autofill {
+    background-color: transparent !important;
+  }
+}
 
 :root {
   --font-schibsted-grotesk: "Schibsted Grotesk", sans-serif;

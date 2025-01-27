@@ -1,16 +1,20 @@
 "use client";
 
-import { useRef, useState } from "react";
-import React, { useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 
 import SearchBar from "./SearchBar";
 import TopBanner from "./TopBanner";
 import SearchButton from "./SearchButton";
 import ProfileAvatar from "./ProfileAvatar";
+
 import useViewport from "../hooks/useViewport";
+import { useSearch } from "../context/SearchContext";
+import { useAuth } from "../context/AuthContext";
 
 export default function Header({ toggleDrawer }) {
   // Different headers for mobile and desktop
+  const { handleSearch } = useSearch();
+  const { user } = useAuth();
   const [isSearchInputOpen, setIsSearchInputOpen] = useState(false);
   const isMobile = useViewport();
 
@@ -33,6 +37,10 @@ export default function Header({ toggleDrawer }) {
     toggleSearchInput();
     searchbarFocus();
   };
+
+  const clearSearch = () => {
+    handleSearch("")
+  }
 
   // Handling the hide-unhide bevahior of the header
   useEffect(() => {
@@ -91,7 +99,13 @@ export default function Header({ toggleDrawer }) {
         isSearchInputOpen ? (
           <div className="w-full flex gap-2 justify-center items-center">
             <SearchBar searchInputRef={searchInputRef} />
-            <button onClick={toggleSearchInput} className="text-white">
+            <button
+              onClick={() => {
+                toggleSearchInput();
+                clearSearch();
+              }}
+              className="text-white"
+            >
               Cancel
             </button>
           </div>
@@ -101,7 +115,13 @@ export default function Header({ toggleDrawer }) {
             <TopBanner />
             <div className="flex gap-4">
               <SearchButton handleClick={handleSearchButtonClick} />
-              <ProfileAvatar onClick={toggleDrawer} size={7} />
+              {user ? (
+                <ProfileAvatar onClick={toggleDrawer} size={7} />
+              ) : (
+                <button className="border-2 h-7 px-2 text-white rounded">
+                  Login
+                </button>
+              )}
             </div>
           </div>
         )

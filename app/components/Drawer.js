@@ -2,17 +2,15 @@
 
 import Link from "next/link";
 import ProfileAvatar from "./ProfileAvatar";
-import {useAuth} from "../context/AuthContext"
+import { useAuth } from "../context/AuthContext";
 
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Cog8ToothIcon } from "@heroicons/react/24/outline";
 import { BookOpenIcon } from "@heroicons/react/24/outline";
 import { HeartIcon } from "@heroicons/react/24/outline";
-
-
+import { ArrowLeftStartOnRectangleIcon } from "@heroicons/react/24/outline";
 
 export default function Drawer({ closeDrawer, isDrawerOpen }) {
-
   const { supabase, user } = useAuth();
 
   return (
@@ -68,7 +66,7 @@ export default function Drawer({ closeDrawer, isDrawerOpen }) {
         {/* User Header */}
         <div className=" flex flex-col items-center gap-y-2">
           <ProfileAvatar size={20} />
-          <h2 className="text-lg font-bold mb-12">Hello User!</h2>
+          <h2 className="text-lg font-bold mb-12">Hello {user}!</h2>
         </div>
 
         {/* Option List */}
@@ -100,6 +98,22 @@ export default function Drawer({ closeDrawer, isDrawerOpen }) {
 
             <Link className="font-semibold" href="/settings">
               Settings
+            </Link>
+          </li>
+
+          <li
+            className="flex items-center"
+            onClick={() => {
+              supabase.auth.signOut()
+              closeDrawer();
+            }}
+          >
+            <span className="me-3">
+              <ArrowLeftStartOnRectangleIcon className="w-6 h-6" />
+            </span>
+
+            <Link className="font-semibold" href="/home">
+              Logout
             </Link>
           </li>
         </ul>

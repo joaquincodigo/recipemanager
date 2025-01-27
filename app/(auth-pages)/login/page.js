@@ -76,23 +76,29 @@ export default function LoginPage() {
         <div className="flex flex-col gap-y-8">
           {/* MAIL */}
           <div className="relative">
-            <label
-              className={`
+            <div className="bg-purple-600 border-4 border-red-600 flex">
+              <label
+                className={`
                 absolute
                 left-2
                 -top-3
                 px-2
                 z-10
-                rounded-full
-                bg-white
-                ${showMailWarning ? "text-red-600" : "text-slate-800"}
+                rounded
+                ${
+                  showMailWarning
+                    ? "text-red-600 border-red-600"
+                    : "text-slate-800"
+                }
               `}
-              htmlFor="email"
-            >
-              {showMailWarning ? "Invalid mail" : "Mail"}
-            </label>
+                htmlFor="email"
+              >
+                {showMailWarning ? "Invalid mail" : "Mail"}
+              </label>
+            </div>
             <input
               className={`
+              bg-white
                 p-3
                 rounded-md
                 border
@@ -122,7 +128,7 @@ export default function LoginPage() {
           {/* PASSWORD */}
           <div className="relative w-full">
             <label
-              className="absolute left-2 -top-3 px-2 z-10 text-slate-800 bg-white"
+              className="absolute rounded left-2 -top-3 px-2 z-10 text-slate-800 bg-white"
               htmlFor="password"
             >
               Password
@@ -132,6 +138,7 @@ export default function LoginPage() {
               className="
               p-3
               rounded-md
+              bg-white
               border
               border-slate-400
               w-full
@@ -172,6 +179,10 @@ export default function LoginPage() {
         {/* TODO: Add functionality: password recovery  */}
         {/* +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/}
 
+        {/* LOGIN BUTTON */}
+        <button className="p-3 text-white font-bold rounded-md bg-[#7FC37E]">
+          Login
+        </button>
 
         {/* SIGN UP (new account)*/}
         <p>
@@ -182,11 +193,6 @@ export default function LoginPage() {
             </Link>
           </span>
         </p>
-
-        {/* LOGIN BUTTON */}
-        <button className="p-3 text-white font-bold rounded-md bg-[#7FC37E]">
-          Login
-        </button>
       </div>
     </form>
   );

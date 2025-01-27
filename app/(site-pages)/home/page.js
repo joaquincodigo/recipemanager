@@ -15,12 +15,18 @@ export default function HomePage() {
     const loadRecipes = async () => {
       const response = await fetch("/api/recipes");
       const data = await response.json();
-      setRecipes(data.recipes);
+      setRecipe
+    s(data.recipes);
     };
     loadRecipes();
   }, []);
 
   useEffect(() => {
+   console.log("useEffect from home page Triggered:", query); 
+    if (query == "") {
+      setFilteredRecipes(recipes)
+      return
+    }
     const cleanQuery = query
       .trim()
       .toLowerCase()
