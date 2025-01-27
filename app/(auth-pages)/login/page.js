@@ -165,14 +165,23 @@ export default function LoginPage() {
         </div>
 
         {/* FORGOT PASSWORD? */}
-
+        <Link href="/password-recovery" className="text-[#099107]">
+          Forgot your password?
+        </Link>
         {/* +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/}
         {/* TODO: Add functionality: password recovery  */}
         {/* +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/}
 
-        <Link href="/home" className="text-[#099107]">
-          Forgot your password?
-        </Link>
+
+        {/* SIGN UP (new account)*/}
+        <p>
+          Dont have an account?{" "}
+          <span>
+            <Link href="/signup" className="text-[#099107]">
+              Sing Up
+            </Link>
+          </span>
+        </p>
 
         {/* LOGIN BUTTON */}
         <button className="p-3 text-white font-bold rounded-md bg-[#7FC37E]">
