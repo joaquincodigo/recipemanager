@@ -76,26 +76,21 @@ export default function LoginPage() {
         <div className="flex flex-col gap-y-8">
           {/* MAIL */}
           <div className="relative">
-            <div className="bg-purple-600 border-4 border-red-600 flex">
-              <label
-                className={`
+            <label
+              className={`
                 absolute
                 left-2
                 -top-3
                 px-2
                 z-10
                 rounded
-                ${
-                  showMailWarning
-                    ? "text-red-600 border-red-600"
-                    : "text-slate-800"
-                }
+                bg-white
+                ${showMailWarning ? "text-red-600" : "text-slate-800"}
               `}
-                htmlFor="email"
-              >
-                {showMailWarning ? "Invalid mail" : "Mail"}
-              </label>
-            </div>
+              htmlFor="email"
+            >
+              {showMailWarning ? "Invalid mail" : "Mail"}
+            </label>
             <input
               className={`
               bg-white

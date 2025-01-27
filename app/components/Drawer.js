@@ -44,6 +44,7 @@ export default function Drawer({ closeDrawer, isDrawerOpen }) {
           h-screen
           w-48
           bg-white
+          bg-opacity-95
           text-black
           ${isDrawerOpen ? "shadow-lg" : "shadow-none"}
           ${isDrawerOpen ? "shadow-black" : "shadow-none"}
@@ -66,7 +67,9 @@ export default function Drawer({ closeDrawer, isDrawerOpen }) {
         {/* User Header */}
         <div className=" flex flex-col items-center gap-y-2">
           <ProfileAvatar size={20} />
-          <h2 className="text-lg font-bold mb-12">Hello {user}!</h2>
+          <h2 className="text-lg font-bold mb-12">
+            Hello {user ? user.email : "usuario"}!
+          </h2>
         </div>
 
         {/* Option List */}
@@ -104,7 +107,7 @@ export default function Drawer({ closeDrawer, isDrawerOpen }) {
           <li
             className="flex items-center"
             onClick={() => {
-              supabase.auth.signOut()
+              supabase.auth.signOut();
               closeDrawer();
             }}
           >
