@@ -1,12 +1,13 @@
-import React from "react";
-// import Image from "next/image";
+"use client";
+import { UserCircleIcon } from "@heroicons/react/24/outline";
+import { useAuth } from "@/app/context/AuthContext";
 
-export default function ProfileAvatar({onClick, size}) {
-  return (
-		// <Image
-		// The Next.js Image component can absolutely be used for images with a URL as their source. You simply need to allow the domain hosting the image in your next.config.js file.
+export default function ProfileAvatar({ onClick, size }) {
+  const { user } = useAuth();
 
-		<img
+  return user ? (
+    // USER LOGGED (profile pic)
+    <img
       src="/images/profile-dummy.jpg"
       alt="Profile Picture"
       onClick={onClick}
@@ -16,8 +17,16 @@ export default function ProfileAvatar({onClick, size}) {
         ring-1 ring-[#FEFEE2] ring-offset-1 ring-offset-[#7FC37E]
         cursor-pointer
       `}
-       style={{ width: `${size * 0.25}rem`, height: `${size * 0.25}rem` }} // Convert size to rem units
- 
+      style={{ width: `${size * 0.25}rem`, height: `${size * 0.25}rem` }} // Convert size to rem units
     />
+  ) : (
+    // USER NOT LOGGED (empty user icon)
+      <button onClick={onClick} className="flex items-center justify-center md:hidden rounded-full ">
+      <UserCircleIcon
+        strokeWidth={2.6}
+        style={{ width: `${size * 0.25}rem`, height: `${size * 0.25}rem` }}
+        className="right-3 text-white font-bold text-2xl hover:text-[#619460]"
+      />
+    </button>
   );
 }

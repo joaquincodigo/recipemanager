@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 import { useAuth } from "../../context/AuthContext";
 import { useEffect, useState } from "react";
@@ -7,12 +8,16 @@ import { useEffect, useState } from "react";
 import { EyeIcon } from "@heroicons/react/24/outline";
 import { EyeSlashIcon } from "@heroicons/react/24/outline";
 import { PauseCircleIcon } from "@heroicons/react/24/solid";
+import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showMailWarning, setShowMailWarning] = useState(false);
+  const [showBadCredentialsWarning, setShowBadCredentialsWarning] =
+    useState(false);
+  const router = useRouter();
   const { supabase, user } = useAuth();
 
   const togglePasswordVisibility = () => {
@@ -34,9 +39,11 @@ export default function LoginPage() {
     });
 
     if (error) {
-      console.error("Login error:", error.message);
+      // console.error("Login error:", error.message);
+      setShowBadCredentialsWarning(true);
     } else {
-      console.log("Login successful:", data);
+      // console.log("Login successful:", data);
+      // DEEPSEEK REDIRECT NEEDED HERE
     }
   };
 
@@ -69,10 +76,8 @@ export default function LoginPage() {
         {/* TODO: ADD LOGO AFTER YOU FINISH IT  */}
         {/* +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/}
         <PauseCircleIcon className="h-24 w-24 text-slate-500 mx-auto" />
-
         {/* HEADING */}
         <h1 className="text-xl text-center font-bold">Login</h1>
-
         <div className="flex flex-col gap-y-8">
           {/* MAIL */}
           <div className="relative">
@@ -165,7 +170,21 @@ export default function LoginPage() {
             </button>
           </div>
         </div>
+        {/* WRONG CREDENTIALS WARNING */}
+        {showBadCredentialsWarning ? (
+          <div className="flex-col items-center justify-center">
+            <div className="flex">
+              <ExclamationCircleIcon
+                strokeWidth={1.7}
+                className="w-5 h-5 text-red-600 mr-1 transform translate-y-0.5"
+              />
 
+              <p className="text-red-600 text-center flex">
+                Incorrect email or password
+              </p>
+            </div>
+          </div>
+        ) : null}
         {/* FORGOT PASSWORD? */}
         <Link href="/password-recovery" className="text-[#099107]">
           Forgot your password?
@@ -173,15 +192,13 @@ export default function LoginPage() {
         {/* +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/}
         {/* TODO: Add functionality: password recovery  */}
         {/* +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/}
-
         {/* LOGIN BUTTON */}
         <button className="p-3 text-white font-bold rounded-md bg-[#7FC37E]">
           Login
         </button>
-
         {/* SIGN UP (new account)*/}
         <p>
-          Dont have an account?{" "}
+          Don't have an account?{" "}
           <span>
             <Link href="/signup" className="text-[#099107]">
               Sing Up

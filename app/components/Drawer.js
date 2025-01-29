@@ -13,6 +13,10 @@ import { ArrowLeftStartOnRectangleIcon } from "@heroicons/react/24/outline";
 export default function Drawer({ closeDrawer, isDrawerOpen }) {
   const { supabase, user } = useAuth();
 
+  const handleLogout = () => {
+    supabase.auth.signOut()
+  }
+
   return (
     <>
       {/* Black Overlay */}
@@ -42,20 +46,17 @@ export default function Drawer({ closeDrawer, isDrawerOpen }) {
           top-0
           right-0
           h-screen
-          w-48
+          w-60
           bg-white
           bg-opacity-95
           text-black
-          ${isDrawerOpen ? "shadow-lg" : "shadow-none"}
-          ${isDrawerOpen ? "shadow-black" : "shadow-none"}
+          ${isDrawerOpen ? "shadow-lg shadow-black" : "shadow-none"}
           z-50
           transform
           transition-transform
           ${isDrawerOpen ? "translate-x-0" : "translate-x-full"}
         `}
       >
-        {/* Drawer Contents */}
-
         {/* Close Button */}
         <button
           onClick={closeDrawer}
@@ -64,62 +65,71 @@ export default function Drawer({ closeDrawer, isDrawerOpen }) {
           <XMarkIcon className="w-7 h-7 text-gray-600 hover:text-black transition-colors duration-300 ease-in-out" />
         </button>
 
-        {/* User Header */}
-        <div className=" flex flex-col items-center gap-y-2">
-          <ProfileAvatar size={20} />
-          <h2 className="text-lg font-bold mb-12">
-            Hello {user ? user.email : "usuario"}!
-          </h2>
-        </div>
+        {user ? (
+          <div>
+            {/* User Header */}
+            <div className="flex flex-col items-center gap-y-2">
+              <ProfileAvatar size={20} />
+              <h2 className="text-lg font-bold mb-12">
+                Hello {user.email || "usuario"}!
+              </h2>
+            </div>
 
-        {/* Option List */}
-        <ul className="flex flex-col mx-auto w-max gap-y-6">
-          <li className="flex items-center" onClick={closeDrawer}>
-            <span className="me-3">
-              <BookOpenIcon className="w-6 h-6" />
-            </span>
-
-            <Link className="font-semibold" href="/my-recipes">
-              My recipes
+            {/* Option List */}
+            <ul className="flex flex-col mx-auto w-max gap-y-6">
+              <li className="flex items-center" onClick={closeDrawer}>
+                <span className="me-3">
+                  <BookOpenIcon className="w-6 h-6" />
+                </span>
+                <Link className="font-semibold" href="/my-recipes">
+                  My recipes
+                </Link>
+              </li>
+              <li className="flex items-center" onClick={closeDrawer}>
+                <span className="me-3">
+                  <HeartIcon className="w-6 h-6" />
+                </span>
+                <Link className="font-semibold" href="/">
+                  Favorites list
+                </Link>
+              </li>
+              <li className="flex items-center" onClick={closeDrawer}>
+                <span className="me-3">
+                  <Cog8ToothIcon className="w-6 h-6" />
+                </span>
+                <Link className="font-semibold" href="/settings">
+                  Settings
+                </Link>
+              </li>
+              <li
+                className="flex items-center"
+                onClick={() => {
+                  supabase.auth.signOut();
+                  closeDrawer();
+                }}
+              >
+                <span className="me-3">
+                  <ArrowLeftStartOnRectangleIcon className="w-6 h-6" />
+                </span>
+                <Link className="font-semibold" href="/home" onClick={handleLogout}>
+                  Logout
+                </Link>
+              </li>
+            </ul>
+          </div>
+        ) : (
+          <div className="w-full h-full flex flex-col items-center justify-center px-3 pb-48">
+            <p className="text-center text-xl mb-3">Hi there!</p>
+            <p className=" text-center mb-6">
+              Log in to explore your account and favorite recipes.
+            </p>
+            <Link href={"/login"}>
+              <button className="p-3 rounded text-white bg-[#7FC37E]">
+                Log in
+              </button>
             </Link>
-          </li>
-
-          <li className="flex items-center" onClick={closeDrawer}>
-            <span className="me-3">
-              <HeartIcon className="w-6 h-6" />
-            </span>
-
-            <Link className="font-semibold" href="/">
-              Favorites list
-            </Link>
-          </li>
-
-          <li className="flex items-center" onClick={closeDrawer}>
-            <span className="me-3">
-              <Cog8ToothIcon className="w-6 h-6" />
-            </span>
-
-            <Link className="font-semibold" href="/settings">
-              Settings
-            </Link>
-          </li>
-
-          <li
-            className="flex items-center"
-            onClick={() => {
-              supabase.auth.signOut();
-              closeDrawer();
-            }}
-          >
-            <span className="me-3">
-              <ArrowLeftStartOnRectangleIcon className="w-6 h-6" />
-            </span>
-
-            <Link className="font-semibold" href="/home">
-              Logout
-            </Link>
-          </li>
-        </ul>
+          </div>
+        )}
       </div>
     </>
   );

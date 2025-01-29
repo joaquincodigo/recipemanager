@@ -7,6 +7,7 @@ import TopBanner from "./TopBanner";
 import SearchButton from "./SearchButton";
 import ProfileAvatar from "./ProfileAvatar";
 
+
 import useViewport from "../hooks/useViewport";
 import { useSearch } from "../context/SearchContext";
 import { useAuth } from "../context/AuthContext";
@@ -39,8 +40,8 @@ export default function Header({ toggleDrawer }) {
   };
 
   const clearSearch = () => {
-    handleSearch("")
-  }
+    handleSearch("");
+  };
 
   // Handling the hide-unhide bevahior of the header
   useEffect(() => {
@@ -104,7 +105,7 @@ export default function Header({ toggleDrawer }) {
                 toggleSearchInput();
                 clearSearch();
               }}
-              className="text-white"
+              className="text-white ms-2"
             >
               Cancel
             </button>
@@ -115,13 +116,7 @@ export default function Header({ toggleDrawer }) {
             <TopBanner />
             <div className="flex gap-4">
               <SearchButton handleClick={handleSearchButtonClick} />
-              {user ? (
-                <ProfileAvatar onClick={toggleDrawer} size={7} />
-              ) : (
-                <button className="border-2 h-7 px-2 text-white rounded">
-                  Login
-                </button>
-              )}
+              <ProfileAvatar onClick={toggleDrawer} size={8.8} />
             </div>
           </div>
         )
@@ -130,7 +125,7 @@ export default function Header({ toggleDrawer }) {
         <>
           <TopBanner />
           <SearchBar />
-          <ProfileAvatar onClick={toggleDrawer} size={7} />
+          <ProfileAvatar onClick={toggleDrawer} size={8} />
         </>
       )}
     </header>
