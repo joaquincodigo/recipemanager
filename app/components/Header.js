@@ -105,7 +105,7 @@ export default function Header({ toggleDrawer }) {
                 toggleSearchInput();
                 clearSearch();
               }}
-              className="text-white ms-2"
+              className="text-white"
             >
               Cancel
             </button>
@@ -114,9 +114,10 @@ export default function Header({ toggleDrawer }) {
           // WITH SEARCHBAR CLOSED
           <div className="w-full flex justify-between items-center">
             <TopBanner />
-            <div className="flex gap-4">
-              <SearchButton handleClick={handleSearchButtonClick} />
-              <ProfileAvatar onClick={toggleDrawer} size={8.8} />
+            <div className="flex gap-3">
+              <SearchButton  handleClick={handleSearchButtonClick} />
+              <ProfileAvatar onClick={toggleDrawer}/>
+              
             </div>
           </div>
         )
@@ -125,7 +126,7 @@ export default function Header({ toggleDrawer }) {
         <>
           <TopBanner />
           <SearchBar />
-          <ProfileAvatar onClick={toggleDrawer} size={8} />
+          <ProfileAvatar onClick={toggleDrawer}/>
         </>
       )}
     </header>
