@@ -27,120 +27,66 @@ export default function RegisterPage() {
   };
 
   return (
-    <form className="p-3 flex flex-col gap-y-8" autoComplete="off">
-      {/* +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/}
-      {/* TODO: ADD LOGO AFTER YOU FINISH IT  */}
-      {/* +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/}
-      <PauseCircleIcon className="h-24 w-24 text-slate-500 mx-auto" />
+    <form
+      className="bg-purple-200 h-[500px] w-full p-3 flex flex-col"
+      autoComplete="off"
+    >
+      {/* +-+-+-+-+-+-+-+-+-+-+- HEADING  +-+-+-+-+-+-+-+-+-+-+-+-+*/}
+      <div className="bg-blue-300 flex-2">
+        <PauseCircleIcon className="h-24 w-24 text-slate-500 mx-auto" />
+        <h1 className="text-xl text-center font-bold">Create your account</h1>
+      </div>
 
-      {/* HEADING */}
-      <h1 className="text-xl text-center font-bold">Create your account</h1>
+      {/* +-+-+-+-+-+-+-+-+-+-+- PAGE 1 +-+-+-+-+-+-+-+-+-+-+-+-+*/}
+      <div className="flex flex-col justify-center items-center gap-y-8 flex-[6] bg-green-500">
+        {/* PAGE 1 */}
+        {currentPage === 1 && (
+          <>
+            {/* NAME */}
+            <div className="relative">
+              <label
+                className="absolute left-2 -top-3 px-2 z-10 rounded bg-white"
+                htmlFor="name"
+              >
+                Name *
+              </label>
+              <input
+                className="bg-white p-3 rounded-md border  border-slate-400 focus:outline-none focus:ring-2 focus:ring-[#7FC37E]"
+                placeholder="Enter your name"
+                type="text"
+                id="name"
+                name="name"
+                autoComplete="off"
+                required
+              />
+            </div>
+            {/* LASTNAME */}
+            <div className="relative">
+              <label
+                className="absolute left-2 -top-3 px-2 z-10 rounded bg-white"
+                htmlFor="lastname"
+              >
+                Last name
+              </label>
+              <input
+                className="bg-white p-3 rounded-md border border-slate-400 focus:outline-none focus:ring-2 focus:ring-[#7FC37E]"
+                placeholder="Enter your last name"
+                type="text"
+                id="lastname"
+                name="lastname"
+                autoComplete="off"
+              />
+            </div>
+          </>
+        )}
 
-      {currentPage === 1 && (
-        <>
-          {/* NAME */}
-          <div className="relative">
-            <label
-              className="absolute left-2 -top-3 px-2 z-10 rounded bg-white"
-              htmlFor="name"
-            >
-              Name *
-            </label>
-            <input
-              className="bg-white p-3 rounded-md border  border-slate-400 focus:outline-none focus:ring-2 focus:ring-[#7FC37E]"
-              placeholder="Enter your name"
-              type="text"
-              id="name"
-              name="name"
-              autoComplete="off"
-              required
-            />
-          </div>
+        {currentPage === 2 && <></>}
+        
+        {currentPage === 3 && <></>}
+      </div>
 
-          {/* LASTNAME */}
-          <div className="relative">
-            <label
-              className="absolute left-2 -top-3 px-2 z-10 rounded bg-white"
-              htmlFor="lastname"
-            >
-              Last name
-            </label>
-            <input
-              className="bg-white p-3 rounded-md border border-slate-400 focus:outline-none focus:ring-2 focus:ring-[#7FC37E]"
-              placeholder="Enter your last name"
-              type="text"
-              id="lastname"
-              name="lastname"
-              autoComplete="off"
-            />
-          </div>
-        </>
-      )}
-
-      {currentPage === 2 && (
-        <>
-          {/* MAIL */}
-          <div className="relative">
-            <label
-              className="absolute left-2 -top-3 px-2 z-10 rounded bg-white"
-              htmlFor="mail"
-            >
-              Mail *
-            </label>
-            <input
-              className="bg-white p-3 rounded-md border border-slate-400 focus:outline-none focus:ring-2 focus:ring-[#7FC37E]"
-              placeholder="Enter your mail"
-              type="email"
-              id="email"
-              name="email"
-              autoComplete="new-mail"
-            />
-          </div>
-        </>
-      )}
-
-      {currentPage === 3 && (
-        <>
-          {/* PASSWORD */}
-          <div className="relative">
-            <label
-              className="absolute left-2 -top-3 px-2 z-10 rounded bg-white"
-              htmlFor="password"
-            >
-              Password *
-            </label>
-            <input
-              className="bg-white p-3 rounded-md border border-slate-400 focus:outline-none focus:ring-2 focus:ring-[#7FC37E]"
-              placeholder="Enter your mail"
-              type="password"
-              id="password"
-              name="password"
-              autoComplete="new-password"
-            />
-          </div>
-
-          {/* PASSWORD VERIFICATIOn */}
-          <div className="relative">
-            <label
-              className="absolute left-2 -top-3 px-2 z-10 rounded bg-white"
-              htmlFor="password-verification"
-            >
-              Password Verification *
-            </label>
-            <input
-              className="bg-white p-3 rounded-md border border-slate-400 focus:outline-none focus:ring-2 focus:ring-[#7FC37E]"
-              placeholder="Re-enter your password"
-              type="password"
-              id="password-verfication"
-              name="password-verification"
-              autoComplete="password-verification"
-            />
-          </div>
-        </>
-      )}
-
-      {/* REGISTER BUTTON */}
-      <div className="flex gap-x-3">
+      {/* +-+-+-+-+-+-+-+-+-+-+- FORM BUTTONS +-+-+-+-+-+-+-+-+-+-+-+-+*/}
+      <div className="flex gap-x-3 flex-1 bg-orange-400">
         {currentPage != 1 && (
           <button
             onClick={handleBack}
@@ -154,13 +100,113 @@ export default function RegisterPage() {
           onClick={handleNext}
           className="p-3 flex-[2] text-white font-bold rounded-md bg-[#7FC37E]"
         >
-          Next
+          Next {currentPage}
         </button>
       </div>
-
-      {/* TESTING TESTING TESTING  TESTING  TESTING  TESTING  TESTING  */}
-      {currentPage}
-      {/* TESTING TESTING TESTING  TESTING  TESTING  TESTING  TESTING  */}
     </form>
   );
 }
+
+// {/* +-+-+-+-+-+-+-+-+-+-+- PAGE 1 +-+-+-+-+-+-+-+-+-+-+-+-+*/}
+// {currentPage === 1 && (
+//     {/* NAME */}
+//     <div className="relative">
+//       <label
+//         className="absolute left-2 -top-3 px-2 z-10 rounded bg-white"
+//         htmlFor="name"
+//       >
+//         Name *
+//       </label>
+//       <input
+//         className="bg-white p-3 rounded-md border  border-slate-400 focus:outline-none focus:ring-2 focus:ring-[#7FC37E]"
+//         placeholder="Enter your name"
+//         type="text"
+//         id="name"
+//         name="name"
+//         autoComplete="off"
+//         required
+//       />
+//     </div>
+
+//     {/* LASTNAME */}
+//     <div className="relative">
+//       <label
+//         className="absolute left-2 -top-3 px-2 z-10 rounded bg-white"
+//         htmlFor="lastname"
+//       >
+//         Last name
+//       </label>
+//       <input
+//         className="bg-white p-3 rounded-md border border-slate-400 focus:outline-none focus:ring-2 focus:ring-[#7FC37E]"
+//         placeholder="Enter your last name"
+//         type="text"
+//         id="lastname"
+//         name="lastname"
+//         autoComplete="off"
+//       />
+//     </div>
+// )}
+//
+//   {/* +-+-+-+-+-+-+-+-+-+-+- PAGE 2 +-+-+-+-+-+-+-+-+-+-+-+-+*/}
+//   {currentPage === 2 && (
+//     <>
+//       {/* MAIL */}
+//       <div className="relative">
+//         <label
+//           className="absolute left-2 -top-3 px-2 z-10 rounded bg-white"
+//           htmlFor="mail"
+//         >
+//           Mail *
+//         </label>
+//         <input
+//           className="bg-white p-3 rounded-md border border-slate-400 focus:outline-none focus:ring-2 focus:ring-[#7FC37E]"
+//           placeholder="Enter your mail"
+//           type="email"
+//           id="email"
+//           name="email"
+//           autoComplete="new-mail"
+//         />
+//       </div>
+//     </>
+//   )}
+
+//   {/* +-+-+-+-+-+-+-+-+-+-+- PAGE 3 +-+-+-+-+-+-+-+-+-+-+-+-+*/}
+//   {currentPage === 3 && (
+//     <>
+//       {/* PASSWORD */}
+//       <div className="relative">
+//         <label
+//           className="absolute left-2 -top-3 px-2 z-10 rounded bg-white"
+//           htmlFor="password"
+//         >
+//           Password *
+//         </label>
+//         <input
+//           className="bg-white p-3 rounded-md border border-slate-400 focus:outline-none focus:ring-2 focus:ring-[#7FC37E]"
+//           placeholder="Enter your mail"
+//           type="password"
+//           id="password"
+//           name="password"
+//           autoComplete="new-password"
+//         />
+//       </div>
+
+//       {/* PASSWORD VERIFICATIOn */}
+//       <div className="relative">
+//         <label
+//           className="absolute left-2 -top-3 px-2 z-10 rounded bg-white"
+//           htmlFor="password-verification"
+//         >
+//           Password Verification *
+//         </label>
+//         <input
+//           className="bg-white p-3 rounded-md border border-slate-400 focus:outline-none focus:ring-2 focus:ring-[#7FC37E]"
+//           placeholder="Re-enter your password"
+//           type="password"
+//           id="password-verfication"
+//           name="password-verification"
+//           autoComplete="password-verification"
+//         />
+//       </div>
+//     </>
+//   )}
