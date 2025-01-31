@@ -16,8 +16,8 @@ export default function SearchButton({ handleClick }) {
           "
       >
         <MagnifyingGlassIcon
-          strokeWidth={2.6}
-          className="right-3 text-white font-bold text-2xl hover:text-[#619460]"
+          strokeWidth={2.9}
+          className="right-3 w-8 h-8 text-white font-bold text-2xl hover:text-[#619460]"
         />
       </button>
     </>

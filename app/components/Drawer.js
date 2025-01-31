@@ -14,8 +14,8 @@ export default function Drawer({ closeDrawer, isDrawerOpen }) {
   const { supabase, user } = useAuth();
 
   const handleLogout = () => {
-    supabase.auth.signOut()
-  }
+    supabase.auth.signOut();
+  };
 
   return (
     <>
@@ -70,8 +70,9 @@ export default function Drawer({ closeDrawer, isDrawerOpen }) {
             {/* User Header */}
             <div className="flex flex-col items-center gap-y-2">
               <ProfileAvatar size={20} />
+              <h2 className="text-lg font-bold">Hello</h2>
               <h2 className="text-lg font-bold mb-12">
-                Hello {user.email || "usuario"}!
+                {user.email || "usuario"}!
               </h2>
             </div>
 
@@ -111,7 +112,11 @@ export default function Drawer({ closeDrawer, isDrawerOpen }) {
                 <span className="me-3">
                   <ArrowLeftStartOnRectangleIcon className="w-6 h-6" />
                 </span>
-                <Link className="font-semibold" href="/home" onClick={handleLogout}>
+                <Link
+                  className="font-semibold"
+                  href="/home"
+                  onClick={handleLogout}
+                >
                   Logout
                 </Link>
               </li>

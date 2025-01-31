@@ -5,12 +5,12 @@ import { useRef, useState, useEffect } from "react";
 import SearchBar from "./SearchBar";
 import TopBanner from "./TopBanner";
 import SearchButton from "./SearchButton";
-import ProfileAvatar from "./ProfileAvatar";
 
 
 import useViewport from "../hooks/useViewport";
 import { useSearch } from "../context/SearchContext";
 import { useAuth } from "../context/AuthContext";
+import UserButton from "./UserButton";
 
 export default function Header({ toggleDrawer }) {
   // Different headers for mobile and desktop
@@ -116,8 +116,7 @@ export default function Header({ toggleDrawer }) {
             <TopBanner />
             <div className="flex gap-3">
               <SearchButton  handleClick={handleSearchButtonClick} />
-              <ProfileAvatar onClick={toggleDrawer}/>
-              
+              <UserButton onClick={toggleDrawer}/>
             </div>
           </div>
         )
@@ -126,7 +125,7 @@ export default function Header({ toggleDrawer }) {
         <>
           <TopBanner />
           <SearchBar />
-          <ProfileAvatar onClick={toggleDrawer}/>
+          <UserButton onClick={toggleDrawer}/>
         </>
       )}
     </header>

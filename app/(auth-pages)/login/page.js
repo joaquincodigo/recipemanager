@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 import { useAuth } from "../../context/AuthContext";
 import { useEffect, useState } from "react";
@@ -43,7 +43,7 @@ export default function LoginPage() {
       setShowBadCredentialsWarning(true);
     } else {
       // console.log("Login successful:", data);
-      // DEEPSEEK REDIRECT NEEDED HERE
+      router.push("/home");
     }
   };
 
