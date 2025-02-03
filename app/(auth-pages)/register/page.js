@@ -27,19 +27,16 @@ export default function RegisterPage() {
   };
 
   return (
-    <form
-      className="bg-purple-200 h-[500px] w-full p-3 flex flex-col"
-      autoComplete="off"
-    >
+    <form className=" h-[400px] w-full p-3 flex flex-col" autoComplete="off">
       {/* +-+-+-+-+-+-+-+-+-+-+- HEADING  +-+-+-+-+-+-+-+-+-+-+-+-+*/}
-      <div className="bg-blue-300 flex-2">
+      <div className=" flex-[2]">
         <PauseCircleIcon className="h-24 w-24 text-slate-500 mx-auto" />
         <h1 className="text-xl text-center font-bold">Create your account</h1>
       </div>
 
-      {/* +-+-+-+-+-+-+-+-+-+-+- PAGE 1 +-+-+-+-+-+-+-+-+-+-+-+-+*/}
-      <div className="flex flex-col justify-center items-center gap-y-8 flex-[6] bg-green-500">
-        {/* PAGE 1 */}
+      {/* +-+-+-+-+-+-+-+- INPUTS CONTAINER  +-+-+-+-+-+-+-+-+-+-+-*/}
+      <div className=" w-full flex flex-col justify-center items-center gap-y-8 flex-[4] ">
+        {/* +-+-+-+-+-+-+-+-+-+-+- PAGE 1 +-+-+-+-+-+-+-+-+-+-+-+-+*/}
         {currentPage === 1 && (
           <>
             {/* NAME */}
@@ -51,7 +48,7 @@ export default function RegisterPage() {
                 Name *
               </label>
               <input
-                className="bg-white p-3 rounded-md border  border-slate-400 focus:outline-none focus:ring-2 focus:ring-[#7FC37E]"
+                className="bg-white w-64 p-3 rounded-md border  border-slate-400 focus:outline-none focus:ring-2 focus:ring-[#7FC37E]"
                 placeholder="Enter your name"
                 type="text"
                 id="name"
@@ -69,7 +66,7 @@ export default function RegisterPage() {
                 Last name
               </label>
               <input
-                className="bg-white p-3 rounded-md border border-slate-400 focus:outline-none focus:ring-2 focus:ring-[#7FC37E]"
+                className="bg-white w-64 p-3 rounded-md border border-slate-400 focus:outline-none focus:ring-2 focus:ring-[#7FC37E]"
                 placeholder="Enter your last name"
                 type="text"
                 id="lastname"
@@ -80,133 +77,91 @@ export default function RegisterPage() {
           </>
         )}
 
-        {currentPage === 2 && <></>}
-        
-        {currentPage === 3 && <></>}
+        {/* +-+-+-+-+-+-+-+-+-+-+- PAGE 1 +-+-+-+-+-+-+-+-+-+-+-+-+*/}
+        {currentPage === 2 && (
+          <>
+            {/* MAIL */}
+            <div className="relative">
+              <label
+                className="absolute left-2 -top-3 px-2 z-10 rounded bg-white"
+                htmlFor="mail"
+              >
+                Mail *
+              </label>
+              <input
+                className="bg-white w-64 p-3 rounded-md border border-slate-400 focus:outline-none focus:ring-2 focus:ring-[#7FC37E]"
+                placeholder="Enter your mail"
+                type="email"
+                id="email"
+                name="email"
+                autoComplete="new-mail"
+              />
+            </div>
+          </>
+        )}
+
+        {/* +-+-+-+-+-+-+-+-+-+-+- PAGE 2 +-+-+-+-+-+-+-+-+-+-+-+-+*/}
+        {currentPage === 3 && (
+          <>
+            {/* PASSWORD */}
+            <div className="relative">
+              <label
+                className="absolute left-2 -top-3 px-2 z-10 rounded bg-white"
+                htmlFor="password"
+              >
+                Password *
+              </label>
+              <input
+                className="bg-white w-64 p-3 rounded-md border border-slate-400 focus:outline-none focus:ring-2 focus:ring-[#7FC37E]"
+                placeholder="Enter your mail"
+                type="password"
+                id="password"
+                name="password"
+                autoComplete="new-password"
+              />
+            </div>
+
+            {/* PASSWORD VERIFICATIOn */}
+            <div className="relative">
+              <label
+                className="absolute left-2 -top-3 px-2 z-10 rounded bg-white"
+                htmlFor="password-verification"
+              >
+                Password Verification *
+              </label>
+              <input
+                className="bg-white w-64 p-3 rounded-md border border-slate-400 focus:outline-none focus:ring-2 focus:ring-[#7FC37E]"
+                placeholder="Re-enter your password"
+                type="password"
+                id="password-verfication"
+                name="password-verification"
+                autoComplete="password-verification"
+              />
+            </div>
+          </>
+        )}
       </div>
 
       {/* +-+-+-+-+-+-+-+-+-+-+- FORM BUTTONS +-+-+-+-+-+-+-+-+-+-+-+-+*/}
-      <div className="flex gap-x-3 flex-1 bg-orange-400">
-        {currentPage != 1 && (
-          <button
-            onClick={handleBack}
-            className="flex-1 font-bold rounded-md hover:bg-slate-200"
-          >
-            Back
-          </button>
-        )}
+      <div className=" w-full flex-1 flex justify-center items-center">
+        <div className=" min-w-64 gap-x-3 flex">
+          {currentPage != 1 && (
+            <button
+              onClick={handleBack}
+              className="flex-1 font-bold rounded-md hover:bg-slate-200"
+            >
+              Back
+            </button>
+          )}
 
-        <button
-          onClick={handleNext}
-          className="p-3 flex-[2] text-white font-bold rounded-md bg-[#7FC37E]"
-        >
-          Next {currentPage}
-        </button>
+          <button
+            onClick={handleNext}
+            className="p-3 flex-[2] text-white font-bold rounded-md bg-[#7FC37E]"
+          >
+            Next
+          </button>
+        </div>
       </div>
     </form>
   );
 }
-
-// {/* +-+-+-+-+-+-+-+-+-+-+- PAGE 1 +-+-+-+-+-+-+-+-+-+-+-+-+*/}
-// {currentPage === 1 && (
-//     {/* NAME */}
-//     <div className="relative">
-//       <label
-//         className="absolute left-2 -top-3 px-2 z-10 rounded bg-white"
-//         htmlFor="name"
-//       >
-//         Name *
-//       </label>
-//       <input
-//         className="bg-white p-3 rounded-md border  border-slate-400 focus:outline-none focus:ring-2 focus:ring-[#7FC37E]"
-//         placeholder="Enter your name"
-//         type="text"
-//         id="name"
-//         name="name"
-//         autoComplete="off"
-//         required
-//       />
-//     </div>
-
-//     {/* LASTNAME */}
-//     <div className="relative">
-//       <label
-//         className="absolute left-2 -top-3 px-2 z-10 rounded bg-white"
-//         htmlFor="lastname"
-//       >
-//         Last name
-//       </label>
-//       <input
-//         className="bg-white p-3 rounded-md border border-slate-400 focus:outline-none focus:ring-2 focus:ring-[#7FC37E]"
-//         placeholder="Enter your last name"
-//         type="text"
-//         id="lastname"
-//         name="lastname"
-//         autoComplete="off"
-//       />
-//     </div>
-// )}
-//
-//   {/* +-+-+-+-+-+-+-+-+-+-+- PAGE 2 +-+-+-+-+-+-+-+-+-+-+-+-+*/}
-//   {currentPage === 2 && (
-//     <>
-//       {/* MAIL */}
-//       <div className="relative">
-//         <label
-//           className="absolute left-2 -top-3 px-2 z-10 rounded bg-white"
-//           htmlFor="mail"
-//         >
-//           Mail *
-//         </label>
-//         <input
-//           className="bg-white p-3 rounded-md border border-slate-400 focus:outline-none focus:ring-2 focus:ring-[#7FC37E]"
-//           placeholder="Enter your mail"
-//           type="email"
-//           id="email"
-//           name="email"
-//           autoComplete="new-mail"
-//         />
-//       </div>
-//     </>
-//   )}
-
-//   {/* +-+-+-+-+-+-+-+-+-+-+- PAGE 3 +-+-+-+-+-+-+-+-+-+-+-+-+*/}
-//   {currentPage === 3 && (
-//     <>
-//       {/* PASSWORD */}
-//       <div className="relative">
-//         <label
-//           className="absolute left-2 -top-3 px-2 z-10 rounded bg-white"
-//           htmlFor="password"
-//         >
-//           Password *
-//         </label>
-//         <input
-//           className="bg-white p-3 rounded-md border border-slate-400 focus:outline-none focus:ring-2 focus:ring-[#7FC37E]"
-//           placeholder="Enter your mail"
-//           type="password"
-//           id="password"
-//           name="password"
-//           autoComplete="new-password"
-//         />
-//       </div>
-
-//       {/* PASSWORD VERIFICATIOn */}
-//       <div className="relative">
-//         <label
-//           className="absolute left-2 -top-3 px-2 z-10 rounded bg-white"
-//           htmlFor="password-verification"
-//         >
-//           Password Verification *
-//         </label>
-//         <input
-//           className="bg-white p-3 rounded-md border border-slate-400 focus:outline-none focus:ring-2 focus:ring-[#7FC37E]"
-//           placeholder="Re-enter your password"
-//           type="password"
-//           id="password-verfication"
-//           name="password-verification"
-//           autoComplete="password-verification"
-//         />
-//       </div>
-//     </>
-//   )}
