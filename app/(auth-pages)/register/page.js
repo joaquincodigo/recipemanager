@@ -11,11 +11,12 @@ export default function RegisterPage() {
     password: "",
     passwordVerification: "",
   });
+  const [warning, setWarning] = useState({ message: null, field: null });
 
   const [currentPage, setCurrentPage] = useState(1);
-  const nameRef = useRef(null)
-  const emailRef = useRef(null)
-  const passwordRef = useRef(null)
+  const nameRef = useRef(null);
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
 
   const handleNext = (e) => {
     e.preventDefault();
@@ -24,7 +25,7 @@ export default function RegisterPage() {
     }
   };
 
-  // Auto-focus handling 
+  // Auto-focus handling
   useEffect(() => {
     if (currentPage === 1) {
       nameRef.current?.focus();
@@ -35,8 +36,7 @@ export default function RegisterPage() {
     if (currentPage === 3) {
       passwordRef.current?.focus();
     }
-  }, [currentPage]); 
-
+  }, [currentPage]);
 
   const handleBack = (e) => {
     e.preventDefault();
@@ -46,7 +46,56 @@ export default function RegisterPage() {
   };
 
   const isValidName = () => {
-    return formData.name.length >= 2;
+    const regex = /^[A-Za-zÀ-ÖØ-öø-ÿ' -]{2,50}$/;
+    return regex.test(formData.name);
+  };
+
+  const isValidEmail = () => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(formData.email);
+  };
+
+  const isValidPassword = () => {
+    const regex = /^.{6,}$/;
+    return regex.test(formData.password);
+  };
+
+  const isValidPasswordVerification = () => {
+    return formData.password === formData.passwordVerification;
+  };
+
+  const handleWarning = (e) => {
+    switch (e.target.name) {
+      case "name":
+        if (!isValidName())
+          setWarning({ message: "Invalid name", field: "name" });
+        break;
+
+      case "email":
+        if (!isValidEmail())
+          setWarning({ message: "Invalid mail", field: "email" });
+        break;
+
+      case "password":
+        if (!isValidPassword())
+          setWarning({ message: "Invalid password", field: "password" });
+        break;
+
+      case "password-verification":
+        if (!isValidPasswordVerification())
+          setWarning({
+            message: "Passwords do not match",
+            field: "password-verification",
+          });
+        break;
+
+      default:
+        break;
+    }
+  };
+
+  const resetWarning = () => {
+    setWarning({ message: "", field: "" });
   };
 
   const handleChange = (e) => {
@@ -56,26 +105,35 @@ export default function RegisterPage() {
   return (
     <form className=" h-[400px] w-full p-3 flex flex-col" autoComplete="off">
       {/* +-+-+-+-+-+-+-+-+-+-+- HEADING  +-+-+-+-+-+-+-+-+-+-+-+-+*/}
-      <div className=" flex-[2]">
-        <PauseCircleIcon className="h-24 w-24 text-slate-500 mx-auto" />
-        <h1 className="text-xl text-center font-bold">Create your account</h1>
+      <div className=" flex-[4]">
+        <PauseCircleIcon className="h-20 w-20 text-slate-500 mx-auto" />
+        <h1 className="mb-5 text-xl text-center font-bold">
+          Create your account
+        </h1>
       </div>
 
       {/* +-+-+-+-+-+-+-+- INPUTS CONTAINER  +-+-+-+-+-+-+-+-+-+-+-*/}
-      <div className=" w-full flex flex-col justify-center items-center gap-y-8 flex-[4] ">
+      <div className=" w-full flex flex-col justify-center items-center gap-y-9 flex-[8] ">
         {/* +-+-+-+-+-+-+-+-+-+-+- PAGE 1 +-+-+-+-+-+-+-+-+-+-+-+-+*/}
         {currentPage === 1 && (
           <>
             {/* NAME */}
             <div className="relative">
               <label
-                className="absolute left-2 -top-3 px-2 z-10 rounded bg-white"
+                className={`${
+                  warning.field === "name" ? "text-red-500" : ""
+                } absolute left-2 -top-3 px-2 z-10 rounded bg-white`}
                 htmlFor="name"
               >
-                Name *
+                {warning.field === "name" ? "Invalid name" : "Name *"}
               </label>
               <input
-                className="bg-white w-64 p-3 rounded-md border  border-slate-400 focus:outline-none focus:ring-2 focus:ring-[#7FC37E]"
+                className={`${
+                  warning.field === "name"
+                    ? "text-red-500 border-red-500 border-2 "
+                    : "border-slate-400"
+                }  
+                "bg-white w-64 p-3 rounded-md border  focus:outline-none focus:ring-2 focus:ring-[#7FC37E]`}
                 placeholder="Enter your name"
                 type="text"
                 id="name"
@@ -84,6 +142,8 @@ export default function RegisterPage() {
                 required
                 ref={nameRef}
                 onChange={handleChange}
+                onBlur={handleWarning}
+                onClick={resetWarning}
                 value={formData.name}
               />
             </div>
@@ -115,19 +175,28 @@ export default function RegisterPage() {
             {/* MAIL */}
             <div className="relative">
               <label
-                className="absolute left-2 -top-3 px-2 z-10 rounded bg-white"
-                htmlFor="mail"
+                className={`${
+                  warning.field === "email" ? "text-red-500" : ""
+                } absolute left-2 -top-3 px-2 z-10 rounded bg-white`}
+                htmlFor="email"
               >
-                Mail *
+                {warning.field === "email" ? "Invalid mail" : "Mail *"}
               </label>
               <input
-                className="bg-white w-64 p-3 rounded-md border border-slate-400 focus:outline-none focus:ring-2 focus:ring-[#7FC37E]"
+                className={`${
+                  warning.field === "email"
+                    ? "text-red-500 border-red-500 border-2 "
+                    : "border-slate-400"
+                }  
+                "bg-white w-64 p-3 rounded-md border  focus:outline-none focus:ring-2 focus:ring-[#7FC37E]`}
                 placeholder="Enter your mail"
                 type="email"
                 id="email"
                 name="email"
-                autoComplete="new-mail"
+                autoComplete="new-email"
                 onChange={handleChange}
+                onBlur={handleWarning}
+                onClick={resetWarning}
                 value={formData.email}
                 ref={emailRef}
               />
@@ -141,13 +210,22 @@ export default function RegisterPage() {
             {/* PASSWORD */}
             <div className="relative">
               <label
-                className="absolute left-2 -top-3 px-2 z-10 rounded bg-white"
+                className={`${
+                  warning.field === "password" ? "text-red-500" : ""
+                } absolute left-2 -top-3 px-2 z-10 rounded bg-white`}
                 htmlFor="password"
               >
-                Password *
+                {warning.field === "password"
+                  ? "Invalid password (too short)"
+                  : "Password *"}
               </label>
               <input
-                className="bg-white w-64 p-3 rounded-md border border-slate-400 focus:outline-none focus:ring-2 focus:ring-[#7FC37E]"
+                className={`${
+                  warning.field === "password"
+                    ? "text-red-500 border-red-500 border-2 "
+                    : "border-slate-400"
+                }
+                "bg-white w-64 p-3 rounded-md border  focus:outline-none focus:ring-2 focus:ring-[#7FC37E]`}
                 placeholder="Enter your mail"
                 type="password"
                 id="password"
@@ -155,6 +233,8 @@ export default function RegisterPage() {
                 autoComplete="new-password"
                 value={formData.password}
                 onChange={handleChange}
+                onBlur={handleWarning}
+                onClick={resetWarning}
                 ref={passwordRef}
               />
             </div>
@@ -162,10 +242,15 @@ export default function RegisterPage() {
             {/* PASSWORD VERIFICATIOn */}
             <div className="relative">
               <label
-                className="absolute left-2 -top-3 px-2 z-10 rounded bg-white"
+                className={`${
+                  warning.field === "password-verification" ? "text-red-500" : ""
+                } absolute left-2 -top-3 px-2 z-10 rounded bg-white`}
                 htmlFor="password-verification"
               >
-                Password Verification *
+                
+                {warning.field === "password-verification"
+                  ? "Passwords do not match"
+                  : "Password Verification *"}
               </label>
               <input
                 className="bg-white w-64 p-3 rounded-md border border-slate-400 focus:outline-none focus:ring-2 focus:ring-[#7FC37E]"
@@ -175,6 +260,8 @@ export default function RegisterPage() {
                 name="passwordVerification"
                 autoComplete="passwordVerification"
                 onChange={handleChange}
+                onBlur={handleWarning}
+                onClick={resetWarning}
                 value={formData.passwordVerification}
               />
             </div>
@@ -183,8 +270,9 @@ export default function RegisterPage() {
       </div>
 
       {/* +-+-+-+-+-+-+-+-+-+-+- FORM BUTTONS +-+-+-+-+-+-+-+-+-+-+-+-+*/}
-      <div className=" w-full flex-1 flex justify-center items-center">
+      <div className=" w-full flex-[4] flex justify-center items-center">
         <div className=" min-w-64 gap-x-3 flex">
+          {/* Back Button */}
           {currentPage != 1 && (
             <button
               onClick={handleBack}
@@ -194,10 +282,12 @@ export default function RegisterPage() {
             </button>
           )}
 
-          <button
-            disabled={!isValidName()}
-            onClick={handleNext}
-            className={`
+          {/* Next Button (page 1) */}
+          {currentPage == 1 && (
+            <button
+              disabled={!isValidName()}
+              onClick={handleNext}
+              className={`
             p-3
             flex-[2]
             font-bold
@@ -207,9 +297,50 @@ export default function RegisterPage() {
                 ? "bg-[#7FC37E] text-white"
                 : "bg-gray-400 text-gray-200"
             }`}
-          >
-            Next
-          </button>
+            >
+              Next
+            </button>
+          )}
+
+          {/* Next Button (page 2) */}
+          {currentPage == 2 && (
+            <button
+              disabled={!isValidEmail()}
+              onClick={handleNext}
+              className={`
+            p-3
+            flex-[2]
+            font-bold
+            rounded-md
+            ${
+              isValidEmail()
+                ? "bg-[#7FC37E] text-white"
+                : "bg-gray-400 text-gray-200"
+            }`}
+            >
+              Next
+            </button>
+          )}
+
+          {/* Next Button (page 3) */}
+          {currentPage == 3 && (
+            <button
+              disabled={!isValidPassword() || !isValidPasswordVerification()}
+              onClick={handleNext}
+              className={`
+            p-3
+            flex-[2]
+            font-bold
+            rounded-md
+            ${
+              isValidPassword() && isValidPasswordVerification()
+                ? "bg-[#7FC37E] text-white"
+                : "bg-gray-400 text-gray-200"
+            }`}
+            >
+              Complete
+            </button>
+          )}
         </div>
       </div>
     </form>
