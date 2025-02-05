@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { PauseCircleIcon } from "@heroicons/react/24/solid";
+import InputField from "@/app/components/InputField";
 
 export default function RegisterPage() {
   const [formData, setFormData] = useState({
@@ -9,8 +10,9 @@ export default function RegisterPage() {
     lastname: "",
     email: "",
     password: "",
-    passwordVerification: "",
+    "password-verification": "",
   });
+
   const [warning, setWarning] = useState({ message: null, field: null });
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -61,7 +63,10 @@ export default function RegisterPage() {
   };
 
   const isValidPasswordVerification = () => {
-    return formData.password === formData.passwordVerification;
+    return (
+      formData["password-verification"] != "" &&
+      formData.password === formData["password-verification"]
+    );
   };
 
   const handleWarning = (e) => {
@@ -104,6 +109,10 @@ export default function RegisterPage() {
 
   return (
     <form className=" h-[400px] w-full p-3 flex flex-col" autoComplete="off">
+
+
+
+
       {/* +-+-+-+-+-+-+-+-+-+-+- HEADING  +-+-+-+-+-+-+-+-+-+-+-+-+*/}
       <div className=" flex-[4]">
         <PauseCircleIcon className="h-20 w-20 text-slate-500 mx-auto" />
@@ -132,7 +141,7 @@ export default function RegisterPage() {
                   warning.field === "name"
                     ? "text-red-500 border-red-500 border-2 "
                     : "border-slate-400"
-                }  
+                }
                 "bg-white w-64 p-3 rounded-md border  focus:outline-none focus:ring-2 focus:ring-[#7FC37E]`}
                 placeholder="Enter your name"
                 type="text"
@@ -239,30 +248,36 @@ export default function RegisterPage() {
               />
             </div>
 
-            {/* PASSWORD VERIFICATIOn */}
+            {/* PASSWORD VERIFICATION */}
             <div className="relative">
               <label
                 className={`${
-                  warning.field === "password-verification" ? "text-red-500" : ""
+                  warning.field === "password-verification"
+                    ? "text-red-500"
+                    : ""
                 } absolute left-2 -top-3 px-2 z-10 rounded bg-white`}
                 htmlFor="password-verification"
               >
-                
                 {warning.field === "password-verification"
                   ? "Passwords do not match"
                   : "Password Verification *"}
               </label>
               <input
-                className="bg-white w-64 p-3 rounded-md border border-slate-400 focus:outline-none focus:ring-2 focus:ring-[#7FC37E]"
+                className={`${
+                  warning.field === "password-verification"
+                    ? "text-red-500 border-red-500 border-2 "
+                    : "border-slate-400"
+                }
+                "bg-white w-64 p-3 rounded-md border  focus:outline-none focus:ring-2 focus:ring-[#7FC37E]`}
                 placeholder="Re-enter your password"
                 type="password"
-                id="passwordVerfication"
-                name="passwordVerification"
-                autoComplete="passwordVerification"
+                id="password-verfication"
+                name="password-verification"
+                autoComplete="password-verification"
                 onChange={handleChange}
                 onBlur={handleWarning}
                 onClick={resetWarning}
-                value={formData.passwordVerification}
+                value={formData["password-verification"]}
               />
             </div>
           </>

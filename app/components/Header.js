@@ -6,7 +6,6 @@ import SearchBar from "./SearchBar";
 import TopBanner from "./TopBanner";
 import SearchButton from "./SearchButton";
 
-
 import useViewport from "../hooks/useViewport";
 import { useSearch } from "../context/SearchContext";
 import { useAuth } from "../context/AuthContext";
