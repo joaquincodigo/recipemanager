@@ -1,8 +1,11 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useContext } from "react";
 import { PauseCircleIcon } from "@heroicons/react/24/solid";
-import InputField from "@/app/components/InputField";
+import { EyeIcon } from "@heroicons/react/24/outline";
+import { EyeSlashIcon } from "@heroicons/react/24/outline";
+
+import { useAuth } from "../../context/AuthContext";
 
 export default function RegisterPage() {
   const [formData, setFormData] = useState({
@@ -14,11 +17,13 @@ export default function RegisterPage() {
   });
 
   const [warning, setWarning] = useState({ message: null, field: null });
-
   const [currentPage, setCurrentPage] = useState(1);
+  const [showPasswords, setShowPasswords] = useState(true);
+
   const nameRef = useRef(null);
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
+  const { supabase } = useAuth();
 
   const handleNext = (e) => {
     e.preventDefault();
@@ -107,12 +112,28 @@ export default function RegisterPage() {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
+  const registerNewUser = async () => {
+    const { data, error } = await supabase.auth.signUp({
+      email: "testUser@example.com",
+      password: "12345x",
+    });
+
+    if (error) {
+      console.log(error);
+      return;
+    } else {
+      console.log("A new user has been created with credentials:");
+      console.log("Data is:");
+      console.log(data);
+    }
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPasswords(!showPasswords);
+  };
+
   return (
     <form className=" h-[400px] w-full p-3 flex flex-col" autoComplete="off">
-
-
-
-
       {/* +-+-+-+-+-+-+-+-+-+-+- HEADING  +-+-+-+-+-+-+-+-+-+-+-+-+*/}
       <div className=" flex-[4]">
         <PauseCircleIcon className="h-20 w-20 text-slate-500 mx-auto" />
@@ -225,7 +246,7 @@ export default function RegisterPage() {
                 htmlFor="password"
               >
                 {warning.field === "password"
-                  ? "Invalid password (too short)"
+                  ? "Passowrd is too short"
                   : "Password *"}
               </label>
               <input
@@ -236,7 +257,7 @@ export default function RegisterPage() {
                 }
                 "bg-white w-64 p-3 rounded-md border  focus:outline-none focus:ring-2 focus:ring-[#7FC37E]`}
                 placeholder="Enter your mail"
-                type="password"
+                type={showPasswords ? "text" : "password"}
                 id="password"
                 name="password"
                 autoComplete="new-password"
@@ -246,6 +267,21 @@ export default function RegisterPage() {
                 onClick={resetWarning}
                 ref={passwordRef}
               />
+
+              {/* REVEAL PASSWORD BUTTON */}
+              <button
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-600 transition-transform duration-600 ease-in-out"
+                type="button"
+                onClick={togglePasswordVisibility}
+              >
+                <span>
+                  {showPasswords ? (
+                    <EyeSlashIcon className="h-6 w-6" />
+                  ) : (
+                    <EyeIcon className="h-6 w-6" />
+                  )}
+                </span>
+              </button>
             </div>
 
             {/* PASSWORD VERIFICATION */}
@@ -270,7 +306,7 @@ export default function RegisterPage() {
                 }
                 "bg-white w-64 p-3 rounded-md border  focus:outline-none focus:ring-2 focus:ring-[#7FC37E]`}
                 placeholder="Re-enter your password"
-                type="password"
+                type={showPasswords ? "text" : "password"}
                 id="password-verfication"
                 name="password-verification"
                 autoComplete="password-verification"
@@ -279,6 +315,20 @@ export default function RegisterPage() {
                 onClick={resetWarning}
                 value={formData["password-verification"]}
               />
+              {/* REVEAL PASSWORD BUTTON */}
+              <button
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-600 transition-transform duration-600 ease-in-out"
+                type="button"
+                onClick={togglePasswordVisibility}
+              >
+                <span>
+                  {showPasswords ? (
+                    <EyeSlashIcon className="h-6 w-6" />
+                  ) : (
+                    <EyeIcon className="h-6 w-6" />
+                  )}
+                </span>
+              </button>
             </div>
           </>
         )}
@@ -341,7 +391,10 @@ export default function RegisterPage() {
           {currentPage == 3 && (
             <button
               disabled={!isValidPassword() || !isValidPasswordVerification()}
-              onClick={handleNext}
+              onClick={() => {
+                handleNext();
+                handleWarning();
+              }}
               className={`
             p-3
             flex-[2]
