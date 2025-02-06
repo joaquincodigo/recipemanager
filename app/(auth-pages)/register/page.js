@@ -112,21 +112,26 @@ export default function RegisterPage() {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const registerNewUser = async () => {
-    const { data, error } = await supabase.auth.signUp({
-      email: "testUser@example.com",
-      password: "12345x",
-    });
 
-    if (error) {
-      console.log(error);
-      return;
-    } else {
-      console.log("A new user has been created with credentials:");
-      console.log("Data is:");
-      console.log(data);
-    }
-  };
+  async function registerNewUser({ email, password, name, lastname }) {
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      data: {
+        first_name: name,
+        last_name: lastname,
+        // include other metadata as needed
+      },
+    },
+  });
+
+  if (error) {
+    console.error('Error signing up:', error.message);
+  } else {
+    console.log('User signed up:', data.user);
+  }
+}
 
   const togglePasswordVisibility = () => {
     setShowPasswords(!showPasswords);
@@ -391,9 +396,10 @@ export default function RegisterPage() {
           {currentPage == 3 && (
             <button
               disabled={!isValidPassword() || !isValidPasswordVerification()}
-              onClick={() => {
-                handleNext();
-                handleWarning();
+              onClick={(e) => {
+                e.preventDefault();
+                handleWarning(e);
+                registerNewUser(formData);
               }}
               className={`
             p-3
@@ -411,6 +417,7 @@ export default function RegisterPage() {
           )}
         </div>
       </div>
+      {JSON.stringify(formData)}
     </form>
   );
 }
