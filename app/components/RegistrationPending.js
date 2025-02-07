@@ -2,8 +2,7 @@ import React from "react";
 import Spinner from "./Spinner";
 import { XCircleIcon } from "@heroicons/react/24/outline";
 import { CheckCircleIcon } from "@heroicons/react/24/outline";
-
-
+import Link from "next/link";
 
 export default function RegistrationPending({ status }) {
   const ui = {
@@ -16,19 +15,21 @@ export default function RegistrationPending({ status }) {
     ),
     success: (
       <>
-        <CheckCircleIcon className="text-[#7FC37E] w-14 h-14"/>        
+        <CheckCircleIcon className="text-[#7FC37E] w-14 h-14" />
         <h1 className="text-2xl font-bold">Registration completed!</h1>
         <p>Redirecting you...</p>
       </>
     ),
     error: (
       <>
-        <XCircleIcon className="text-red-400 w-14 h-14"/>        
+        <XCircleIcon className="text-red-400 w-14 h-14" />
         <h1 className="text-2xl font-bold">Something went wrong</h1>
         <p>An error has occurred during the registration process.</p>
-        <button className="bg-[#7FC37E] px-3 py-3 text-white font-bold rounded text-xl">
-          Try again
-        </button>
+        <Link href="/register">
+          <button className="bg-[#7FC37E] px-3 py-3 text-white font-bold rounded text-xl">
+            Try again
+          </button>
+        </Link>
       </>
     ),
   };
