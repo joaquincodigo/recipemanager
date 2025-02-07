@@ -112,26 +112,25 @@ export default function RegisterPage() {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-
   async function registerNewUser({ email, password, name, lastname }) {
-  const { data, error } = await supabase.auth.signUp({
-    email,
-    password,
-    options: {
-      data: {
-        first_name: name,
-        last_name: lastname,
-        // include other metadata as needed
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: {
+          first_name: name,
+          last_name: lastname,
+          // include other metadata as needed
+        },
       },
-    },
-  });
+    });
 
-  if (error) {
-    console.error('Error signing up:', error.message);
-  } else {
-    console.log('User signed up:', data.user);
+    if (error) {
+      console.error("Error signing up:", error.message);
+    } else {
+      console.log("User signed up:", data.user);
+    }
   }
-}
 
   const togglePasswordVisibility = () => {
     setShowPasswords(!showPasswords);
@@ -342,15 +341,8 @@ export default function RegisterPage() {
       {/* +-+-+-+-+-+-+-+-+-+-+- FORM BUTTONS +-+-+-+-+-+-+-+-+-+-+-+-+*/}
       <div className=" w-full flex-[4] flex justify-center items-center">
         <div className=" min-w-64 gap-x-3 flex">
-          {/* Back Button */}
-          {currentPage != 1 && (
-            <button
-              onClick={handleBack}
-              className="flex-1 font-bold rounded-md hover:bg-slate-200"
-            >
-              Back
-            </button>
-          )}
+
+        
 
           {/* Next Button (page 1) */}
           {currentPage == 1 && (
@@ -378,15 +370,16 @@ export default function RegisterPage() {
               disabled={!isValidEmail()}
               onClick={handleNext}
               className={`
-            p-3
-            flex-[2]
-            font-bold
-            rounded-md
-            ${
-              isValidEmail()
-                ? "bg-[#7FC37E] text-white"
-                : "bg-gray-400 text-gray-200"
-            }`}
+                order-2
+                p-3
+                flex-[2]
+                font-bold
+                rounded-md
+                ${
+                isValidEmail()
+                  ? "bg-[#7FC37E] text-white"
+                  : "bg-gray-400 text-gray-200"
+              }`}
             >
               Next
             </button>
@@ -406,6 +399,7 @@ export default function RegisterPage() {
             flex-[2]
             font-bold
             rounded-md
+            order-2
             ${
               isValidPassword() && isValidPasswordVerification()
                 ? "bg-[#7FC37E] text-white"
@@ -415,9 +409,20 @@ export default function RegisterPage() {
               Complete
             </button>
           )}
+
+          {/* Back Button */}
+            {currentPage != 1 && (
+            <button
+              onClick={handleBack}
+              className="flex-1 font-bold rounded-md hover:bg-slate-200 order-1"
+            >
+              Back
+            </button>
+          )}
+
         </div>
       </div>
-      {JSON.stringify(formData)}
+      {/* {JSON.stringify(formData)} */}
     </form>
   );
 }
