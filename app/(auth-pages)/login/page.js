@@ -121,6 +121,7 @@ export default function LoginPage() {
               onBlur={validateEmail}
               onFocus={() => {
                 setShowMailWarning(false);
+                setShowBadCredentialsWarning(false);
               }}
             />
           </div>
@@ -152,6 +153,10 @@ export default function LoginPage() {
               id="password"
               autoComplete="current-password"
               onChange={(e) => handlePasswordInput(e)}
+              onFocus={() => {
+                setShowMailWarning(false);
+                setShowBadCredentialsWarning(false);
+              }}
               required
             />
             {/* REVEAL PASSWORD BUTTON */}
