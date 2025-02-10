@@ -19,7 +19,7 @@ export default function RegisterPage() {
 
   const [warning, setWarning] = useState({ message: null, field: null });
   const [currentPage, setCurrentPage] = useState(1);
-  const [showPasswords, setShowPasswords] = useState(true);
+  const [showPasswords, setShowPasswords] = useState(false);
   const [isFormCompleted, setIsFormCompleted] = useState(false);
   const [registrationStatus, setRegistrationStatus] = useState("loading");
 
@@ -116,8 +116,6 @@ export default function RegisterPage() {
   };
 
   async function registerNewUser({ email, password, name, lastname }) {
-    console.log("hello");
-    console.log(email, password, name, lastname);
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
@@ -130,25 +128,31 @@ export default function RegisterPage() {
     });
 
     if (error) {
-      console.log("IM ERROR")
-      setRegistrationStatus("error")
+      setRegistrationStatus("error");
     } else {
-      console.log("IM SUCCESS")
-      setRegistrationStatus("success")
+      setRegistrationStatus("success");
     }
   }
 
   const completeForm = () => {
-    setIsFormCompleted(true)
-    registerNewUser(formData)
-  }
+    setIsFormCompleted(true);
+    registerNewUser(formData);
+  };
 
   const togglePasswordVisibility = () => {
     setShowPasswords(!showPasswords);
   };
 
+  const handleTryAgain = () => {
+    setCurrentPage(1);
+    setIsFormCompleted(false);
+  };
+
   return isFormCompleted ? (
-    <RegistrationPending status={registrationStatus} />
+    <RegistrationPending
+      status={registrationStatus}
+      handleTryAgain={handleTryAgain}
+    />
   ) : (
     <form className=" h-[400px] w-full p-3 flex flex-col" autoComplete="off">
       {/* +-+-+-+-+-+-+-+-+-+-+- HEADING  +-+-+-+-+-+-+-+-+-+-+-+-+*/}
@@ -402,7 +406,7 @@ export default function RegisterPage() {
               onClick={(e) => {
                 e.preventDefault();
                 handleWarning(e);
-                completeForm()
+                completeForm();
               }}
               className={`
             p-3
@@ -431,7 +435,6 @@ export default function RegisterPage() {
           )}
         </div>
       </div>
-      {/* {JSON.stringify(formData)} */}
     </form>
   );
 }
