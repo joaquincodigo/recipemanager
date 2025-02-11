@@ -13,10 +13,11 @@ import UserButton from "./UserButton";
 
 export default function Header({ toggleDrawer }) {
   // Different headers for mobile and desktop
+  const isMobile = useViewport();
+
   const { handleSearch } = useSearch();
   const { user } = useAuth();
   const [isSearchInputOpen, setIsSearchInputOpen] = useState(false);
-  const isMobile = useViewport();
 
   // Header hiding when scrolling down and re-appearing when scrolling up
   const [isVisible, setIsVisible] = useState(true);
@@ -91,6 +92,7 @@ export default function Header({ toggleDrawer }) {
       sticky
       top-0
       z-10
+      overflow-hidden
       ${isVisible ? "translate-y-0" : "-translate-y-full"}`}
     >
       {/* MOBILE */}

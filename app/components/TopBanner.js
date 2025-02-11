@@ -7,19 +7,19 @@ export default function TopBanner() {
   return (
     <>
 
+      {/* MOBILE BANNER */}
       <Link className="md:hidden" href="/">
         {/* MOBILE BANNER */}
         <Image
-          src={"/images/top-banner-mobile.gif"}
+          src={"/images/RecipesHavenLogoGreenBg.svg"}
           width={180}
           height={180}
           alt="Top Banner"
         />
       </Link>
 
-      {/* DEKSTOP BANNER */}
 
-      {/* MOBILE BANNER */}
+      {/* DEKSTOP BANNER */}
       <Link className="hidden md:inline" href="/">
         <Image
           src={"/images/top-banner-pc.gif"}

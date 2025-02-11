@@ -21,7 +21,7 @@ export default function SearchBar({ onSearch, searchInputRef }) {
         className="
           px-3
           rounded-full
-          bg-[#FEFEE2]
+          bg-white
           w-full
           h-full
           text-sm

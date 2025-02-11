@@ -1,5 +1,7 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
+
 import { useRouter } from "next/navigation";
 
 import { useAuth } from "../../context/AuthContext";
@@ -7,7 +9,6 @@ import { useEffect, useState } from "react";
 
 import { EyeIcon } from "@heroicons/react/24/outline";
 import { EyeSlashIcon } from "@heroicons/react/24/outline";
-import { PauseCircleIcon } from "@heroicons/react/24/solid";
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
 
 export default function LoginPage() {
@@ -72,10 +73,16 @@ export default function LoginPage() {
   return (
     <form onSubmit={handleSubmit}>
       <div className="p-3 flex flex-col gap-y-6">
-        {/* +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/}
-        {/* TODO: ADD LOGO AFTER YOU FINISH IT  */}
-        {/* +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/}
-        <PauseCircleIcon className="h-24 w-24 text-slate-500 mx-auto" />
+        {/* LOGO */}
+        <div className="flex justify-center">
+          <Image
+            src="/images/RecipesHavenLogoWhiteBg.svg"
+            alt="The site logo depicting a chef hat and recipe"
+            width={80}
+            height={80}
+          />
+        </div>
+
         {/* HEADING */}
         <h1 className="text-xl text-center font-bold">Login</h1>
         <div className="flex flex-col gap-y-8">
@@ -175,6 +182,7 @@ export default function LoginPage() {
             </button>
           </div>
         </div>
+
         {/* WRONG CREDENTIALS WARNING */}
         {showBadCredentialsWarning ? (
           <div className="flex-col items-center justify-center">
@@ -190,13 +198,12 @@ export default function LoginPage() {
             </div>
           </div>
         ) : null}
+
         {/* FORGOT PASSWORD? */}
         <Link href="/password-recovery" className="text-[#099107]">
           Forgot your password?
         </Link>
-        {/* +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/}
-        {/* TODO: Add functionality: password recovery  */}
-        {/* +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/}
+
         {/* LOGIN BUTTON */}
         <button className="p-3 text-white font-bold rounded-md bg-[#7FC37E]">
           Login
