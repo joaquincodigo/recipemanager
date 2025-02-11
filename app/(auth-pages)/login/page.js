@@ -71,7 +71,7 @@ export default function LoginPage() {
   }, [showMailWarning]);
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="pb-24 h-screen overflow-hidden flex flex-col justify-center " onSubmit={handleSubmit}>
       <div className="p-3 flex flex-col gap-y-6">
         {/* LOGO */}
         <div className="flex justify-center">

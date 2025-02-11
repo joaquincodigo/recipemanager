@@ -16,7 +16,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="schibstedGrotesk.variable h-full">
+    <html lang="en" className="schibstedGrotesk.variable h-screen overflow-hidden">
       <body
         className={
           "antialiased bg-white overflow-y-scroll overflow-x-hidden h-full"
