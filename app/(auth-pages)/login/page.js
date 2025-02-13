@@ -2,11 +2,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useLogin } from "@/app/hooks/useLogin";
 import { EyeIcon } from "@heroicons/react/24/outline";
 import { EyeSlashIcon } from "@heroicons/react/24/outline";
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
-import { useLogin } from "@/app/hooks/useLogin";
+import Spinner from "@/app/components/Spinner";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -43,7 +44,7 @@ export default function LoginPage() {
     e.preventDefault();
     try {
       await loginUser(email, password);
-      router.push("/home") 
+      router.push("/home");
     } catch {
       setShowBadCredentialsWarning(true);
     }
@@ -52,11 +53,14 @@ export default function LoginPage() {
   return (
     <>
       {isLoginLoading ? (
-        <p>Loading...</p>
+        <div className="flex flex-col justify-center items-center">
+          <p className="font-semibold mb-5 text-xl">Logging in...</p>
+          <Spinner />
+        </div>
       ) : (
         <form
           className="pb-24 h-screen overflow-hidden flex flex-col justify-center"
-          onSubmit={(e) => handleSubmit(e)}
+          onSubmit={handleSubmit}
         >
           <div className="p-3 flex flex-col gap-y-6">
             {/* HEADING */}
@@ -70,7 +74,6 @@ export default function LoginPage() {
             </div>
             <h1 className="text-xl text-center font-bold">Login</h1>
             <div className="flex flex-col gap-y-8">
-
               {/* MAIL */}
               <div className="relative">
                 <label
