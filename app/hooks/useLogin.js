@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 export function useLogin() {
-  console.log("hook called");
   const [isLoginLoading, setIsLoginLoading] = useState(false);
   const [loginError, setLoginError] = useState(null);
 
@@ -22,9 +21,8 @@ export function useLogin() {
       return data;
     } catch (err) {
       setLoginError(err.message);
-      throw err;
-    } finally {
       setIsLoginLoading(false);
+      throw err;
     }
   }
 
