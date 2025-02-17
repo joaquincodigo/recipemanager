@@ -1,15 +1,21 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
+
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { useLogin } from "@/app/hooks/useLogin";
+
 import { EyeIcon } from "@heroicons/react/24/outline";
 import { EyeSlashIcon } from "@heroicons/react/24/outline";
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
+
 import Spinner from "@/app/components/Spinner";
 
+import useLogin from "@/app/hooks/useLogin";
+
 export default function LoginPage() {
+  const { handleLogin, loginError, isLoginPending, setIsLoginPending } =
+    useLogin();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -17,7 +23,6 @@ export default function LoginPage() {
   const [showBadCredentialsWarning, setShowBadCredentialsWarning] =
     useState(false);
   const router = useRouter();
-  const { loginUser, isLoginLoading, loginError } = useLogin();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -40,19 +45,27 @@ export default function LoginPage() {
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      await loginUser(email, password);
-      router.push("/home");
-    } catch {
-      setShowBadCredentialsWarning(true);
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    // console.log("The email is:", email);
+    // console.log("The password is:", password);
+
+    const success = await handleLogin(email, password);
+    // console.log("SUCCESS VARIABLE IS:", success)
+
+    if (success) {
+      // console.log("SUCCESS, LOGGED IN");
+      router.push("/home")
+    } else {
+      // console.log(loginError)
+      setShowBadCredentialsWarning(true)
     }
   };
 
   return (
     <>
-      {isLoginLoading ? (
+      {isLoginPending ? (
         <div className="flex flex-col justify-center items-center">
           <p className="font-semibold mb-5 text-xl">Logging in...</p>
           <Spinner />

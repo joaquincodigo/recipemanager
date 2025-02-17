@@ -3,9 +3,11 @@ import { supabase } from '@/lib/supabase';
 
 const useLogin = () => {
   const [loginError, setLoginError] = useState(null);
+  const [isLoginPending, setIsLoginPending] = useState(false);
 
   const handleLogin = useCallback(async (mail, password) => {
-    // Query the 'demousers' table for matching credentials
+    setIsLoginPending(true);
+
     const { data, error } = await supabase
       .from('demousers')
       .select('*')
@@ -15,15 +17,17 @@ const useLogin = () => {
 
     if (error || !data) {
       setLoginError('Invalid credentials');
-      return;
+      setIsLoginPending(false);
+      return false;
     }
 
-    // Save the user ID in a cookie on successful login
     document.cookie = `userId=${data.id}; path=/;`;
     setLoginError(null);
+    setIsLoginPending(false);
+    return true
   }, []);
 
-  return { handleLogin, loginError };
+  return { handleLogin, loginError, isLoginPending, setIsLoginPending };
 };
 
 export default useLogin;
