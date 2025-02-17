@@ -1,30 +1,29 @@
-import { useState } from "react";
+import { useState, useCallback } from 'react';
+import { supabase } from '@/lib/supabase';
 
-export function useLogin() {
-  const [isLoginLoading, setIsLoginLoading] = useState(false);
+const useLogin = () => {
   const [loginError, setLoginError] = useState(null);
 
-  async function loginUser(email, password) {
-    setIsLoginLoading(true);
-    setLoginError(null);
+  const handleLogin = useCallback(async (mail, password) => {
+    // Query the 'demousers' table for matching credentials
+    const { data, error } = await supabase
+      .from('demousers')
+      .select('*')
+      .eq('email', mail)
+      .eq('password', password)
+      .single();
 
-    try {
-      const res = await fetch("/api/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
-
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Login failed");
-
-      return data;
-    } catch (err) {
-      setLoginError(err.message);
-      setIsLoginLoading(false);
-      throw err;
+    if (error || !data) {
+      setLoginError('Invalid credentials');
+      return;
     }
-  }
 
-  return { loginUser, isLoginLoading, loginError };
-}
+    // Save the user ID in a cookie on successful login
+    document.cookie = `userId=${data.id}; path=/;`;
+    setLoginError(null);
+  }, []);
+
+  return { handleLogin, loginError };
+};
+
+export default useLogin;

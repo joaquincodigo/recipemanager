@@ -10,7 +10,7 @@ const schibstedGrotesk = Schibsted_Grotesk({
 });
 
 export const metadata = {
-  title: "Recipe Hub",
+  title: "Recipes Haven",
   description: "Explore, create and share your recipes",
 };
 

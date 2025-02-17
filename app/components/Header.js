@@ -2,25 +2,20 @@
 
 import { useRef, useState, useEffect } from "react";
 
+import { useSearch } from "@/app/context/SearchContext";
+import useViewport from "@/app/hooks/useViewport";
+
 import SearchBar from "./SearchBar";
 import TopBanner from "./TopBanner";
 import SearchButton from "./SearchButton";
 
-import useViewport from "../hooks/useViewport";
-import { useSearch } from "../context/SearchContext";
-import { useAuth } from "../context/AuthContext";
 import UserButton from "./UserButton";
 
 export default function Header({ toggleDrawer }) {
-  // Different headers for mobile and desktop
-  const isMobile = useViewport();
-
+  const isMobile = useViewport(); // Different headers for mobile an desktop
   const { handleSearch } = useSearch();
-  const { user } = useAuth();
   const [isSearchInputOpen, setIsSearchInputOpen] = useState(false);
-
-  // Header hiding when scrolling down and re-appearing when scrolling up
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(true); // Header hiding when scrolling down and re-appearing when scrolling up
   const [lastScroll, setLastScroll] = useState(0);
   const searchInputRef = useRef(null);
 
@@ -116,8 +111,8 @@ export default function Header({ toggleDrawer }) {
           <div className="w-full flex justify-between items-center">
             <TopBanner />
             <div className="flex gap-3">
-              <SearchButton  handleClick={handleSearchButtonClick} />
-              <UserButton onClick={toggleDrawer}/>
+              <SearchButton handleClick={handleSearchButtonClick} />
+              <UserButton onClick={toggleDrawer} />
             </div>
           </div>
         )
@@ -126,7 +121,7 @@ export default function Header({ toggleDrawer }) {
         <>
           <TopBanner />
           <SearchBar />
-          <UserButton onClick={toggleDrawer}/>
+          <UserButton onClick={toggleDrawer} />
         </>
       )}
     </header>

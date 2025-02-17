@@ -2,7 +2,9 @@
 
 import Link from "next/link";
 import ProfileAvatar from "./ProfileAvatar";
-import { useAuth } from "../context/AuthContext";
+
+import { useAuth } from "@/app/context/AuthContext";
+import useLogout from "@/app/hooks/useLogout";
 
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Cog8ToothIcon } from "@heroicons/react/24/outline";
@@ -11,11 +13,8 @@ import { HeartIcon } from "@heroicons/react/24/outline";
 import { ArrowLeftStartOnRectangleIcon } from "@heroicons/react/24/outline";
 
 export default function Drawer({ closeDrawer, isDrawerOpen }) {
-  const { supabase, user } = useAuth();
-
-  const handleLogout = () => {
-    supabase.auth.signOut();
-  };
+  const { handleLogout } = useLogout();
+  const { userId, loggedIn } = useAuth();
 
   return (
     <>
@@ -65,14 +64,14 @@ export default function Drawer({ closeDrawer, isDrawerOpen }) {
           <XMarkIcon className="w-7 h-7 text-gray-600 hover:text-black transition-colors duration-300 ease-in-out" />
         </button>
 
-        {user ? (
+        {loggedIn ? (
           <div>
             {/* User Header */}
             <div className="flex flex-col items-center gap-y-2">
               <ProfileAvatar size={20} />
               <h2 className="text-lg font-bold">Hello</h2>
               <h2 className="text-lg font-bold mb-12">
-                {user.email || "usuario"}!
+                {"LOGGED USER" || "NON LOGGED USER"}!
               </h2>
             </div>
 

@@ -1,4 +1,3 @@
-import { cookies } from "next/headers";
 import { supabase } from "@/lib/supabase";
 
 export async function POST(req) {
@@ -8,9 +7,9 @@ export async function POST(req) {
     // Query user data
     const { data, error } = await supabase
       .from("demousers")
-      .select("id, email, password") // Avoid exposing unnecessary data
+      .select("id, email, password")
       .eq("email", email)
-      .eq("password", password) // (Still insecure but fine for a demo)
+      .eq("password", password)
       .single();
 
     if (error || !data) {
@@ -19,10 +18,8 @@ export async function POST(req) {
       });
     }
 
-    // Set a simple session cookie
-    cookies().set("demoToken", data.id, { httpOnly: true, path: "/" });
-
-    return new Response(JSON.stringify({ message: "Logged in" }), {
+    // Send the user ID back to the client instead of setting a cookie here
+    return new Response(JSON.stringify({ message: "Logged in", userId: data.id }), {
       status: 200,
     });
   } catch (error) {
@@ -32,3 +29,5 @@ export async function POST(req) {
     });
   }
 }
+
+

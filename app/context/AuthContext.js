@@ -1,46 +1,27 @@
-"use client";
+"use client"
 
 import { createContext, useContext, useState, useEffect } from "react";
-import { supabase } from "../../lib/supabase";
 
-const AuthContext = createContext();
+const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [userId, setUserId] = useState(null);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
-    const initializeAuth = async () => {
-      const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
-
-      if (sessionError) {
-        console.error("Error fetching session:", sessionError);
-        setUser(null);
-        return;
-      }
-
-      const session = sessionData.session;
-      setUser(session?.user ?? null);
-
-      // Listen for auth state changes
-      const { data: listener } = supabase.auth.onAuthStateChange(
-        (event, session) => {
-          setUser(session?.user ?? null);
-        }
-      );
-
-      return () => {
-        listener.subscription.unsubscribe();
-      };
-    };
-
-    initializeAuth();
+    const match = document.cookie.match(/(^| )userId=([^;]+)/);
+    if (match) {
+      setUserId(match[2]);
+      setLoggedIn(true);
+    }
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, supabase }}>
+    <AuthContext.Provider value={{ userId, loggedIn }}>
       {children}
     </AuthContext.Provider>
   );
 };
 
+// Hook to use AuthContext
 export const useAuth = () => useContext(AuthContext);
