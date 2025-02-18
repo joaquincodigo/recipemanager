@@ -16,6 +16,8 @@ export default function Drawer({ closeDrawer, isDrawerOpen }) {
   const { handleLogout } = useLogout();
   const { userId, loggedIn } = useAuth();
 
+
+
   return (
     <>
       {/* Black Overlay */}
@@ -106,7 +108,7 @@ export default function Drawer({ closeDrawer, isDrawerOpen }) {
                   <ArrowLeftStartOnRectangleIcon className="w-6 h-6" />
                 </span>
                 <button
-                  className="font-semibold bg-red-600"
+                  className="font-semibold"
                   onClick={handleLogout}
                 >
                   Logout
