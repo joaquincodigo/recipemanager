@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { useSearch } from "../../context/SearchContext";
-import { useAuth } from "../../context/AuthContext";
 
 import RecipeCard from "@/app/components/RecipeCard";
 import Spinner from "@/app/components/Spinner";
