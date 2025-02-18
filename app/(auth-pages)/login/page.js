@@ -10,8 +10,8 @@ import { EyeSlashIcon } from "@heroicons/react/24/outline";
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
 
 import Spinner from "@/app/components/Spinner";
-
 import useLogin from "@/app/hooks/useLogin";
+import { useAuth } from "@/app/context/AuthContext";
 
 export default function LoginPage() {
   const { handleLogin, loginError, isLoginPending, setIsLoginPending } =
@@ -23,6 +23,7 @@ export default function LoginPage() {
   const [showBadCredentialsWarning, setShowBadCredentialsWarning] =
     useState(false);
   const router = useRouter();
+  const { refreshAuth } = useAuth();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -56,10 +57,11 @@ export default function LoginPage() {
 
     if (success) {
       // console.log("SUCCESS, LOGGED IN");
-      router.push("/home")
+      refreshAuth();
+      router.push("/home");
     } else {
       // console.log(loginError)
-      setShowBadCredentialsWarning(true)
+      setShowBadCredentialsWarning(true);
     }
   };
 
