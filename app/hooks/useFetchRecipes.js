@@ -11,7 +11,7 @@ const useFetchRecipes = (page) => {
       setAreRecipesLoading(true);
       setRecipesError(null);
 
-      const itemsPerPage = 10;
+      const itemsPerPage = 8;
       const start = (page - 1) * itemsPerPage;
       const end = page * itemsPerPage - 1;
 

@@ -1,7 +1,12 @@
 "use client";
 
 import { CubeTransparentIcon } from "@heroicons/react/24/outline";
+
+// Testing-testing-testing-testing-testing-testing-testing
 import useFetchRecipes from "@/app/hooks/useFetchRecipes";
+import PageNumber from "@/app/components/pagination/PageNumber";
+import PaginationArrow from "@/app/components/pagination/PaginationArrow";
+// Testing-testing-testing-testing-testing-testing-testing
 
 export default function PasswordRecoveryPage() {
   const { recipes, recipesError } = useFetchRecipes(1);
@@ -12,6 +17,12 @@ export default function PasswordRecoveryPage() {
         <CubeTransparentIcon className="w-full h-full text-gray-100" />
       </div>
       <div className="z-50">
+
+        {/* // Testing-testing-testing-testing-testing-testing-testing */}
+        <PageNumber number={null} isActive={false}/>
+        <PaginationArrow direction={"right"}/>
+        {/* // Testing-testing-testing-testing-testing-testing-testing */}
+
         <h1 className="text-4xl text-slate-400 font-thin mb-10">Oh oh!</h1>
         <div className="flex flex-col gap-y-3">
           <p className="text-xl">
@@ -20,8 +31,14 @@ export default function PasswordRecoveryPage() {
           </p>
           <p className="text-xl">Stay tuned!</p>
 
-          <div>Recipes: {JSON.stringify(recipes)}</div>
-          <div>Error: {JSON.stringify(recipesError)}</div>
+          {/* // Testing-testing-testing-testing-testing-testing-testing */}
+          <ul>
+            {recipes.map((r) => (
+              <li key={r.id}>{r.title}</li>
+            ))}
+          </ul>
+
+          {/* // Testing-testing-testing-testing-testing-testing-testing */}
         </div>
       </div>
     </div>
