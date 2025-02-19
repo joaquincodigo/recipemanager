@@ -4,8 +4,7 @@ import { CubeTransparentIcon } from "@heroicons/react/24/outline";
 
 // Testing-testing-testing-testing-testing-testing-testing
 import useFetchRecipes from "@/app/hooks/useFetchRecipes";
-import PageNumber from "@/app/components/pagination/PageNumber";
-import PaginationArrow from "@/app/components/pagination/PaginationArrow";
+import PaginationControls from "@/app/components/pagination/PaginationControls";
 // Testing-testing-testing-testing-testing-testing-testing
 
 export default function PasswordRecoveryPage() {
@@ -19,8 +18,7 @@ export default function PasswordRecoveryPage() {
       <div className="z-50">
 
         {/* // Testing-testing-testing-testing-testing-testing-testing */}
-        <PageNumber number={null} isActive={false}/>
-        <PaginationArrow direction={"right"}/>
+        <PaginationControls/>
         {/* // Testing-testing-testing-testing-testing-testing-testing */}
 
         <h1 className="text-4xl text-slate-400 font-thin mb-10">Oh oh!</h1>
