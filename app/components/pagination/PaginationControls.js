@@ -1,31 +1,54 @@
 import PaginationArrow from "./PaginationArrow";
 import PaginationNumber from "./PaginationNumber";
-import usePagination from "@/app/hooks/usePagination";
+// TESTING-TESTING-TESTING-TESTING-TESTING-TESTING
+import { useEffect } from "react";
+// TESTING-TESTING-TESTING-TESTING-TESTING-TESTING
 
-export default function PaginationControls() {
-  const testData = Array.from({ length: 100 }, (_, i) => `Item ${i + 1}`);
-  const { paginationControlsArray, currentPage, setCurrentPage } =
-    usePagination(testData);
-  console.log("im currentPage:", currentPage);
-  console.log("page contents:", paginationControlsArray[currentPage - 1]);
+export default function PaginationControls({
+  paginatedRecipes,
+  currentPage,
+  setCurrentPage,
+  paginationControlsMaxNumbers,
+}) {
+  useEffect(() => {
+    console.log(currentPage);
+  }, [currentPage]);
 
   return (
     <div className="flex gap-x-1">
       <PaginationArrow direction="left" />
-
-      {paginationControlsArray.map((page, index) =>
-        page === "..." ? (
-          <PaginationNumber key={index} />
-        ) : (
+      {paginatedRecipes <= paginationControlsMaxNumbers ? (
+        paginatedRecipes.map((_, index) => (
+          <PaginationNumber key={index} number={index} />
+        ))
+      ) : (
+        <>
           <PaginationNumber
-            key={index}
-            number={index + 1} // Use index + 1 to display the page number
-            isActive={index + 1 === currentPage} // Compare page number to currentPage
+            number={currentPage}
             onClick={() => {
-              setCurrentPage(index + 1); // Set currentPage to the actual page number
+              setCurrentPage(currentPage);
             }}
           />
-        )
+          <PaginationNumber
+            number={currentPage + 1}
+            onClick={() => {
+              setCurrentPage(currentPage + 1);
+            }}
+          />
+          <PaginationNumber
+            number={currentPage + 2}
+            onClick={() => {
+              setCurrentPage(currentPage);
+            }}
+          />
+          <PaginationNumber />
+          <PaginationNumber
+            number={paginatedRecipes.length - 1}
+            onClick={() => {
+              setCurrentPage(paginatedRecipes.length - 1);
+            }}
+          />
+        </>
       )}
 
       <PaginationArrow direction="right" />

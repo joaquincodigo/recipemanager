@@ -1,41 +1,35 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
 
-const useFetchRecipes = (page) => {
+const useFetchRecipes = (query) => {
   const [recipes, setRecipes] = useState([]);
-  const [recipesError, setRecipesError] = useState(null);
-  const [areRecipesLoading, setAreRecipesLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchRecipes = async () => {
-      setAreRecipesLoading(true);
-      setRecipesError(null);
+      setError(null); // Reset error before fetching
 
-      const itemsPerPage = 8;
-      const start = (page - 1) * itemsPerPage;
-      const end = page * itemsPerPage - 1;
+      let request = supabase.from("recipes").select("*");
 
-      const { data, error } = await supabase
-        .from("recipes")
-        .select("*")
-        .range(start, end);
+      if (query) {
+        request = request.or(
+          `title.ilike.%${query}%,description.ilike.%${query}%`
+        );
+      }
+
+      const { data, error } = await request;
 
       if (error) {
-        setRecipesError(new Error("Failed to fetch recipes"));
-        setRecipes([]);
-      } else if (data.length === 0) {
-        setRecipesError(new Error("No recipes found"));
+        setError(error.message);
       } else {
         setRecipes(data);
       }
-
-      setAreRecipesLoading(false);
     };
 
     fetchRecipes();
-  }, [page]);
+  }, [query]);
 
-  return { recipes, areRecipesLoading, recipesError };
+  return { recipes, error };
 };
 
 export default useFetchRecipes;
