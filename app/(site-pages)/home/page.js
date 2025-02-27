@@ -15,11 +15,14 @@ export default function HomePage() {
     paginatedRecipes,
     currentPage,
     setCurrentPage,
-    paginationControlsMaxNumbers,
+    paginationControlsArray,
   } = usePagination(recipes);
+  console.log(
+    "HomePage received paginationControlsArray:",
+    paginationControlsArray
+  );
 
   const pageContents = paginatedRecipes[currentPage];
-  // const pageContents = null;
 
   return (
     <div className="p-3 h-screen">
@@ -33,10 +36,9 @@ export default function HomePage() {
 
           <div className="flex justify-center align-items mt-6">
             <PaginationControls
-              paginatedRecipes={paginatedRecipes}
               currentPage={currentPage}
               setCurrentPage={setCurrentPage}
-              paginationControlsMaxNumbers={paginationControlsMaxNumbers}
+              paginationControlsArray={paginationControlsArray}
             />
           </div>
         </>
