@@ -9,7 +9,7 @@ export default function PaginationControls({
 }) {
 
   return (
-    <div className="flex gap-x-1">
+    <div className="flex gap-x-1 mt-2 justify-center">
       <PaginationArrow
         direction={"left"}
         setCurrentPage={setCurrentPage}
@@ -21,6 +21,10 @@ export default function PaginationControls({
             <PaginationNumber
               number={page || "..."}
               isActive={page === currentPage}
+            onClick={(e) => {
+              setCurrentPage(page)
+              console.log("Clicked number, sending you to page:", page);
+            }}
               key={i}
             />
           ))

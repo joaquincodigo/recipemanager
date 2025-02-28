@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
 
 const useFetchRecipes = (query) => {
+  console.log("from USEFETCHRECIPES, query is:", query)
   const [recipes, setRecipes] = useState([]);
   const [error, setError] = useState(null);
 
@@ -12,11 +13,10 @@ const useFetchRecipes = (query) => {
       let request = supabase.from("recipes").select("*");
 
       if (query) {
-        request = request.or(
-          `title.ilike.%${query}%,description.ilike.%${query}%`
-        );
+        // Remove extra wrapping parentheses
+        request = request.or(`title.ilike.%${query}%,description.ilike.%${query}%`);
       }
-
+      
       const { data, error } = await request;
 
       if (error) {

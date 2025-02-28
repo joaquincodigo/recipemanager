@@ -31,7 +31,7 @@ export default function HomePage() {
             ))}
           </div>
 
-          <div className="flex justify-center align-items mt-6">
+          <div className="flex justify-center mt-6">
             <PaginationControls
               currentPage={currentPage}
               setCurrentPage={setCurrentPage}
