@@ -23,7 +23,6 @@ const usePagination = (recipes) => {
     paginatedRecipes.length > 0 ? [null, ...paginatedRecipes] : [];
 
   const getPaginationControlsArray = (totalPages, currentPage, maxVisible) => {
-    console.log("Inputs:", { totalPages, currentPage, maxVisible });
 
     // Safety checks
     if (totalPages === undefined || totalPages === null || totalPages <= 0) {
@@ -43,7 +42,6 @@ const usePagination = (recipes) => {
 
     if (totalPages <= maxVisible) {
       const result = Array.from({ length: totalPages }, (_, i) => i + 1);
-      console.log("Simple pagination:", result);
       return result;
     }
 
@@ -54,10 +52,7 @@ const usePagination = (recipes) => {
       start = Math.max(1, totalPages - maxVisible + 1);
     }
 
-    console.log("Calculated range:", { start, end });
-
     const pages = Array.from({ length: end - start + 1 }, (_, i) => start + i);
-    console.log("Initial pages array:", pages);
 
     if (pages.length > 0 && pages[pages.length - 1] < totalPages) {
       // Add ellipsis if needed, but check array bounds first
@@ -65,10 +60,8 @@ const usePagination = (recipes) => {
         pages.splice(-1, 0, null);
       }
       pages.push(totalPages);
-      console.log("Added last page:", pages);
     }
 
-    console.log("Final pages array:", pages);
     return pages;
   };
 
@@ -78,16 +71,15 @@ const usePagination = (recipes) => {
     paginationControlsMaxNumbers
   );
 
-  console.log(
-    "Hook returning paginationControlsArray:",
-    paginationControlsArray
-  );
+  const totalPages = paginatedRecipes.length
+
 
   return {
     paginatedRecipes: adjustedPaginatedRecipes,
     currentPage,
     setCurrentPage,
     paginationControlsArray,
+    // totalPages
   };
 };
 

@@ -6,20 +6,37 @@ export default function PaginationControls({
   currentPage,
   setCurrentPage,
   paginationControlsArray,
+  totalPages,
 }) {
-
-  console.log("PaginationControls received in COMPONENTS:", {
+  console.log("PaginationControls received in PAGINATION CONTROLS:", {
     currentPage,
     paginationControlsArray,
+    totalPages,
   });
 
   return (
     <div className="flex gap-x-1">
+      <PaginationArrow
+        direction={"left"}
+        setCurrentPage={setCurrentPage}
+        currentPage={currentPage}
+        totalPages={totalPages}
+      />
       {paginationControlsArray
         ? paginationControlsArray.map((page, i) => (
-            <li key={i}>{page || "..."}</li>
+            <PaginationNumber
+              number={page || "..."}
+              isActive={page === currentPage}
+              key={i}
+            />
           ))
         : "No pages"}
+      <PaginationArrow
+        direction={"right"}
+        setCurrentPage={setCurrentPage}
+        currentPage={currentPage}
+        totalPages={totalPages}
+      />
     </div>
   );
 }

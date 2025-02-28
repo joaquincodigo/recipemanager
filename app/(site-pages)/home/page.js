@@ -16,11 +16,8 @@ export default function HomePage() {
     currentPage,
     setCurrentPage,
     paginationControlsArray,
+    totalPages
   } = usePagination(recipes);
-  console.log(
-    "HomePage received paginationControlsArray:",
-    paginationControlsArray
-  );
 
   const pageContents = paginatedRecipes[currentPage];
 
@@ -39,6 +36,7 @@ export default function HomePage() {
               currentPage={currentPage}
               setCurrentPage={setCurrentPage}
               paginationControlsArray={paginationControlsArray}
+              totalPages={totalPages}
             />
           </div>
         </>
