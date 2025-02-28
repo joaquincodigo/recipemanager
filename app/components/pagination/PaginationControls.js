@@ -1,6 +1,5 @@
 import PaginationArrow from "./PaginationArrow";
 import PaginationNumber from "./PaginationNumber";
-import { useEffect } from "react";
 
 export default function PaginationControls({
   currentPage,
@@ -8,11 +7,6 @@ export default function PaginationControls({
   paginationControlsArray,
   totalPages,
 }) {
-  console.log("PaginationControls received in PAGINATION CONTROLS:", {
-    currentPage,
-    paginationControlsArray,
-    totalPages,
-  });
 
   return (
     <div className="flex gap-x-1">

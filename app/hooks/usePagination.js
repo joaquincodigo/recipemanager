@@ -23,20 +23,16 @@ const usePagination = (recipes) => {
     paginatedRecipes.length > 0 ? [null, ...paginatedRecipes] : [];
 
   const getPaginationControlsArray = (totalPages, currentPage, maxVisible) => {
-
     // Safety checks
     if (totalPages === undefined || totalPages === null || totalPages <= 0) {
-      console.log("Total pages invalid:", totalPages);
       return [];
     }
 
     if (currentPage === undefined || currentPage === null || currentPage <= 0) {
-      console.log("Current page invalid:", currentPage);
       return [];
     }
 
     if (maxVisible === undefined || maxVisible === null || maxVisible <= 0) {
-      console.log("Max visible invalid:", maxVisible);
       return [];
     }
 
@@ -61,7 +57,6 @@ const usePagination = (recipes) => {
       }
       pages.push(totalPages);
     }
-
     return pages;
   };
 
@@ -71,15 +66,14 @@ const usePagination = (recipes) => {
     paginationControlsMaxNumbers
   );
 
-  const totalPages = paginatedRecipes.length
-
+  const totalPages = paginatedRecipes.length;
 
   return {
     paginatedRecipes: adjustedPaginatedRecipes,
     currentPage,
     setCurrentPage,
     paginationControlsArray,
-    // totalPages
+    totalPages
   };
 };
 
