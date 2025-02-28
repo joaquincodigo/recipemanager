@@ -9,7 +9,7 @@ export default function PaginationControls({
 }) {
 
   return (
-    <div className="flex gap-x-1 mt-2 justify-center">
+    <div className="flex gap-x-1 mt-2 justify-center items-center">
       <PaginationArrow
         direction={"left"}
         setCurrentPage={setCurrentPage}
