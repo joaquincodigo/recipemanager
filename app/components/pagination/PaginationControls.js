@@ -21,10 +21,7 @@ export default function PaginationControls({
             <PaginationNumber
               number={page || "..."}
               isActive={page === currentPage}
-            onClick={(e) => {
-              setCurrentPage(page)
-              console.log("Clicked number, sending you to page:", page);
-            }}
+              onClick={() => setCurrentPage(page)}
               key={i}
             />
           ))

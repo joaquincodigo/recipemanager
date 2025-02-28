@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
 
 const useFetchRecipes = (query) => {
-  console.log("from USEFETCHRECIPES, query is:", query)
   const [recipes, setRecipes] = useState([]);
   const [error, setError] = useState(null);
 
