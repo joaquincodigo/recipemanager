@@ -101,7 +101,7 @@ export default function Header({ toggleDrawer }) {
                 toggleSearchInput();
                 clearSearch();
               }}
-              className="text-white"
+              className="text-white font-semibold text-lg rounded-full hover:bg-[#5c9f5a] px-2 py-1"
             >
               Cancel
             </button>

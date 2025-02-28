@@ -19,12 +19,12 @@ export default function SearchBar({ onSearch, searchInputRef }) {
         }}
         placeholder="Search"
         className="
+        placeholder-
           px-3
           rounded-full
           bg-white
           w-full
           h-full
-          text-sm
           flex
           focus:outline-none
           focus:ring-1
