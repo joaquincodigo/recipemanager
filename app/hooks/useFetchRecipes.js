@@ -2,33 +2,46 @@ import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
 
 const useFetchRecipes = (query) => {
+  // We'll keep an array for recipes but add a separate loading state
   const [recipes, setRecipes] = useState([]);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchRecipes = async () => {
-      setError(null); // Reset error before fetching
+      // Set loading to true at the start of fetch
+      setLoading(true);
+      setError(null);
 
-      let request = supabase.from("recipes").select("*");
+      try {
+        let request = supabase.from("recipes").select("*");
+        if (query) {
+          request = request.or(
+            `title.ilike.%${query}%,description.ilike.%${query}%`
+          );
+        }
 
-      if (query) {
-        // Remove extra wrapping parentheses
-        request = request.or(`title.ilike.%${query}%,description.ilike.%${query}%`);
-      }
-      
-      const { data, error } = await request;
+        const { data, error } = await request;
 
-      if (error) {
-        setError(error.message);
-      } else {
-        setRecipes(data);
+        if (error) {
+          setError(error.message);
+          setRecipes([]);
+        } else {
+          setRecipes(data || []);
+        }
+      } catch (err) {
+        setError(err.message);
+        setRecipes([]);
+      } finally {
+        // Set loading to false when done
+        setLoading(false);
       }
     };
 
     fetchRecipes();
   }, [query]);
 
-  return { recipes, error };
+  return { recipes, error, loading };
 };
 
 export default useFetchRecipes;

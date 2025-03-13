@@ -1,13 +1,17 @@
 import Link from "next/link";
 import React from "react";
 
-import { ClockIcon } from '@heroicons/react/24/outline';
-import { TagIcon } from '@heroicons/react/24/outline';
-import { HeartIcon } from '@heroicons/react/24/outline';
-import { HeartIcon as HeartFilledIcon} from '@heroicons/react/24/solid';
+import { ClockIcon } from "@heroicons/react/24/outline";
+import { TagIcon } from "@heroicons/react/24/outline";
+import { HeartIcon } from "@heroicons/react/24/outline";
+import { HeartIcon as HeartFilledIcon } from "@heroicons/react/24/solid";
 
+export default function RecipeCard({ recipe, isLiked, onToggleLike }) {
+  const handleLike = (e) => {
+    e.preventDefault() // prevent the Link wrapper behavior
+    onToggleLike()
+  }
 
-export default function RecipeCard({ recipe }) {
   return (
     <Link className="w-full" href={`/recipe/${recipe.id}`}>
       {/* IMAGE */}
@@ -35,7 +39,6 @@ export default function RecipeCard({ recipe }) {
           {/* Join the words back together into a single string */}
         </h2>
 
-
         {/* DESCRIPTION */}
         <p className="text-sm mb-3">{recipe.description}</p>
 
@@ -43,7 +46,7 @@ export default function RecipeCard({ recipe }) {
         <div className="w-full flex items-center gap-5">
           {/* PREPARATION TIME */}
           <div className="flex">
-            <ClockIcon className="w-6 h-6 text-slate-500 me-0.5"/>
+            <ClockIcon className="w-6 h-6 text-slate-500 me-0.5" />
             <p className="font-semibold text-slate-500">
               {recipe.preparation_time}'
             </p>
@@ -55,9 +58,19 @@ export default function RecipeCard({ recipe }) {
             <p className="font-semibold text-slate-500">{recipe.category}</p>
           </div>
 
-          {/* FAVORITED */}
+          {/* LIKE BUTTON */}
           <div className="flex">
-            <HeartIcon className="w-6 h-6 text-slate-500 me-0.5" />
+            {isLiked ? (
+              <HeartFilledIcon
+                onClick={handleLike}
+                className="w-6 h-6 text-red-500 me-0.5 cursor-pointer"
+              />
+            ) : (
+              <HeartIcon
+                onClick={handleLike}
+                className="w-6 h-6 text-slate-500 me-0.5 cursor-pointer"
+              />
+            )}
           </div>
         </div>
       </div>
