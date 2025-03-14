@@ -10,6 +10,8 @@ import RecipeCard from "@/app/components/RecipeCard";
 import Spinner from "@/app/components/Spinner";
 import { useAuth } from "@/app/context/AuthContext";
 import useLikeRecipe from "@/app/hooks/useLikeRecipe";
+import { XCircleIcon } from "@heroicons/react/24/outline";
+
 
 export default function HomePage() {
   const containerRef = useRef(null);
@@ -42,8 +44,9 @@ export default function HomePage() {
     );
   } else if (recipes.length === 0) {
     content = (
-      <div className="flex justify-center items-center h-full">
-        No matches found.
+      <div className="flex flex-col justify-center items-center h-full pb-20">
+        <XCircleIcon className="text-slate-600 w-10 h-10 mb-1"/>
+        <p className="text-lg text-slate-600">No matches found</p>
       </div>
     );
   } else {
