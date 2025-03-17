@@ -43,7 +43,7 @@ export default function RecipeCard({ recipe, isLiked, onToggleLike }) {
         <p className="text mb-3">{recipe.description}</p>
 
         {/* FOOTER */}
-        <div className="w-full flex justify-aroundx text-sm border-t pt-4 pb-2">
+        <div className="w-full flex justify-aroundx text-sm border-t pt-3 pb-1">
           <div className="flex-1 flex justify-center items-center">
             {" "}
             {isLiked ? (
