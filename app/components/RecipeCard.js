@@ -8,9 +8,9 @@ import { HeartIcon as HeartFilledIcon } from "@heroicons/react/24/solid";
 
 export default function RecipeCard({ recipe, isLiked, onToggleLike }) {
   const handleLike = (e) => {
-    e.preventDefault() // prevent the Link wrapper behavior
-    onToggleLike()
-  }
+    e.preventDefault(); // prevent the Link wrapper behavior
+    onToggleLike();
+  };
 
   return (
     <Link className="w-full" href={`/recipe/${recipe.id}`}>
@@ -40,26 +40,12 @@ export default function RecipeCard({ recipe, isLiked, onToggleLike }) {
         </h2>
 
         {/* DESCRIPTION */}
-        <p className="text-sm mb-3">{recipe.description}</p>
+        <p className="text mb-3">{recipe.description}</p>
 
         {/* FOOTER */}
-        <div className="w-full flex items-center gap-5">
-          {/* PREPARATION TIME */}
-          <div className="flex">
-            <ClockIcon className="w-6 h-6 text-slate-500 me-0.5" />
-            <p className="font-semibold text-slate-500">
-              {recipe.preparation_time}'
-            </p>
-          </div>
-
-          {/* CATEGORY */}
-          <div className="flex">
-            <TagIcon className="w-6 h-6 text-slate-500 me-0.5" />
-            <p className="font-semibold text-slate-500">{recipe.category}</p>
-          </div>
-
-          {/* LIKE BUTTON */}
-          <div className="flex">
+        <div className="w-full flex justify-aroundx text-sm border-t pt-4 pb-2">
+          <div className="flex-1 flex justify-center items-center">
+            {" "}
             {isLiked ? (
               <HeartFilledIcon
                 onClick={handleLike}
@@ -71,6 +57,23 @@ export default function RecipeCard({ recipe, isLiked, onToggleLike }) {
                 className="w-6 h-6 text-slate-500 me-0.5 cursor-pointer"
               />
             )}
+            <p className="font-semibold text-slate-500 leading-none ms-2">
+              Like
+            </p>
+          </div>
+
+          <div className="flex-1 flex justify-center items-center">
+            <ClockIcon className="w-6 h-6 text-slate-500 me-1" />
+            <p className="font-semibold text-slate-500 leading-none">
+              {recipe.preparation_time}'
+            </p>
+          </div>
+
+          <div className="flex-1 flex justify-center items-center">
+            <TagIcon className="w-6 h-6 text-slate-500 me-1" />
+            <p className="font-semibold text-slate-500 leading-none">
+              {recipe.category}
+            </p>
           </div>
         </div>
       </div>
