@@ -91,8 +91,8 @@ export default function Drawer({ closeDrawer, isDrawerOpen }) {
                 <span className="me-3">
                   <HeartIcon className="w-6 h-6" />
                 </span>
-                <Link className="font-semibold" href="/">
-                  Favorites list
+                <Link className="font-semibold" href="/liked-recipes">
+                  Liked recipes
                 </Link>
               </li>
               <li className="flex items-center" onClick={closeDrawer}>
