@@ -44,18 +44,14 @@ export default function RecipeCard({ recipe, isLiked, onToggleLike }) {
 
         {/* FOOTER */}
         <div className="w-full flex justify-aroundx text-sm border-t pt-3 pb-1">
-          <div className="flex-1 flex justify-center items-center">
-            {" "}
+          <div
+            className="flex-1 flex justify-center items-center"
+            onClick={handleLike}
+          >
             {isLiked ? (
-              <HeartFilledIcon
-                onClick={handleLike}
-                className="w-6 h-6 text-red-500 me-0.5 cursor-pointer"
-              />
+              <HeartFilledIcon className="w-6 h-6 text-red-500 me-0.5 cursor-pointer" />
             ) : (
-              <HeartIcon
-                onClick={handleLike}
-                className="w-6 h-6 text-slate-500 me-0.5 cursor-pointer"
-              />
+              <HeartIcon className="w-6 h-6 text-slate-500 me-0.5 cursor-pointer" />
             )}
             <p className="font-semibold text-slate-500 leading-none ms-2">
               Like
