@@ -38,7 +38,7 @@ export default function HomePage() {
   let content;
   if (loading) {
     content = (
-      <div className="flex justify-center items-center h-full">
+      <div className="flex justify-center items-center h-screen">
         <Spinner />
       </div>
     );
