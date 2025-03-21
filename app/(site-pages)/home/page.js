@@ -52,7 +52,7 @@ export default function HomePage() {
     );
   } else if (recipes.length === 0) {
     content = (
-      <div className="flex flex-col justify-center items-center h-full pb-20">
+      <div className="flex flex-col justify-center items-center h-full">
         <XCircleIcon className="text-slate-600 w-10 h-10 mb-1" />
         <p className="text-lg text-slate-600">No matches found</p>
       </div>

@@ -47,12 +47,12 @@ export default function SitePagesLayout({ children }) {
   }, [isDrawerOpen]);
 
   return (
-    <>
+    <div className="pt-14">
       <Header toggleDrawer={toggleDrawer} />
 
       <Drawer closeDrawer={closeDrawer} isDrawerOpen={isDrawerOpen} />
 
       <main>{children}</main>
-    </>
+    </div>
   );
 }

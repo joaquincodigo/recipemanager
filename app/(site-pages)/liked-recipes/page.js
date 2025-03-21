@@ -39,14 +39,14 @@ export default function LikedRecipes() {
   // LOADING
   if (loading) {
     content = (
-      <div className="flex justify-center items-center h-full">
+      <div className="flex justify-center items-center h-screen">
         <Spinner />
       </div>
     );
     // ERROR
   } else if (error) {
     content = (
-      <div className="flex justify-center items-center h-full">
+      <div className="flex justify-center items-center h-screen">
         <p>An error has occurred.</p>
         <p>{error}</p>
       </div>
@@ -54,7 +54,7 @@ export default function LikedRecipes() {
     // EMPTY LIST
   } else if (likedRecipes.length === 0) {
     content = (
-      <div className="flex flex-col justify-center items-center h-full pb-20">
+      <div className="flex flex-col justify-center items-center h-full">
         <XCircleIcon className="text-slate-600 w-10 h-10 mb-1" />
         <p className="text-lg text-slate-600">
           You didn't give a like to any recipe yet
