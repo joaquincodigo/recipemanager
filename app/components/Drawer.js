@@ -16,8 +16,6 @@ export default function Drawer({ closeDrawer, isDrawerOpen }) {
   const { handleLogout } = useLogout();
   const { userId, loggedIn } = useAuth();
 
-
-
   return (
     <>
       {/* Black Overlay */}

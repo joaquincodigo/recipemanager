@@ -8,6 +8,7 @@ import { HeartIcon as HeartFilledIcon } from "@heroicons/react/24/solid";
 
 export default function RecipeCard({ recipe, isLiked, onToggleLike }) {
   const handleLike = (e) => {
+    console.log("im clicked");
     e.preventDefault(); // prevent the Link wrapper behavior
     onToggleLike();
   };

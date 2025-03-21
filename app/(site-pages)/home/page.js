@@ -11,13 +11,16 @@ import Spinner from "@/app/components/Spinner";
 import { useAuth } from "@/app/context/AuthContext";
 import useLikeRecipe from "@/app/hooks/useLikeRecipe";
 import { XCircleIcon } from "@heroicons/react/24/outline";
-
+import { useRouter } from "next/navigation";
 
 export default function HomePage() {
   const containerRef = useRef(null);
   const { query } = useSearch();
   const { recipes, error, loading } = useFetchRecipes(query);
-  
+  const router = useRouter();
+  const { userId } = useAuth();
+  const { isLiked, toggleLike } = useLikeRecipe(userId);
+
   const {
     paginatedRecipes,
     currentPage,
@@ -26,8 +29,13 @@ export default function HomePage() {
     totalPages,
   } = usePagination(recipes);
 
-  const { userId } = useAuth();
-  const { isLiked, toggleLike } = useLikeRecipe(userId);
+  const handleLike = (recipeId) => {
+    if (!userId) {
+      router.push("/login");
+      return;
+    }
+    toggleLike(recipeId);
+  };
 
   useEffect(() => {
     // Scroll the container to top on page change
@@ -45,7 +53,7 @@ export default function HomePage() {
   } else if (recipes.length === 0) {
     content = (
       <div className="flex flex-col justify-center items-center h-full pb-20">
-        <XCircleIcon className="text-slate-600 w-10 h-10 mb-1"/>
+        <XCircleIcon className="text-slate-600 w-10 h-10 mb-1" />
         <p className="text-lg text-slate-600">No matches found</p>
       </div>
     );
@@ -59,7 +67,7 @@ export default function HomePage() {
               key={recipe.id}
               recipe={recipe}
               isLiked={isLiked(recipe.id)}
-              onToggleLike={() => toggleLike(recipe.id)}
+              onToggleLike={() => handleLike(recipe.id)}
             />
           ))}
         </div>
