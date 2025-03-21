@@ -16,7 +16,6 @@ export default function Header({ toggleDrawer }) {
   const { handleSearch } = useSearch();
   const [isSearchInputOpen, setIsSearchInputOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true); // Header hiding when scrolling down and re-appearing when scrolling up
-  const [lastScroll, setLastScroll] = useState(0);
   const searchInputRef = useRef(null);
 
   const toggleSearchInput = () => {
@@ -38,37 +37,28 @@ export default function Header({ toggleDrawer }) {
     handleSearch("");
   };
 
-  // Handling the hide-unhide bevahior of the header
+  const lastScroll = useRef(0);
+
   useEffect(() => {
-    let timeoutId; // To store the timeout ID for debouncing
-
     const handleScroll = () => {
-      clearTimeout(timeoutId);
+      const currentScroll = window.scrollY;
+      const scrollThreshold = 10; // Sensitivity
 
-      timeoutId = setTimeout(() => {
-        const currentScroll = window.scrollY;
-        const scrollThreshold = 40; // Minimum scroll distance to hide/show header
-
-        if (Math.abs(currentScroll - lastScroll) > scrollThreshold) {
-          if (currentScroll > lastScroll && currentScroll > scrollThreshold) {
-            setIsVisible(false);
-          } else {
-            // Show the header when scrolling up
-            setIsVisible(true);
-          }
-
-          setLastScroll(currentScroll);
+      if (Math.abs(currentScroll - lastScroll.current) > scrollThreshold) {
+        if (currentScroll > lastScroll.current) {
+          setIsVisible(false); // Hide on scroll down
+        } else {
+          setIsVisible(true); // Show on scroll up
         }
-      }, 10);
+
+        lastScroll.current = currentScroll; // Update last scroll position
+      }
     };
 
     window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
-    return () => {
-      clearTimeout(timeoutId);
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [lastScroll]);
 
   return (
     <header
@@ -84,7 +74,7 @@ export default function Header({ toggleDrawer }) {
       transition-transform
       duration-300
       ease-in-out
-      sticky
+      fixed
       top-0
       z-10
       overflow-hidden

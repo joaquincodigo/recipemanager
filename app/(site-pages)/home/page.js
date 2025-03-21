@@ -76,7 +76,7 @@ export default function HomePage() {
   }
 
   return (
-    <div ref={containerRef} className="p-3 h-screen overflow-y-auto scroll-pt-16">
+    <div ref={containerRef} className="p-3">
       {content}
       <Footer />
     </div>

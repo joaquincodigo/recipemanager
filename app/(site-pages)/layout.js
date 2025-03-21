@@ -1,21 +1,9 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import { Schibsted_Grotesk } from "next/font/google";
 
 import Header from "../components/Header";
 import Drawer from "../components/Drawer";
-
-const schibstedGrotesk = Schibsted_Grotesk({
-  subsets: ["latin"],
-  weights: ["400", "700"],
-  variable: "--font-schibsted-grotesk",
-});
-
-// export const metadata = {
-//   title: "Recipe Hub",
-//   description: "Explore, create and share your recipes",
-// };
 
 export default function SitePagesLayout({ children }) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -64,7 +52,7 @@ export default function SitePagesLayout({ children }) {
 
       <Drawer closeDrawer={closeDrawer} isDrawerOpen={isDrawerOpen} />
 
-      <main className="h-full">{children}</main>
+      <main>{children}</main>
     </>
   );
 }

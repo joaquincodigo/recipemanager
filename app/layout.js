@@ -16,10 +16,10 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="schibstedGrotesk.variable h-screen overflow-hidden">
+    <html lang="en" className="schibstedGrotesk.variable h-screen">
       <body
         className={
-          "antialiased bg-white overflow-y-scroll overflow-x-hidden h-full"
+          "antialiased bg-white h-full"
         }
       >
         <AuthProvider>
