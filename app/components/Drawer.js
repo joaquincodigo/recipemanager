@@ -14,7 +14,7 @@ import { ArrowLeftStartOnRectangleIcon } from "@heroicons/react/24/outline";
 
 export default function Drawer({ closeDrawer, isDrawerOpen }) {
   const { handleLogout } = useLogout();
-  const { userId, loggedIn } = useAuth();
+  const { userId, username, loggedIn } = useAuth();
 
   return (
     <>
@@ -69,9 +69,8 @@ export default function Drawer({ closeDrawer, isDrawerOpen }) {
             {/* User Header */}
             <div className="flex flex-col items-center gap-y-2">
               <ProfileAvatar size={20} />
-              <h2 className="text-lg font-bold">Hello</h2>
               <h2 className="text-lg font-bold mb-12">
-                {"LOGGED USER" || "NON LOGGED USER"}!
+                {`Hello ${username || "Loading..."}`}
               </h2>
             </div>
 
@@ -105,10 +104,7 @@ export default function Drawer({ closeDrawer, isDrawerOpen }) {
                 <span className="me-3">
                   <ArrowLeftStartOnRectangleIcon className="w-6 h-6" />
                 </span>
-                <button
-                  className="font-semibold"
-                  onClick={handleLogout}
-                >
+                <button className="font-semibold" onClick={handleLogout}>
                   Logout
                 </button>
               </li>
