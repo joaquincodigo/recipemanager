@@ -20,7 +20,6 @@ export default function HomePage() {
   const router = useRouter();
   const { userId } = useAuth();
   const { isLiked, toggleLike } = useLikeRecipe(userId);
-  const [animateLike, setAnimateLike] = useState(false)
    
 
   const {

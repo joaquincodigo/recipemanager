@@ -5,9 +5,14 @@ import { ClockIcon } from "@heroicons/react/24/outline";
 import { TagIcon } from "@heroicons/react/24/outline";
 import { HeartIcon } from "@heroicons/react/24/outline";
 import { HeartIcon as HeartFilledIcon } from "@heroicons/react/24/solid";
+import { useState } from "react";
+import { motion } from "framer-motion";
 
 export default function RecipeCard({ recipe, isLiked, onToggleLike }) {
+  const [animateLike, setAnimateLike] = useState(false);
+
   const handleLike = (e) => {
+    setAnimateLike(true);
     console.log("im clicked");
     e.preventDefault(); // prevent the Link wrapper behavior
     onToggleLike();
@@ -45,20 +50,35 @@ export default function RecipeCard({ recipe, isLiked, onToggleLike }) {
 
         {/* FOOTER */}
         <div className="w-full flex justify-aroundx text-sm border-t pt-3 pb-1">
-          <div
+          {/* LIKE */}
+          <button
             className="flex-1 flex justify-center items-center"
             onClick={handleLike}
           >
             {isLiked ? (
-              <HeartFilledIcon className="w-6 h-6 text-red-500 me-0.5 cursor-pointer" />
+              <div className="relative">
+                <motion.div
+                  className="absolute inset-0 items-center justify-center"
+                  initial={{ scale: 1, opacity: 1 }}
+                  animate={{ scale: 2, opacity: 0 }}
+                  transition={{ duration: 0.5, ease: "easeOut" }}
+                  onAnimationComplete={() => {
+                    setAnimateLike(false);
+                  }}
+                >
+                  <HeartFilledIcon className="w-6 h-6 text-red-500 me-0.5 cursor-pointer" />
+                </motion.div>
+                <HeartFilledIcon className="w-6 h-6 text-red-500 me-0.5 cursor-pointer" />
+              </div>
             ) : (
               <HeartIcon className="w-6 h-6 text-slate-500 me-0.5 cursor-pointer" />
             )}
             <p className="font-semibold text-slate-500 leading-none ms-2">
               Like
             </p>
-          </div>
+          </button>
 
+          {/* PREP TIME */}
           <div className="flex-1 flex justify-center items-center">
             <ClockIcon className="w-6 h-6 text-slate-500 me-1" />
             <p className="font-semibold text-slate-500 leading-none">
@@ -66,6 +86,7 @@ export default function RecipeCard({ recipe, isLiked, onToggleLike }) {
             </p>
           </div>
 
+          {/* CATEGORY */}
           <div className="flex-1 flex justify-center items-center">
             <TagIcon className="w-6 h-6 text-slate-500 me-1" />
             <p className="font-semibold text-slate-500 leading-none">
