@@ -69,9 +69,11 @@ export default function Drawer({ closeDrawer, isDrawerOpen }) {
             {/* User Header */}
             <div className="flex flex-col items-center gap-y-2">
               <ProfileAvatar size={20} />
-              <h2 className="text-lg font-bold mb-12">
-                {`Hello ${username || "Loading..."}`}
-              </h2>
+              <div className="flex justify-center max-w-40 bg-red-300">
+                <h2 className="text-center text-lg font-bold mb-12">
+                  {`Hello ${username || "Loading..."}`}
+                </h2>
+              </div>
             </div>
 
             {/* Option List */}
