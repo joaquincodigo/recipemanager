@@ -4,8 +4,15 @@ const usePagination = (recipes) => {
   const [currentPage, setCurrentPage] = useState(1);
   const recipesPerPage = 8;
   const paginationControlsMaxNumbers = 5;
-  
-  // If recipes is truly undefined (loading state)
+
+  // RESET PAGE TO 1
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [recipes]);
+ 
+
+
+  // recipes IS UNDEFINED 
   if (recipes === undefined) {
     return {
       currentPage,
@@ -18,11 +25,8 @@ const usePagination = (recipes) => {
     };
   }
   
-  // Now we know recipes is defined, check if it's empty
-  const isEmpty = recipes.length === 0;
-  
-  // Empty results case
-  if (isEmpty) {
+  // recipes IS EMPTY 
+  if (recipes.length === 0) {
     return {
       currentPage,
       setCurrentPage,
@@ -34,7 +38,7 @@ const usePagination = (recipes) => {
     };
   }
   
-  // We have actual recipes
+  // recipes HAS RECIPES 
   const paginateArray = (recipes, recipesPerPage) => {
     return recipes.reduce((acc, _, index) => {
       if (index % recipesPerPage === 0) {

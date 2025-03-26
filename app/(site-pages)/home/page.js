@@ -20,8 +20,6 @@ export default function HomePage() {
   const router = useRouter();
   const { userId } = useAuth();
   const { isLiked, toggleLike } = useLikeRecipe(userId);
-   
-
   const {
     paginatedRecipes,
     currentPage,
@@ -38,27 +36,35 @@ export default function HomePage() {
     toggleLike(recipeId);
   };
 
+  // Move scroll to the top of the page when the user switches pages
   useEffect(() => {
     // Scroll the container to top on page change
     containerRef.current?.scrollTo({ top: 0, behavior: "smooth" });
   }, [currentPage]);
 
-  // Determine what to render
   let content;
+
+  // LOADING
   if (loading) {
     content = (
       <div className="flex justify-center items-center h-screen">
         <Spinner />
       </div>
     );
-  } else if (recipes.length === 0) {
+  }
+
+  // NO MATCHES
+  else if (recipes.length === 0) {
     content = (
       <div className="flex flex-col justify-center items-center h-full">
         <XCircleIcon className="text-slate-600 w-10 h-10 mb-1" />
         <p className="text-lg text-slate-600">No matches found</p>
       </div>
     );
-  } else {
+  }
+
+  // NORMAL RESULTS
+  else {
     const pageContents = paginatedRecipes[currentPage];
     content = (
       <>
