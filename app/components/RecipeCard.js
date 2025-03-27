@@ -13,7 +13,6 @@ export default function RecipeCard({ recipe, isLiked, onToggleLike }) {
 
   const handleLike = (e) => {
     setAnimateLike(true);
-    console.log("im clicked");
     e.preventDefault(); // prevent the Link wrapper behavior
     onToggleLike();
   };
@@ -60,7 +59,7 @@ export default function RecipeCard({ recipe, isLiked, onToggleLike }) {
                 <motion.div
                   className="absolute inset-0 items-center justify-center"
                   initial={{ scale: 1, opacity: 1 }}
-                  animate={{ scale: 2, opacity: 0 }}
+                  animate={animateLike ? { scale: 2, opacity: 0 } : {}}
                   transition={{ duration: 0.5, ease: "easeOut" }}
                   onAnimationComplete={() => {
                     setAnimateLike(false);
