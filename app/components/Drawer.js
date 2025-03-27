@@ -13,8 +13,6 @@ import { HeartIcon } from "@heroicons/react/24/outline";
 import { ArrowLeftStartOnRectangleIcon } from "@heroicons/react/24/outline";
 import { PlusCircleIcon } from "@heroicons/react/24/outline";
 
-
-
 export default function Drawer({ closeDrawer, isDrawerOpen }) {
   const { handleLogout } = useLogout();
   const { userId, username, loggedIn } = useAuth();
