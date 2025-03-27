@@ -14,7 +14,6 @@ import { XCircleIcon } from "@heroicons/react/24/outline";
 import { useRouter } from "next/navigation";
 
 export default function HomePage() {
-  const containerRef = useRef(null);
   const { query } = useSearch();
   const { recipes, error, loading } = useFetchRecipes(query);
   const router = useRouter();
@@ -36,10 +35,12 @@ export default function HomePage() {
     toggleLike(recipeId);
   };
 
-  // Move scroll to the top of the page when the user switches pages
+  // Scroll to the top of the page when the user switches pages
   useEffect(() => {
-    // Scroll the container to top on page change
-    containerRef.current?.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   }, [currentPage]);
 
   let content;
@@ -91,7 +92,7 @@ export default function HomePage() {
   }
 
   return (
-    <div ref={containerRef} className="p-3">
+    <div className="p-3">
       {content}
       <Footer />
     </div>
