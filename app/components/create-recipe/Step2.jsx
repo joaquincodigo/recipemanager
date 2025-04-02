@@ -1,6 +1,6 @@
 import ImageInput from "../ui/ImageInput";
 
-export default function Page2({ formData, setFormData }) {
+export default function Step2({ formData, setFormData }) {
   const styles = {
     container: "flex justify-center w-full",
     heading: "text-slate-500 font-bold mb-5 text-center pb-3",

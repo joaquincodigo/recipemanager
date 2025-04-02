@@ -1,11 +1,18 @@
 import Button from "../ui/Button";
 
-export default function NavigationControls({ step, setStep }) {
+export default function NavigationControls({
+  step,
+  setStep,
+  setCanMoveFoward,
+}) {
+
   const handleBack = () => {
     setStep((s) => s - 1);
   };
+
   const handleNext = () => {
     setStep((s) => s + 1);
+    setCanMoveFoward(false);
   };
 
   const styles = {
@@ -14,13 +21,16 @@ export default function NavigationControls({ step, setStep }) {
 
   return (
     <div className={styles.container}>
-      <Button
-        label="Back"
-        type="secondary"
-        onClick={handleBack}
-        disabled={step === 1}
-        className="flex-1"
-      />
+      {step !== 1 && (
+        <Button
+          label="Back"
+          type="secondary"
+          onClick={handleBack}
+          disabled={step === 1}
+          className="flex-1"
+        />
+      )}
+
       <Button
         label="Next"
         type="primary"
