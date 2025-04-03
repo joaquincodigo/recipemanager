@@ -1,19 +1,28 @@
-export default function Button({ label, type, onClick, disabled, className }) {
-  const baseStyles = "rounded-md font-bold p-3";
+import { useEffect } from "react";
 
-  const typeStyles =
-    type === "primary"
-      ? disabled
-        ? "bg-[#9ead9e] text-slate-500" // Disabled Primary
-        : "bg-[#7FC37E] text-white hover:bg-[#5d995c]" // Enabled Primary
-      : disabled
-      ? "bg-none text-slate-500" // Disabled Secondary
-      : "bg-none text-black hover:bg-slate-200"; // Enabled Secondary
+export default function Button({ label, type, enabled, className, onClick }) {
+
+  // Handlers
+  const handleClick = enabled ? onClick : () => {};
+
+  // Styles
+  const baseStyles = "rounded-md font-bold p-3";
+  const styles = {
+    primary: {
+      enabled: "bg-[#7FC37E] text-white hover:bg-[#5d995c]",
+      disabled: "bg-[#9ead9e] text-slate-500",
+    },
+    secondary: {
+      enabled: "bg-none text-black hover:bg-slate-200",
+      disabled: "bg-none text-slate-500",
+    },
+  };
+  const buttonStyles = styles[type]?.[enabled ? "enabled" : "disabled"];
 
   return (
     <button
-      onClick={onClick}
-      className={`${baseStyles} ${typeStyles} ${className || ""}`}
+      onClick={handleClick}
+      className={`${baseStyles} ${buttonStyles} ${className || ""}`}
     >
       {label}
     </button>

@@ -1,11 +1,12 @@
+import { useEffect } from "react";
 import Button from "../ui/Button";
 
 export default function NavigationControls({
   step,
   setStep,
+  canMoveFoward,
   setCanMoveFoward,
 }) {
-
   const handleBack = () => {
     setStep((s) => s - 1);
   };
@@ -21,12 +22,13 @@ export default function NavigationControls({
 
   return (
     <div className={styles.container}>
+
       {step !== 1 && (
         <Button
           label="Back"
           type="secondary"
           onClick={handleBack}
-          disabled={step === 1}
+          enbaled={!(step === 1)}
           className="flex-1"
         />
       )}
@@ -35,9 +37,10 @@ export default function NavigationControls({
         label="Next"
         type="primary"
         onClick={handleNext}
-        disabled={step === 5}
+        enabled={canMoveFoward}
         className="flex-[2]"
       />
     </div>
+
   );
 }

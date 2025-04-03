@@ -3,28 +3,28 @@ import TextAreaInput from "../ui/TextAreaInput";
 import { useState } from "react";
 
 export default function Step1({ formData, setFormData, setCanMoveFoward }) {
-  const [titleError, setTitleError] = useState(false);
-  const [descriptionError, setDescriptionError] = useState(false);
+  const isTitleValid = (title) => title.length >= 3;
+  const isDescriptionValid = (description) => description.length >= 10;
 
-  const handleTitleInput = (e) => {
-    setFormData({ ...formData, title: e.target.value });
+  const handleInput = (e, propertyName) => {
+    // Store the value
+    setFormData((prev) => {
+      const updatedFormData = { ...prev, [propertyName]: e.target.value };
+
+      // Check if the user can continue to the next step
+      setCanMoveFoward(
+        isTitleValid(updatedFormData.title)
+        // && isDescriptionValid(updatedFormData.description)
+      );
+
+      console.log("updated:", updatedFormData);
+      return updatedFormData;
+    });
   };
 
-  const handleDescriptionInput = (e) => {
-    setFormData({ ...formData, description: e.target.value });
-  };
-
-  const checkTitle = (e) => {
-    if (e.target.value.length < 3) {
-      console.log("title error");
-      setTitleError(true);
-    }
-  };
-
-  const checkDescription = (e) => {
-    if (e.target.value.length < 10) {
-      setDescriptionError(true);
-    }
+  const errors = {
+    title: "The title must have at least 3 characters.",
+    description: "The description must have at least 10 characters.",
   };
 
   const styles = {
@@ -41,26 +41,16 @@ export default function Step1({ formData, setFormData, setCanMoveFoward }) {
         <TextInput
           fieldName="Title"
           required={true}
-          handleInput={handleTitleInput}
-          onBlur={checkTitle}
-          error={titleError}
-          onFocus={() => {
-            setTitleError(false);
-          }}
+          onChange={(e) => handleInput(e, "title")}
         />
 
         {/* Error Message */}
-        {titleError && (
-          <p className={styles.errorMessage}>
-            The title must have at least 3 characters.
-          </p>
-        )}
+        {isTitleValid && <p className={styles.errorMessage}>{errors.title}</p>}
       </div>
 
-      <div>
-        {/* Description */}
-        <TextAreaInput
-          fieldName="Description"
+      {/* <div>
+        Description
+        <TextAreaInput fieldName="Description"
           required={true}
           handleInput={handleDescriptionInput}
           onBlur={checkDescription}
@@ -68,9 +58,9 @@ export default function Step1({ formData, setFormData, setCanMoveFoward }) {
           error={descriptionError}
         />
 
-        {/* Error Message */}
+        Error Message
         {descriptionError && <p className={styles.errorMessage}>The description must have at least 10 characters.</p>}
-      </div>
+      </div> */}
     </>
   );
 }

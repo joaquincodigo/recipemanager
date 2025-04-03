@@ -3,10 +3,7 @@ import React from "react";
 export default function TextInput({
   fieldName,
   required,
-  handleInput,
-  onBlur,
-  onFocus,
-  error,
+  onChange,
 }) {
   const styles = {
     container: "relative flex flex-col",
@@ -23,18 +20,17 @@ export default function TextInput({
     <div className={styles.container}>
       <label
         htmlFor={fieldName}
-        className={error ? styles.errorLabel : styles.label}
+        className={styles.label}
       >
         {fieldName} {required ? "*" : ""}
       </label>
 
       <input
         type="text"
-        className={error ? styles.errorInput : styles.input}
+        className={styles.input}
         id={fieldName}
         name={fieldName}
-        onBlur={onBlur}
-        onFocus={onFocus}
+        onChange={onChange}
       />
     </div>
   );
