@@ -3,8 +3,7 @@ import React from "react";
 export default function TextAreaInput({
   fieldName,
   required,
-  onBlur,
-  onFocus,
+  onChange,
   error,
 }) {
   const styles = {
@@ -32,8 +31,7 @@ export default function TextAreaInput({
         id={fieldName}
         name={fieldName}
         className={error ? styles.errorTextarea : styles.textarea}
-        onFocus={onFocus}
-        onBlur={onBlur}
+        onChange={onChange}
       ></textarea>
     </div>
   );

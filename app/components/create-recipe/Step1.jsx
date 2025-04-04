@@ -13,8 +13,8 @@ export default function Step1({ formData, setFormData, setCanMoveFoward }) {
 
       // Check if the user can continue to the next step
       setCanMoveFoward(
-        isTitleValid(updatedFormData.title)
-        // && isDescriptionValid(updatedFormData.description)
+        isTitleValid(updatedFormData.title) &&
+          isDescriptionValid(updatedFormData.description)
       );
 
       console.log("updated:", updatedFormData);
@@ -48,19 +48,21 @@ export default function Step1({ formData, setFormData, setCanMoveFoward }) {
         {isTitleValid && <p className={styles.errorMessage}>{errors.title}</p>}
       </div>
 
-      {/* <div>
-        Description
-        <TextAreaInput fieldName="Description"
+      <div>
+        {/* Description */}
+        <TextAreaInput
+          fieldName="Description"
           required={true}
-          handleInput={handleDescriptionInput}
-          onBlur={checkDescription}
-          onFocus={() => setDescriptionError(false)}
-          error={descriptionError}
+          onChange={(e) => handleInput(e, "description")}
         />
 
-        Error Message
-        {descriptionError && <p className={styles.errorMessage}>The description must have at least 10 characters.</p>}
-      </div> */}
+        {/* Error Message */}
+        {/* {descriptionError && (
+          <p className={styles.errorMessage}>
+            The description must have at least 10 characters.
+          </p>
+        )} */}
+      </div>
     </>
   );
 }
