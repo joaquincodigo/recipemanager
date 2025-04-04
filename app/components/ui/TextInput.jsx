@@ -4,6 +4,9 @@ export default function TextInput({
   fieldName,
   required,
   onChange,
+  onBlur,
+  onFocus,
+  error,
 }) {
   const styles = {
     container: "relative flex flex-col",
@@ -20,17 +23,19 @@ export default function TextInput({
     <div className={styles.container}>
       <label
         htmlFor={fieldName}
-        className={styles.label}
+        className={error ? styles.errorLabel : styles.label}
       >
         {fieldName} {required ? "*" : ""}
       </label>
 
       <input
         type="text"
-        className={styles.input}
+        className={error ? styles.errorInput : styles.input}
         id={fieldName}
         name={fieldName}
         onChange={onChange}
+        onBlur={onBlur}
+        onFocus={onFocus}
       />
     </div>
   );

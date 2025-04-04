@@ -4,6 +4,8 @@ export default function TextAreaInput({
   fieldName,
   required,
   onChange,
+  onBlur,
+  onFocus,
   error,
 }) {
   const styles = {
@@ -32,6 +34,8 @@ export default function TextAreaInput({
         name={fieldName}
         className={error ? styles.errorTextarea : styles.textarea}
         onChange={onChange}
+        onBlur={onBlur}
+        onFocus={onFocus}
       ></textarea>
     </div>
   );

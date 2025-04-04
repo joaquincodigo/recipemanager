@@ -5,6 +5,16 @@ import { useState } from "react";
 export default function Step1({ formData, setFormData, setCanMoveFoward }) {
   const isTitleValid = (title) => title.length >= 3;
   const isDescriptionValid = (description) => description.length >= 10;
+  const [titleError, setTitleError] = useState(false);
+  const [descriptionError, setDescriptionError] = useState(false);
+
+  const validateTitle = () => {
+    setTitleError(!isTitleValid(formData.title));
+  };
+
+  const validateDescription = () => {
+    setDescriptionError(!isDescriptionValid(formData.description));
+  };
 
   const handleInput = (e, propertyName) => {
     // Store the value
@@ -42,10 +52,13 @@ export default function Step1({ formData, setFormData, setCanMoveFoward }) {
           fieldName="Title"
           required={true}
           onChange={(e) => handleInput(e, "title")}
+          onBlur={validateTitle}
+          onFocus={() => setTitleError(false)}
+          error={titleError}
         />
 
         {/* Error Message */}
-        {isTitleValid && <p className={styles.errorMessage}>{errors.title}</p>}
+        {titleError && <p className={styles.errorMessage}>{errors.title}</p>}
       </div>
 
       <div>
@@ -54,14 +67,17 @@ export default function Step1({ formData, setFormData, setCanMoveFoward }) {
           fieldName="Description"
           required={true}
           onChange={(e) => handleInput(e, "description")}
+          onBlur={validateDescription}
+          onFocus={() => setDescriptionError(false)}
+          error={descriptionError}
         />
 
         {/* Error Message */}
-        {/* {descriptionError && (
+        {descriptionError && (
           <p className={styles.errorMessage}>
             The description must have at least 10 characters.
           </p>
-        )} */}
+        )}
       </div>
     </>
   );
