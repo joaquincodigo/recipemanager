@@ -8,9 +8,7 @@ export default function NavigationControls({
 }) {
   const handleBack = (e) => {
     e.preventDefault()
-    console.log("Im handle back");
     setStep((s) => s - 1);
-    setCanMoveFoward(false);
   };
 
   const handleNext = (e) => {
@@ -30,8 +28,7 @@ export default function NavigationControls({
           label="Back"
           type="secondary"
           onClick={handleBack}
-          enabled={true}
-          // enabled ={!(step === 1)}
+          enabled ={!(step === 1)}
           className="flex-1"
         />
       )}
