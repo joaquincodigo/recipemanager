@@ -7,6 +7,7 @@ export default function TextInput({
   onBlur,
   onFocus,
   error,
+  value
 }) {
   const styles = {
     container: "relative flex flex-col",
@@ -36,6 +37,7 @@ export default function TextInput({
         onChange={onChange}
         onBlur={onBlur}
         onFocus={onFocus}
+        value={value}
       />
     </div>
   );

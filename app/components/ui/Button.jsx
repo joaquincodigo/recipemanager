@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 
 export default function Button({ label, type, enabled, className, onClick }) {
-
   // Handlers
   const handleClick = enabled ? onClick : () => {};
 

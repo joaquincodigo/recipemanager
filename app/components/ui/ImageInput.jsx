@@ -6,7 +6,7 @@ export default function ImageInput() {
 
   const styles = {
     label:
-      "flex w-56 items-center gap-2 cursor-pointer bg-[#7FC37E] text-white px-4 py-2 rounded-lg hover:bg-[#5b995a]",
+      "flex w-42 font-bold items-center gap-2 cursor-pointer bg-[#7FC37E] text-white px-4 py-2 rounded-lg hover:bg-[#5b995a]",
     input: "hidden",
     icon: "w-8 h-8",
     thumbWrapper: "relative w-52 h-52 mt-4",
@@ -27,7 +27,7 @@ export default function ImageInput() {
     <div>
       {!image && (
         <label className={styles.label}>
-          Seleccionar imagen
+          Select image
           <input
             type="file"
             accept="image/png, image/jpeg, image/gif"

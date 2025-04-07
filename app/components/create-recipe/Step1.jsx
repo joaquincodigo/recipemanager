@@ -27,7 +27,6 @@ export default function Step1({ formData, setFormData, setCanMoveFoward }) {
           isDescriptionValid(updatedFormData.description)
       );
 
-      console.log("updated:", updatedFormData);
       return updatedFormData;
     });
   };
@@ -55,6 +54,7 @@ export default function Step1({ formData, setFormData, setCanMoveFoward }) {
           onBlur={validateTitle}
           onFocus={() => setTitleError(false)}
           error={titleError}
+          value={formData.title}
         />
 
         {/* Error Message */}
@@ -70,13 +70,12 @@ export default function Step1({ formData, setFormData, setCanMoveFoward }) {
           onBlur={validateDescription}
           onFocus={() => setDescriptionError(false)}
           error={descriptionError}
+          value={formData.description}
         />
 
         {/* Error Message */}
         {descriptionError && (
-          <p className={styles.errorMessage}>
-            The description must have at least 10 characters.
-          </p>
+          <p className={styles.errorMessage}>{errors.description}</p>
         )}
       </div>
     </>

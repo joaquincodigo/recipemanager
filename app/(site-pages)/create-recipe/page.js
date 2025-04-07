@@ -14,11 +14,6 @@ export default function CreateRecipe() {
   });
   const [canMoveFoward, setCanMoveFoward] = useState(false);
 
-  // HANDLERS
-  useEffect(() => {
-    console.log(canMoveFoward);
-  }, [canMoveFoward]);
-
   // STYLES
   const styles = {
     heading: "text-xl font-bold text-center mt-5",
@@ -37,7 +32,13 @@ export default function CreateRecipe() {
             setCanMoveFoward={setCanMoveFoward}
           />
         )}
-        {step === 2 && <Step2 formData={formData} setFormData={setFormData} />}
+        {step === 2 && (
+          <Step2
+            formData={formData}
+            setFormData={setFormData}
+            setCanMoveFoward={setCanMoveFoward}
+          />
+        )}
       </div>
 
       <NavigationControls

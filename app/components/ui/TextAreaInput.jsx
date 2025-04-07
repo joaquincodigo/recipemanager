@@ -7,6 +7,7 @@ export default function TextAreaInput({
   onBlur,
   onFocus,
   error,
+  value,
 }) {
   const styles = {
     container: "relative flex flex-col",
@@ -36,6 +37,7 @@ export default function TextAreaInput({
         onChange={onChange}
         onBlur={onBlur}
         onFocus={onFocus}
+        value={value}
       ></textarea>
     </div>
   );
