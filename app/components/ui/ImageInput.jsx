@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PhotoIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
-export default function ImageInput() {
+export default function ImageInput({ formData, setFormData }) {
   const [image, setImage] = useState(null);
 
   const styles = {
@@ -16,12 +16,26 @@ export default function ImageInput() {
     removeIcon: "w-4 h-4 text-slate-700",
   };
 
+  useEffect(() => {
+    if (formData.image) setImage(formData.image);
+  }, [formData]);
+
   const handleChange = (e) => {
     const file = e.target.files[0];
-    if (file) setImage(file);
+    if (file) {
+      setFormData((prev) => ({
+        ...prev,
+        image: file,
+      }));
+    }
   };
 
-  const removeImage = () => setImage(null);
+  const removeImage = () => {
+    setFormData((prev) => ({
+      ...prev,
+      image: null,
+    }));
+  };
 
   return (
     <div>
