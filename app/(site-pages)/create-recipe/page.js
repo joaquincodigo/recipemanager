@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 import Step1 from "@/app/components/create-recipe/Step1";
 import Step2 from "@/app/components/create-recipe/Step2";
+import Step3 from "@/app/components/create-recipe/Step3";
 import NavigationControls from "@/app/components/create-recipe/navigationControls";
 
 export default function CreateRecipe() {
@@ -25,6 +26,7 @@ export default function CreateRecipe() {
     <div className={styles.container}>
       <h1 className={styles.heading}>Create a new recipe</h1>
       <div className={styles.formContainer}>
+
         {step === 1 && (
           <Step1
             formData={formData}
@@ -32,6 +34,7 @@ export default function CreateRecipe() {
             setCanMoveFoward={setCanMoveFoward}
           />
         )}
+
         {step === 2 && (
           <Step2
             formData={formData}
@@ -39,6 +42,15 @@ export default function CreateRecipe() {
             setCanMoveFoward={setCanMoveFoward}
           />
         )}
+
+        {step === 3 && (
+          <Step3
+            formData={formData}
+            setFormData={setFormData}
+            setCanMoveFoward={setCanMoveFoward}
+          />
+        )}
+
       </div>
 
       <NavigationControls

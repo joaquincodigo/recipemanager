@@ -76,7 +76,7 @@ export default function Header({ toggleDrawer }) {
       ease-in-out
       fixed
       top-0
-      z-10
+      z-50 
       overflow-hidden
       ${isVisible ? "translate-y-0" : "-translate-y-full"}`}
     >

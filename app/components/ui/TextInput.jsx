@@ -1,14 +1,10 @@
-import React from "react";
+// ui/TextInput.jsx
+import React, { forwardRef } from "react";
 
-export default function TextInput({
-  fieldName,
-  required,
-  onChange,
-  onBlur,
-  onFocus,
-  error,
-  value
-}) {
+export default forwardRef(function TextInput(
+  { fieldName, required, onChange, onBlur, onFocus, error, value, onKeyDown },
+  ref
+) {
   const styles = {
     container: "relative flex flex-col",
     input:
@@ -28,17 +24,18 @@ export default function TextInput({
       >
         {fieldName} {required ? "*" : ""}
       </label>
-
       <input
+        ref={ref}
         type="text"
-        className={error ? styles.errorInput : styles.input}
         id={fieldName}
         name={fieldName}
+        className={error ? styles.errorInput : styles.input}
         onChange={onChange}
         onBlur={onBlur}
         onFocus={onFocus}
         value={value}
+        onKeyDown={onKeyDown}
       />
     </div>
   );
-}
+});
