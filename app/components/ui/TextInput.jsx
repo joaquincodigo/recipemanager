@@ -35,6 +35,7 @@ export default forwardRef(function TextInput(
         onFocus={onFocus}
         value={value}
         onKeyDown={onKeyDown}
+        autoComplete="off"
       />
     </div>
   );
