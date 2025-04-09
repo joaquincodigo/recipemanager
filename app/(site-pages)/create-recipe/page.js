@@ -15,6 +15,12 @@ export default function CreateRecipe() {
   });
   const [canMoveFoward, setCanMoveFoward] = useState(false);
 
+  // TESTING-TESTING-TESTING-TESTING-TESTING-TESTING
+  useEffect(() => {
+    console.log(formData);
+  }, [formData]);
+  // TESTING-TESTING-TESTING-TESTING-TESTING-TESTING
+
   // STYLES
   const styles = {
     heading: "text-xl font-bold text-center mt-5",
@@ -26,7 +32,6 @@ export default function CreateRecipe() {
     <div className={styles.container}>
       <h1 className={styles.heading}>Create a new recipe</h1>
       <div className={styles.formContainer}>
-
         {step === 1 && (
           <Step1
             formData={formData}
@@ -50,7 +55,6 @@ export default function CreateRecipe() {
             setCanMoveFoward={setCanMoveFoward}
           />
         )}
-
       </div>
 
       <NavigationControls
