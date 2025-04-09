@@ -1,20 +1,39 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import TextInput from "../ui/TextInput";
 import Button from "../ui/Button";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 
-export default function Step3({ formData, setFormData }) {
-  const [ingredients, setIngredients] = useState([""]);
+export default function Step3({ formData, setFormData, setCanMoveFoward }) {
   const inputRefs = useRef([]);
 
+  // The first input must always be visible
+  useEffect(() => {
+    if (formData.ingredients.length === 0) {
+      setFormData((prev) => ({
+        ...prev,
+        ingredients: [""],
+      }));
+    }
+  }, []);
+
+  // If there's at least 1 non-empty ingredient, the user can proceed
+  useEffect(() => {
+    if (formData.ingredients.length !== 0 && formData.ingredients[0] !== "") {
+      setCanMoveFoward(true);
+    }
+  }, [formData]);
+
   const addIngredient = () => {
-    setIngredients((prev) => [...prev, ""]);
+    setFormData((prev) => ({
+      ...prev,
+      ingredients: [...prev.ingredients, ""],
+    }));
   };
 
   useEffect(() => {
-    const lastIndex = ingredients.length - 1;
+    const lastIndex = formData.ingredients.length - 1;
     inputRefs.current[lastIndex]?.focus();
-  }, [ingredients]);
+  }, [formData.ingredients]);
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
@@ -23,16 +42,23 @@ export default function Step3({ formData, setFormData }) {
     }
   };
 
-  const handleChange = (i, value) => {
-    const newIngredients = [...ingredients];
-    newIngredients[i] = value;
-    setIngredients(newIngredients);
+  const handleIngredientChange = (index, e) => {
+    const newIngredients = [...formData.ingredients];
+    newIngredients[index] = e.target.value;
+    const cleaned = newIngredients.filter((item) => item.trim() !== "");
+    setFormData((prev) => ({
+      ...prev,
+      ingredients: cleaned.length > 0 ? newIngredients : [""],
+    }));
   };
 
   const removeIngredient = (index) => {
-    if (ingredients.length === 1) return;
-    const newIngredients = ingredients.filter((_, i) => i !== index);
-    setIngredients(newIngredients);
+    if (formData.ingredients.length === 1) return;
+    const newIngredients = formData.ingredients.filter((_, i) => i !== index);
+    setFormData((prev) => ({
+      ...prev,
+      ingredients: newIngredients,
+    }));
   };
 
   const styles = {
@@ -46,13 +72,13 @@ export default function Step3({ formData, setFormData }) {
     <>
       <h2 className={styles.heading}>What are the ingredients?</h2>
 
-      {ingredients.map((ingredient, i) => (
+      {formData.ingredients.map((ingredient, i) => (
         <div key={i} className={styles.inputContainer}>
           <TextInput
             ref={(el) => (inputRefs.current[i] = el)}
             fieldName="Ingredient"
             value={ingredient}
-            onChange={(e) => handleChange(i, e.target.value)}
+            onChange={(e) => handleIngredientChange(i, e)}
             onKeyDown={handleKeyDown}
           />
           <Button
@@ -66,7 +92,7 @@ export default function Step3({ formData, setFormData }) {
       ))}
 
       <Button
-        label="Add ingredient"
+        label="Add another ingredient"
         type="primary"
         enabled={true}
         onClick={addIngredient}

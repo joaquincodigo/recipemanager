@@ -12,6 +12,8 @@ export default function CreateRecipe() {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
+    ingredients: []
+
   });
   const [canMoveFoward, setCanMoveFoward] = useState(false);
 
