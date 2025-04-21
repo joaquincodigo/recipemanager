@@ -66,6 +66,7 @@ export default function Step3({ formData, setFormData, setCanMoveFoward }) {
     inputContainer: "flex justify-center gap-x-2",
     removeButton: "bg-red-900 hover:bg-slate-700",
     removeIcon: "w-5 h-5 stroke-[3]",
+    newIngredientButton: "max-w-56 mx-auto mt-3"
   };
 
   return (
@@ -96,7 +97,7 @@ export default function Step3({ formData, setFormData, setCanMoveFoward }) {
         type="primary"
         enabled={true}
         onClick={addIngredient}
-        className="max-w-56 mx-auto mt-3"
+        className={styles.newIngredientButton}
       />
     </>
   );

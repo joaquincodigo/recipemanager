@@ -5,10 +5,12 @@ import { useState, useRef, useEffect, useContext } from "react";
 import { EyeIcon } from "@heroicons/react/24/outline";
 import { EyeSlashIcon } from "@heroicons/react/24/outline";
 import RegistrationPending from "@/app/components/RegistrationPending";
-
-import { useAuth } from "../../context/AuthContext";
+import { supabase } from "@/lib/supabase";
+import { useRouter } from "next/navigation";
+import useLogin from "@/app/hooks/useLogin";
 
 export default function RegisterPage() {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     name: "",
     lastname: "",
@@ -22,11 +24,10 @@ export default function RegisterPage() {
   const [showPasswords, setShowPasswords] = useState(false);
   const [isFormCompleted, setIsFormCompleted] = useState(false);
   const [registrationStatus, setRegistrationStatus] = useState("loading");
-
+  const { handleLogin } = useLogin();
   const nameRef = useRef(null);
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
-  const { supabase } = useAuth();
 
   const handleNext = (e) => {
     e.preventDefault();
@@ -115,22 +116,25 @@ export default function RegisterPage() {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  async function registerNewUser({ email, password, name, lastname }) {
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        data: {
-          first_name: name,
-          last_name: lastname,
-        },
+  async function registerNewUser({ email, password, name, last_name }) {
+    const { error } = await supabase.from("demousers").insert([
+      {
+        email,
+        password,
+        name,
+        last_name,
+        avatar_url: "",
+        liked_recipes: [],
+        uploaded_recipes: [],
       },
-    });
+    ]);
 
     if (error) {
       setRegistrationStatus("error");
     } else {
       setRegistrationStatus("success");
+      const loginSuccess = await handleLogin(email, password);
+      if (loginSuccess) window.location.href = "/home";
     }
   }
 
@@ -159,7 +163,7 @@ export default function RegisterPage() {
       <div className="flex justify-center mb-5">
         <Image
           src="/images/RecipesHavenLogoWhiteBg.svg"
-          alt="The site logo depicting a chef hat and recipe"
+          alt="The site logo depicting a chef hat and a recipe"
           width={80}
           height={80}
         />

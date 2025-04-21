@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Step1 from "@/app/components/create-recipe/Step1";
 import Step2 from "@/app/components/create-recipe/Step2";
 import Step3 from "@/app/components/create-recipe/Step3";
+import Step4 from "@/app/components/create-recipe/Step4";
 import NavigationControls from "@/app/components/create-recipe/navigationControls";
 
 export default function CreateRecipe() {
@@ -12,13 +13,15 @@ export default function CreateRecipe() {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
-    ingredients: []
-
+    ingredients: [],
+    preparation_steps: [],
   });
   const [canMoveFoward, setCanMoveFoward] = useState(false);
 
   // TESTING-TESTING-TESTING-TESTING-TESTING-TESTING
   useEffect(() => {
+    console.log(`%c${formData}`, "color: white; font-size: large;");
+
     console.log(formData);
   }, [formData]);
   // TESTING-TESTING-TESTING-TESTING-TESTING-TESTING
@@ -52,6 +55,14 @@ export default function CreateRecipe() {
 
         {step === 3 && (
           <Step3
+            formData={formData}
+            setFormData={setFormData}
+            setCanMoveFoward={setCanMoveFoward}
+          />
+        )}
+
+        {step === 4 && (
+          <Step4
             formData={formData}
             setFormData={setFormData}
             setCanMoveFoward={setCanMoveFoward}
