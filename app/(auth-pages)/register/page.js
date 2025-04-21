@@ -6,7 +6,6 @@ import { EyeIcon } from "@heroicons/react/24/outline";
 import { EyeSlashIcon } from "@heroicons/react/24/outline";
 import RegistrationPending from "@/app/components/RegistrationPending";
 import { supabase } from "@/lib/supabase";
-import { useRouter } from "next/navigation";
 import useLogin from "@/app/hooks/useLogin";
 
 export default function RegisterPage() {
