@@ -5,6 +5,7 @@ import Step1 from "@/app/components/create-recipe/Step1";
 import Step2 from "@/app/components/create-recipe/Step2";
 import Step3 from "@/app/components/create-recipe/Step3";
 import Step4 from "@/app/components/create-recipe/Step4";
+import Step5 from "@/app/components/create-recipe/Step5";
 import NavigationControls from "@/app/components/create-recipe/navigationControls";
 
 export default function CreateRecipe() {
@@ -68,6 +69,15 @@ export default function CreateRecipe() {
             setCanMoveFoward={setCanMoveFoward}
           />
         )}
+
+        {step === 5 && (
+          <Step5
+            formData={formData}
+            setFormData={setFormData}
+            setCanMoveFoward={setCanMoveFoward}
+          />
+        )}
+
       </div>
 
       <NavigationControls
