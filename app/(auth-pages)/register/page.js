@@ -9,7 +9,6 @@ import { supabase } from "@/lib/supabase";
 import useLogin from "@/app/hooks/useLogin";
 
 export default function RegisterPage() {
-  const router = useRouter();
   const [formData, setFormData] = useState({
     name: "",
     lastname: "",
@@ -168,7 +167,7 @@ export default function RegisterPage() {
         />
       </div>
 
-      <form className="h-[320px] w-full p-3 flex flex-col" autoComplete="off">
+      <form className="h-[400px] w-full p-3 flex flex-col" autoComplete="off">
         <h1 className="mb-5 text-xl text-center font-bold">
           Create your account
         </h1>
@@ -179,6 +178,7 @@ export default function RegisterPage() {
           {currentPage === 1 && (
             <>
               {/* NAME */}
+              <h2 className="font-bold text-slate-600">What's your name?</h2>
               <div className="relative">
                 <label
                   className={`${
@@ -230,10 +230,11 @@ export default function RegisterPage() {
             </>
           )}
 
-          {/* +-+-+-+-+-+-+-+-+-+-+- PAGE 1 +-+-+-+-+-+-+-+-+-+-+-+-+*/}
+          {/* +-+-+-+-+-+-+-+-+-+-+- PAGE 2 +-+-+-+-+-+-+-+-+-+-+-+-+*/}
           {currentPage === 2 && (
             <>
               {/* MAIL */}
+              <h2 className="font-bold text-slate-600">What's your mail?</h2>
               <div className="relative">
                 <label
                   className={`${
@@ -265,10 +266,11 @@ export default function RegisterPage() {
             </>
           )}
 
-          {/* +-+-+-+-+-+-+-+-+-+-+- PAGE 2 +-+-+-+-+-+-+-+-+-+-+-+-+*/}
+          {/* +-+-+-+-+-+-+-+-+-+-+- PAGE 3 +-+-+-+-+-+-+-+-+-+-+-+-+*/}
           {currentPage === 3 && (
             <>
               {/* PASSWORD */}
+              <h2 className="font-bold text-slate-600">Create a password</h2>
               <div className="relative">
                 <label
                   className={`${
