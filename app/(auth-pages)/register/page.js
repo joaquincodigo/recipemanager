@@ -255,7 +255,7 @@ export default function RegisterPage() {
                   type="email"
                   id="email"
                   name="email"
-                  autoComplete="new-email"
+                  autoComplete="off"
                   onChange={handleChange}
                   onBlur={handleWarning}
                   onClick={resetWarning}
