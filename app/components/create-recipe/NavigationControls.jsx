@@ -7,18 +7,18 @@ export default function NavigationControls({
   setCanMoveFoward,
 }) {
   const handleBack = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     setStep((s) => s - 1);
   };
 
   const handleNext = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     setStep((s) => s + 1);
     setCanMoveFoward(false);
   };
 
   const styles = {
-    container: "flex gap-2 w-full",
+    container: `flex gap-2 w-full ${step === 1 ? "justify-center" : ""}`,
   };
 
   return (
@@ -28,13 +28,13 @@ export default function NavigationControls({
           label="Back"
           type="secondary"
           onClick={handleBack}
-          enabled ={!(step === 1)}
+          enabled={!(step === 1)}
           className="flex-1"
         />
       )}
 
       <Button
-        label="Next"
+        label={step === 8 ? "Finish" : "Next"}
         type="primary"
         onClick={handleNext}
         enabled={canMoveFoward}

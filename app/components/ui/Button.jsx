@@ -5,7 +5,7 @@ export default function Button({ label, type, enabled, className, onClick }) {
   const handleClick = enabled ? onClick : () => {};
 
   // Styles
-  const baseStyles = "rounded-md font-bold p-3";
+  const baseStyles = "rounded-md font-bold p-3 max-w-64";
   const styles = {
     primary: {
       enabled: "bg-[#7FC37E] text-white hover:bg-[#5d995c]",

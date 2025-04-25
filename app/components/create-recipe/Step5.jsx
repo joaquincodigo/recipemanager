@@ -1,12 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Step5({ formData, setFormData, setCanMoveFoward }) {
   const [time, setTime] = useState("00:01");
 
+  useEffect(() => {
+    setCanMoveFoward(true);
+  }, []);
+
   const handleChange = (e) => {
     const time = e.target.value;
     setTime(time);
-    setFormData(time);
+    setFormData((prev) => ({ ...prev, time: time }));
     if (time !== "00:00") {
       setCanMoveFoward(true);
     }
@@ -30,7 +34,7 @@ export default function Step5({ formData, setFormData, setCanMoveFoward }) {
     container: "flex flex-col items-center justify-center",
     heading: "text-slate-500 font-bold mb-5 text-center pb-10",
     timer:
-      "bg-white p-3 rounded-md border focus:outline-none focus:ring-2 focus:ring-[#7FC37E] max-w-28 mb-3",
+      "bg-white p-3 rounded-md border focus:outline-none focus:ring-2 focus:ring-[#7FC37E] max-w-28 mb-3 hover:bg-[#c0f2bf]",
   };
 
   return (
