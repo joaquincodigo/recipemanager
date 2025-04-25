@@ -1,6 +1,6 @@
 import { supabase } from "@/lib/supabase";
 
-const useStoreNewrecipe = () => {
+const useStoreNewRecipe = () => {
   const isValidData = (data) => {
     const {
       title,
@@ -9,11 +9,15 @@ const useStoreNewrecipe = () => {
       category,
       ingredients,
       preparation_steps,
+      preparation_time,
       servings,
       author,
     } = data;
 
     if (typeof title !== "string" || title.trim() === "") return false;
+
+    if (typeof preparation_time !== "number" || preparation_time === 0)
+      return false;
 
     if (typeof description !== "string" || description.trim() === "")
       return false;
@@ -44,15 +48,19 @@ const useStoreNewrecipe = () => {
   };
 
   const recordNewRecipe = async (formData) => {
+    console.log("HELLO WORLD!");
     if (!isValidData(formData)) {
+      console.log("Invalid data:", formData);
       return { success: false, error: "Invalid form data" };
     }
 
-    const { error } = await supabase.from("recipes").insert([formData]);
+    const { data, error } = await supabase.from("recipes").insert([formData]);
+    console.log("Insert result:", { data, error });
+
     return { success: !error, error };
   };
 
   return { recordNewRecipe };
 };
 
-export default useStoreNewrecipe;
+export default useStoreNewRecipe;

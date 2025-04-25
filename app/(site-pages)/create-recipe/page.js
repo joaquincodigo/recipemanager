@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 import Step1 from "@/app/components/create-recipe/Step1";
 import Step2 from "@/app/components/create-recipe/Step2";
@@ -11,12 +11,11 @@ import Step7 from "@/app/components/create-recipe/Step7";
 import Step8 from "@/app/components/create-recipe/Step8";
 import Step9 from "@/app/components/create-recipe/Step9";
 import NavigationControls from "@/app/components/create-recipe/navigationControls";
-import useStoreNewrecipe from "@/app/hooks/useStoreNewRecipe";
+import useStoreNewRecipe from "@/app/hooks/useStoreNewRecipe";
 
 export default function CreateRecipe() {
   const [endingScreen, setEndingScreen] = useState("loading");
-  const [userId, setUserId] = useState(null);
-  const { recordNewRecipe } = useStoreNewrecipe();
+  const { recordNewRecipe } = useStoreNewRecipe();
   const [step, setStep] = useState(1);
   const [canMoveFoward, setCanMoveFoward] = useState(false);
   const [formData, setFormData] = useState({
@@ -24,33 +23,31 @@ export default function CreateRecipe() {
     description: "",
     ingredients: [],
     preparation_steps: [],
-    author: userId,
   });
 
   useEffect(() => {
     const match = document.cookie.match(/(^| )userId=([^;]+)/);
-    setUserId(match?.[2] || null);
+    const userId = match?.[2] || null;
+    setFormData((prev) => ({ ...prev, author: userId }));
   }, []);
 
+  const hasStored = useRef(false);
   useEffect(() => {
-    const storeRecipeInDB = async () => {
-      const { success, error } = await recordNewRecipe(formData);
-      if (success) {
-        setEndingScreen("success");
-      } else {
-        setEndingScreen("error");
-      }
-    };
-
-    if (step === 9) {
-      storeRecipeInDB();
+    if (step === 9 && !hasStored.current) {
+      hasStored.current = true;
+      recordNewRecipe(formData).then(({ success }) =>
+        setEndingScreen(success ? "success" : "error")
+      );
     }
   }, [step]);
 
   // TESTING-TESTING-TESTING-TESTING-TESTING-TESTING
+  // useEffect(() => {
+  //   console.log(formData);
+  //}, [formData]);
   useEffect(() => {
-    console.log(formData);
-  }, [formData]);
+    console.log("Im author", formData.author);
+  }, [formData.author]);
   // TESTING-TESTING-TESTING-TESTING-TESTING-TESTING
 
   const styles = {

@@ -10,7 +10,9 @@ export default function Step5({ formData, setFormData, setCanMoveFoward }) {
   const handleChange = (e) => {
     const time = e.target.value;
     setTime(time);
-    setFormData((prev) => ({ ...prev, time: time }));
+    const [hours, minutes] = time.split(":").map(Number);
+    const totalMinutes = hours * 60 + minutes;
+    setFormData((prev) => ({ ...prev, preparation_time: totalMinutes }));
     if (time !== "00:00") {
       setCanMoveFoward(true);
     }
