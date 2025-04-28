@@ -1,13 +1,21 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function Step7({ formData, setFormData, setCanMoveFoward }) {
+  const [difficulty, setDifficulty] = useState(formData.difficulty || "");
+
   const handleChange = (e) => {
+    const selectedDifficulty = e.target.value;
+    setDifficulty(selectedDifficulty);
     setFormData((prev) => ({
-      ...formData,
-      difficulty: e.target.value,
+      ...prev,
+      difficulty: selectedDifficulty,
     }));
-    setCanMoveFoward(true)
+    setCanMoveFoward(true);
   };
+
+  useEffect(() => {
+    if (difficulty !== "") setCanMoveFoward(true);
+  }, []);
 
   const styles = {
     select:
@@ -19,7 +27,11 @@ export default function Step7({ formData, setFormData, setCanMoveFoward }) {
   return (
     <div className={styles.container}>
       <h2 className={styles.heading}>How difficult is this recipe?</h2>
-      <select defaultValue="" className={styles.select} onChange={handleChange}>
+      <select
+        value={difficulty}
+        className={styles.select}
+        onChange={handleChange}
+      >
         <option value="" disabled>
           Select a difficulty
         </option>

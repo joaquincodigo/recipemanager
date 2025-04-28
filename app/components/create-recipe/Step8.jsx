@@ -1,8 +1,14 @@
+import { useState } from "react";
+
 export default function Step8({ formData, setFormData, setCanMoveFoward }) {
+  const [category, setCategory] = useState(formData.category || "");
+
   const handleChange = (e) => {
+    const selectedCategory = e.target.value;
+    setCategory(selectedCategory);
     setFormData((prev) => ({
-      ...formData,
-      category: e.target.value,
+      ...prev,
+      category: selectedCategory,
     }));
     setCanMoveFoward(true);
   };
@@ -18,7 +24,7 @@ export default function Step8({ formData, setFormData, setCanMoveFoward }) {
     <div className={styles.container}>
       <h2 className={styles.heading}>What cuisine is this recipe?</h2>
       <select
-        defaultValue=""
+        value={category}
         name="category"
         id="category"
         className={styles.select}

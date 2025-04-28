@@ -31,119 +31,115 @@ export default function CreateRecipe() {
     setFormData((prev) => ({ ...prev, author: userId }));
   }, []);
 
-  const hasStored = useRef(false);
+  const hasStored = useRef(false); // Prevent multiple posts
   useEffect(() => {
     if (step === 9 && !hasStored.current) {
+      // Prevent multiple posts
       hasStored.current = true;
+      console.log("Recording recipe");
       recordNewRecipe(formData).then(({ success }) =>
         setEndingScreen(success ? "success" : "error")
       );
     }
   }, [step]);
 
-  // TESTING-TESTING-TESTING-TESTING-TESTING-TESTING
-  // useEffect(() => {
-  //   console.log(formData);
-  //}, [formData]);
-  useEffect(() => {
-    console.log("Im author", formData.author);
-  }, [formData.author]);
-  // TESTING-TESTING-TESTING-TESTING-TESTING-TESTING
-
   const styles = {
-    heading: "text-xl font-bold text-center mt-5",
-    container: "flex flex-col p-3 gap-y-10 min-h-screen",
-    formContainer: "flex flex-col gap-y-5 justify-center min-h-72",
+    heading: "text-xl font-bold text-center mt-5 mb-5",
+    container: "flex flex-col p-3 gap-y-10 min-h-screen justify-center pb-32",
+    formContainer: "flex flex-col gap-y-5 justify-center pb-10 h-72",
   };
 
   return (
     <div className={styles.container}>
-      {step !== 9 && <h1 className={styles.heading}>Create a new recipe</h1>}
-      <div className={styles.formContainer}>
-        {/* Title and description */}
-        {step === 1 && (
-          <Step1
-            formData={formData}
-            setFormData={setFormData}
+      <div>
+        {step !== 9 && <h1 className={styles.heading}>Create a new recipe</h1>}
+        <div className={styles.formContainer}>
+          {/* Title and description */}
+          {step === 1 && (
+            <Step1
+              formData={formData}
+              setFormData={setFormData}
+              setCanMoveFoward={setCanMoveFoward}
+            />
+          )}
+
+          {/* Image */}
+          {step === 2 && (
+            <Step2
+              formData={formData}
+              setFormData={setFormData}
+              setCanMoveFoward={setCanMoveFoward}
+            />
+          )}
+
+          {/* Ingredients */}
+          {step === 3 && (
+            <Step3
+              formData={formData}
+              setFormData={setFormData}
+              setCanMoveFoward={setCanMoveFoward}
+            />
+          )}
+
+          {/* Preparation Steps */}
+          {step === 4 && (
+            <Step4
+              formData={formData}
+              setFormData={setFormData}
+              setCanMoveFoward={setCanMoveFoward}
+            />
+          )}
+
+          {/* Preparation Time */}
+          {step === 5 && (
+            <Step5
+              formData={formData}
+              setFormData={setFormData}
+              setCanMoveFoward={setCanMoveFoward}
+            />
+          )}
+
+          {/* Servings */}
+          {step === 6 && (
+            <Step6
+              formData={formData}
+              setFormData={setFormData}
+              setCanMoveFoward={setCanMoveFoward}
+            />
+          )}
+
+          {/* Difficulty */}
+          {step === 7 && (
+            <Step7
+              formData={formData}
+              setFormData={setFormData}
+              setCanMoveFoward={setCanMoveFoward}
+            />
+          )}
+
+          {/* Category */}
+          {step === 8 && (
+            <Step8
+              formData={formData}
+              setFormData={setFormData}
+              setCanMoveFoward={setCanMoveFoward}
+            />
+          )}
+
+          {/* Saving Data Screen  */}
+          {step === 9 && (
+            <Step9 setStep={setStep} endingScreen={endingScreen} />
+          )}
+        </div>
+        {step !== 9 && (
+          <NavigationControls
+            step={step}
+            setStep={setStep}
+            canMoveFoward={canMoveFoward}
             setCanMoveFoward={setCanMoveFoward}
           />
         )}
-
-        {/* Image */}
-        {step === 2 && (
-          <Step2
-            formData={formData}
-            setFormData={setFormData}
-            setCanMoveFoward={setCanMoveFoward}
-          />
-        )}
-
-        {/* Ingredients */}
-        {step === 3 && (
-          <Step3
-            formData={formData}
-            setFormData={setFormData}
-            setCanMoveFoward={setCanMoveFoward}
-          />
-        )}
-
-        {/* Preparation Steps */}
-        {step === 4 && (
-          <Step4
-            formData={formData}
-            setFormData={setFormData}
-            setCanMoveFoward={setCanMoveFoward}
-          />
-        )}
-
-        {/* Preparation Time */}
-        {step === 5 && (
-          <Step5
-            formData={formData}
-            setFormData={setFormData}
-            setCanMoveFoward={setCanMoveFoward}
-          />
-        )}
-
-        {/* Servings */}
-        {step === 6 && (
-          <Step6
-            formData={formData}
-            setFormData={setFormData}
-            setCanMoveFoward={setCanMoveFoward}
-          />
-        )}
-
-        {/* Difficulty */}
-        {step === 7 && (
-          <Step7
-            formData={formData}
-            setFormData={setFormData}
-            setCanMoveFoward={setCanMoveFoward}
-          />
-        )}
-
-        {/* Category */}
-        {step === 8 && (
-          <Step8
-            formData={formData}
-            setFormData={setFormData}
-            setCanMoveFoward={setCanMoveFoward}
-          />
-        )}
-
-        {/* Saving Data Screen  */}
-        {step === 9 && <Step9 setStep={setStep} endingScreen={endingScreen} />}
       </div>
-
-      {step !== 9 && (
-        <NavigationControls
-          step={step}
-          setStep={setStep}
-          canMoveFoward={canMoveFoward}
-          setCanMoveFoward={setCanMoveFoward}
-        />
-      )}
     </div>
   );
 }
