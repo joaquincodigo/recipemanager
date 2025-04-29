@@ -87,47 +87,51 @@ export default function RecipePage({ params }) {
       <section className="mb-6">
         <h2 className="mb-3 text-xl font-bold">Ingredients</h2>
         <ul className="mb-3">
-          {recipe?.ingredients?.map((ingredient, index) => (
-            <li className="ms-5 list-disc" key={index}>
-              {ingredient}
-            </li>
-          ))}
+          {recipe?.ingredients
+            ?.filter((ingredient) => ingredient.trim() !== "")
+            .map((ingredient, index) => (
+              <li className="ms-5 list-disc" key={index}>
+                {ingredient}
+              </li>
+            ))}
         </ul>
       </section>
 
       {/* PREPARATIONS STEPS  */}
       <section className="mb-6">
         <h2 className="font-bold text-xl mb-3">Preparation Steps</h2>
-        <ul className=" relative">
+        <ul className="relative">
           <div className="absolute left-[14px] top-0 h-full w-1 bg-[#dddddd] z-[0]"></div>
 
-          {recipe.preparation_steps.map((step, index) => (
-            <li className="flex items-center mb-3" key={index}>
-              <div
-                className="
-                    z-10
-                    flex
-                    items-center
-                    justify-center
-                    h-8
-                    w-8
-                    rounded-full
-                    border-solid
-                    border-4
-                    border-[#dddddd]
-                    p-3
-                    font-bold
-                    mr-3
-                    bg-white
-                    text-slate-500
-                  "
-              >
-                {index + 1}
-              </div>
+          {recipe.preparation_steps
+            .filter((step) => step.trim() !== "")
+            .map((step, index) => (
+              <li className="flex items-center mb-3" key={index}>
+                <div
+                  className="
+            z-10
+            flex
+            items-center
+            justify-center
+            h-8
+            w-8
+            rounded-full
+            border-solid
+            border-4
+            border-[#dddddd]
+            p-3
+            font-bold
+            mr-3
+            bg-white
+            text-slate-500
+          "
+                >
+                  {index + 1}
+                </div>
 
-              {recipe.preparation_steps[index]}
-            </li>
-          ))}
+                {step}
+              </li>
+            ))}
         </ul>
       </section>
 
