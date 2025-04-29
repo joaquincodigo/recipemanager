@@ -43,6 +43,12 @@ export default function CreateRecipe() {
     }
   }, [step]);
 
+  // TESTING-TESTING-TESTING-TESTING-TESTING-TESTING
+  useEffect(() => {
+    console.log(formData);
+  }, []);
+  // TESTING-TESTING-TESTING-TESTING-TESTING-TESTING
+
   const styles = {
     heading: "text-xl font-bold text-center mt-5 mb-5",
     container: "flex flex-col p-3 gap-y-10 min-h-screen justify-center pb-32",
