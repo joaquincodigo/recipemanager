@@ -39,20 +39,9 @@ export default function Step8({ formData, setFormData, setCanMoveFoward }) {
         <option value="chinese">Chinese</option>
         <option value="japanese">Japanese</option>
         <option value="indian">Indian</option>
-        <option value="thai">Thai</option>
         <option value="french">French</option>
-        <option value="greek">Greek</option>
-        <option value="spanish">Spanish</option>
-        <option value="korean">Korean</option>
-        <option value="vietnamese">Vietnamese</option>
-        <option value="mediterranean">Mediterranean</option>
-        <option value="german">German</option>
-        <option value="turkish">Turkish</option>
-        <option value="caribbean">Caribbean</option>
-        <option value="brazilian">Brazilian</option>
-        <option value="ethiopian">Ethiopian</option>
-        <option value="lebanese">Lebanese</option>
-        <option value="russian">Russian</option>
+        <option value="thai">Thai</option>
+        <option value="other">Other</option>
       </select>
     </div>
   );

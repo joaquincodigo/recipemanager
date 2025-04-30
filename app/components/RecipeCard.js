@@ -89,7 +89,9 @@ export default function RecipeCard({ recipe, isLiked, onToggleLike }) {
           <div className="flex-1 flex justify-center items-center">
             <TagIcon className="w-6 h-6 text-slate-500 me-1" />
             <p className="font-semibold text-slate-500 leading-none">
-              {recipe.category}
+              {/* Only first letter must be uppercase */}
+              {recipe.category.charAt(0).toUpperCase() +
+                recipe.category.slice(1).toLowerCase()}
             </p>
           </div>
         </div>
