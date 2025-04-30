@@ -34,10 +34,10 @@ export default function RecipePage({ params }) {
 
     fetchData();
   }, [params]);
-
+  
   if (loading) {
     return (
-      <div className="flex items-center justify-center w-full h-full pb-36">
+      <div className="flex items-center justify-center w-full h-full pb-36 flex-1">
         <Spinner />
       </div>
     );

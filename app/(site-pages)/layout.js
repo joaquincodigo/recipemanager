@@ -52,7 +52,7 @@ export default function SitePagesLayout({ children }) {
 
       <Drawer closeDrawer={closeDrawer} isDrawerOpen={isDrawerOpen} />
 
-      <main>{children}</main>
+      <main className="h-screen">{children}</main>
     </div>
   );
 }

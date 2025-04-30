@@ -48,14 +48,33 @@ const useStoreNewRecipe = () => {
   };
 
   const recordNewRecipe = async (formData) => {
-    console.log("HELLO WORLD!");
     if (!isValidData(formData)) {
       console.log("Invalid data:", formData);
       return { success: false, error: "Invalid form data" };
     }
 
+    // Handle image upload if it exists
+    if (formData.image instanceof File) {
+      const file = formData.image;
+      const sanitizedFileName = file.name.replace(/[^a-z0-9.\-_]/gi, "_");
+      const fileName = `${Date.now()}_${sanitizedFileName}`;
+
+      const { data: uploadData, error: uploadError } = await supabase.storage
+        .from("recipe-manager-images")
+        .upload(fileName, file);
+
+      if (uploadError) {
+        return { success: false, error: uploadError.message };
+      }
+
+      const { data: publicUrlData } = supabase.storage
+        .from("recipe-manager-images")
+        .getPublicUrl(fileName);
+
+      formData.image = publicUrlData.publicUrl;
+    }
+
     const { data, error } = await supabase.from("recipes").insert([formData]);
-    console.log("Insert result:", { data, error });
 
     return { success: !error, error };
   };

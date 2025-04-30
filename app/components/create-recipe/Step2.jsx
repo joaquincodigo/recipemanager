@@ -9,7 +9,7 @@ export default function Step2({ formData, setFormData, setCanMoveFoward }) {
 
   const styles = {
     container: "flex justify-center w-full",
-    heading: "text-slate-500 font-bold mb-5 text-center pb-3",
+    heading: "text-slate-500 font-bold mb-5 text-center",
   };
 
   return (

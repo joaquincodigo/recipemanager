@@ -66,32 +66,33 @@ export default function Step3({ formData, setFormData, setCanMoveFoward }) {
     inputContainer: "flex justify-center gap-x-2",
     removeButton: "bg-red-900 hover:bg-slate-700",
     removeIcon: "w-5 h-5 stroke-[3]",
-    newIngredientButton: "max-w-56 mx-auto mt-3"
+    newIngredientButton: "max-w-56 mx-auto mt-3",
   };
 
   return (
     <>
       <h2 className={styles.heading}>What are the ingredients?</h2>
 
-      {formData.ingredients.map((ingredient, i) => (
-        <div key={i} className={styles.inputContainer}>
-          <TextInput
-            ref={(el) => (inputRefs.current[i] = el)}
-            fieldName="Ingredient"
-            value={ingredient}
-            onChange={(e) => handleIngredientChange(i, e)}
-            onKeyDown={handleKeyDown}
-          />
-          <Button
-            label={<XMarkIcon className={styles.removeIcon} />}
-            type="primary"
-            enabled={true}
-            onClick={() => removeIngredient(i)}
-            className={styles.removeButton}
-          />
-        </div>
-      ))}
-
+      {/* <div className="overflow-scroll"> */}
+        {formData.ingredients.map((ingredient, i) => (
+          <div key={i} className={styles.inputContainer}>
+            <TextInput
+              ref={(el) => (inputRefs.current[i] = el)}
+              fieldName="Ingredient"
+              value={ingredient}
+              onChange={(e) => handleIngredientChange(i, e)}
+              onKeyDown={handleKeyDown}
+            />
+            <Button
+              label={<XMarkIcon className={styles.removeIcon} />}
+              type="primary"
+              enabled={true}
+              onClick={() => removeIngredient(i)}
+              className={styles.removeButton}
+            />
+          </div>
+        ))}
+      {/* </div> */}
       <Button
         label="Add another ingredient"
         type="primary"
