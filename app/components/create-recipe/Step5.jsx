@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 export default function Step5({ formData, setFormData, setCanMoveFoward }) {
   const allowedMinutes = [
-    1, 2, 3, 4, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55,
+    0, 1, 2, 3, 4, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55,
   ];
   const allowedHours = Array.from({ length: 10 }, (_, i) => i + 1);
 

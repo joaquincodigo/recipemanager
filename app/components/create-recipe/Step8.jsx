@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Step8({ formData, setFormData, setCanMoveFoward }) {
   const [category, setCategory] = useState(formData.category || "");
@@ -12,6 +12,10 @@ export default function Step8({ formData, setFormData, setCanMoveFoward }) {
     }));
     setCanMoveFoward(true);
   };
+
+  useEffect(() => {
+    if (category !== "") setCanMoveFoward(true);
+  }, []);
 
   const styles = {
     select:

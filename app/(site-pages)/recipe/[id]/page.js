@@ -7,6 +7,7 @@ import { ClockIcon } from "@heroicons/react/24/outline";
 import { ChartPieIcon } from "@heroicons/react/24/outline";
 import { ChevronDoubleUpIcon } from "@heroicons/react/24/outline";
 import { TagIcon } from "@heroicons/react/24/outline";
+import BackButton from "@/app/components/BackButton";
 
 export default function RecipePage({ params }) {
   const [recipe, setRecipe] = useState(null);
@@ -34,7 +35,7 @@ export default function RecipePage({ params }) {
 
     fetchData();
   }, [params]);
-  
+
   if (loading) {
     return (
       <div className="flex items-center justify-center w-full h-full pb-36 flex-1">
@@ -49,11 +50,19 @@ export default function RecipePage({ params }) {
     <div className="p-3 pb-10">
       {/* IMAGE */}
       <section className="mb-12">
-        <img
-          className="w-full rounded-lg mb-3"
-          src={recipe?.image}
-          alt="The finished recipe"
-        />
+        {recipe.imgage ? (
+          <img
+            className="w-full rounded-lg mb-3"
+            src={recipe?.image}
+            alt="The finished recipe"
+          />
+        ) : (
+          <img
+            className="w-full rounded-lg mb-3"
+            src="/images/recipe-placeholder-image.gif"
+            alt="The finished recipe"
+          />
+        )}
 
         {/* TITLE */}
         <h1 className="font-bold text-4xl mb-3">
@@ -167,6 +176,9 @@ export default function RecipePage({ params }) {
           </li>
         </ul>
       </section>
+      <div className="flex justify-end mt-16">
+        <BackButton />
+      </div>
     </div>
   );
 }

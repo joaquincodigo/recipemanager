@@ -1,10 +1,37 @@
-"use client";
+import { cookies } from "next/headers";
+import { supabase } from "@/lib/supabase";
+import CardsList from "@/app/components/my-recipes/CardsList";
 
-export default function MyRecipesPage() {
+async function getUserRecipes() {
+  const cookieStore = cookies();
+  const userId = cookieStore.get("userId")?.value;
+
+  if (!userId) throw new Error("No user ID in cookie");
+
+  const { data, error } = await supabase
+    .from("recipes")
+    .select("*")
+    .eq("author", userId);
+
+  if (error) throw new Error("Failed to fetch recipes");
+
+  return data;
+}
+
+const styles = {
+  container: "px-3 pb-10",
+  heading: "text-xl font-bold mt-3",
+  subheading: "text-lg mb-5",
+};
+
+export default async function RecipesPage() {
+  const recipes = await getUserRecipes();
+
   return (
-    <div className="p-3">
-      <h1 className="text-xl font-bold">Your Recipes</h1>
+    <div className={styles.container}>
+      <h1 className={styles.heading}>Your Recipes</h1>
+      <h2 className={styles.subheading}>Explore your own creations</h2>
+      <CardsList recipes={recipes} />
     </div>
   );
 }
-
