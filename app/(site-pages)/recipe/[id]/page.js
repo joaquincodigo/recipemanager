@@ -100,7 +100,7 @@ export default function RecipePage({ params }) {
             ?.filter((ingredient) => ingredient.trim() !== "")
             .map((ingredient, index) => (
               <li className="ms-5 list-disc" key={index}>
-                {ingredient}
+                {ingredient.charAt(0).toUpperCase() + ingredient.slice(1)}
               </li>
             ))}
         </ul>
@@ -137,8 +137,7 @@ export default function RecipePage({ params }) {
                 >
                   {index + 1}
                 </div>
-
-                {step}
+                {step?.charAt(0).toUpperCase() + step.slice(1)}
               </li>
             ))}
         </ul>
@@ -161,7 +160,8 @@ export default function RecipePage({ params }) {
         <ul>
           <li className="flex items-center">
             <TagIcon className="w-6 h-6 text-slate-500 me-0.5" />
-            {recipe?.category}
+            {recipe?.category.charAt(0).toUpperCase() +
+              recipe.category.slice(1)}
           </li>
         </ul>
       </section>
@@ -172,7 +172,8 @@ export default function RecipePage({ params }) {
         <ul>
           <li className="flex items-center">
             <ChevronDoubleUpIcon className="w-6 h-6 text-slate-500 me-0.5" />
-            {recipe?.difficulty}
+            {recipe?.difficulty.charAt(0).toUpperCase() +
+              recipe.difficulty.slice(1)}
           </li>
         </ul>
       </section>
