@@ -50,9 +50,9 @@ export default function RecipePage({ params }) {
     <div className="p-3 pb-10">
       {/* IMAGE */}
       <section className="mb-12">
-        {recipe.imgage ? (
+        {recipe.image ? (
           <img
-            className="w-full rounded-lg mb-3"
+            className="w-full aspect-square object-cover object-center rounded-lg mb-3"
             src={recipe?.image}
             alt="The finished recipe"
           />
@@ -118,22 +118,21 @@ export default function RecipePage({ params }) {
               <li className="flex items-center mb-3" key={index}>
                 <div
                   className="
-            z-10
-            flex
-            items-center
-            justify-center
-            h-8
-            w-8
-            rounded-full
-            border-solid
-            border-4
-            border-[#dddddd]
-            p-3
-            font-bold
-            mr-3
-            bg-white
-            text-slate-500
-          "
+                    z-10
+                    flex
+                    items-center
+                    justify-center
+                    h-8
+                    w-8
+                    rounded-full
+                    border-solid
+                    border-4
+                    border-[#dddddd]
+                    p-3
+                    font-bold
+                    mr-3
+                    bg-white
+                    text-slate-500"
                 >
                   {index + 1}
                 </div>

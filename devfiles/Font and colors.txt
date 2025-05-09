@@ -3,3 +3,4 @@ Font: Schibsted Grotesk
 Green #7FC37E
 Pale Yello #FEFEE2
 Blackish #333333
+Violet: #7E7FC3
