@@ -1,7 +1,6 @@
 "use client";
 
 import { UserCircleIcon } from "@heroicons/react/24/outline";
-import Link from "next/link";
 import ProfileAvatar from "./ProfileAvatar";
 import { useAuth } from "@/app/context/AuthContext";
 
