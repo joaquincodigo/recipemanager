@@ -11,7 +11,8 @@ export default function UserButton({ onClick }) {
   const styles = {
     container:
       "flex items-center justify-center md:hidden rounded-full w-8 h-8",
-    annonymousUserBtn: "text-white text-bold",
+    annonymousUserBtn:
+      "right-3 w-8 h-8 text-white font-bold text-2xl hover:text-[#619460]",
   };
 
   return (
@@ -20,7 +21,10 @@ export default function UserButton({ onClick }) {
         {loggedIn ? (
           <ProfileAvatar size={7.2} /> // Tailwind size is 8 but the photo and the outer ring gives the appearece that the avatar is larger than it actually is
         ) : (
-          <UserCircleIcon className={styles.annonymousUserBtn} />
+          <UserCircleIcon
+            strokeWidth={2.4}
+            className={styles.annonymousUserBtn}
+          />
         )}
       </div>
     </button>
