@@ -48,19 +48,12 @@ export default function LoginPage() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    // console.log("The email is:", email);
-    // console.log("The password is:", password);
-
     const success = await handleLogin(email, password);
-    // console.log("SUCCESS VARIABLE IS:", success)
 
     if (success) {
-      // console.log("SUCCESS, LOGGED IN");
       refreshAuth();
       router.push("/home");
     } else {
-      // console.log(loginError)
       setShowBadCredentialsWarning(true);
     }
   };
