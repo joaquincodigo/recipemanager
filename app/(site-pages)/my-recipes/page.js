@@ -3,7 +3,7 @@ import { supabase } from "@/lib/supabase";
 import CardsList from "@/app/components/my-recipes/CardsList";
 
 async function getUserRecipes() {
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const userId = cookieStore.get("userId")?.value;
 
   if (!userId) throw new Error("No user ID in cookie");

@@ -177,7 +177,7 @@ export default function RecipePage({ params }) {
           </li>
         </ul>
       </section>
-      <div className="flex justify-end mt-16">
+      <div className="flex justify-center mt-16">
         <BackButton />
       </div>
 

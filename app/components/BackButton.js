@@ -6,7 +6,7 @@ export default function BackButton() {
   const router = useRouter();
   const styles = {
     button:
-      "rounded-md gap-x-2 font-bold p-3  bg-[#7FC37E] text-white hover:bg-[#5d995c] flex",
+      "w-40 rounded-md gap-x-2 font-bold p-3 bg-[#7FC37E] text-white hover:bg-[#5d995c] flex justify-center",
     buttonText: "inline-block",
     icon: "w-6 h-6 text-white",
   };

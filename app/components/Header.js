@@ -1,8 +1,8 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
-
 import { useSearch } from "@/app/context/SearchContext";
+import { usePathname } from "next/navigation";
 import useViewport from "@/app/hooks/useViewport";
 
 import SearchBar from "./SearchBar";
@@ -12,6 +12,7 @@ import SearchButton from "./SearchButton";
 import UserButton from "./UserButton";
 
 export default function Header({ toggleDrawer }) {
+  const pathname = usePathname();
   const isMobile = useViewport(); // Different headers for mobile an desktop
   const { handleSearch } = useSearch();
   const [isSearchInputOpen, setIsSearchInputOpen] = useState(false);
@@ -58,7 +59,6 @@ export default function Header({ toggleDrawer }) {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
 
   return (
     <header

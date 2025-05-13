@@ -103,7 +103,7 @@ export default function LoginPage() {
                   type="email"
                   id="email"
                   name="email"
-                  autoComplete="username"
+                  autoComplete="off"
                   required
                   onChange={handleMailInput}
                   value={email}
