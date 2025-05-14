@@ -69,7 +69,7 @@ export default function HomePage() {
     const pageContents = paginatedRecipes[currentPage];
     content = (
       <>
-        <div className="grid grid-cols-1 w-full gap-4 justify-items-center">
+        <div className="grid grid-cols-1 md:grid-cols-4 w-full gap-4 justify-items-center">
           {pageContents.map((recipe) => (
             <RecipeCard
               key={recipe.id}
@@ -92,7 +92,7 @@ export default function HomePage() {
   }
 
   return (
-    <div className="p-3">
+    <div className="px-3">
       {content}
       <Footer />
     </div>

@@ -22,7 +22,7 @@ export default function RecipeCard({ recipe, isLiked, onToggleLike }) {
   return (
     <Link className="w-full" href={`/recipe/${recipe.id}`}>
       {/* IMAGE */}
-      <div className="p-2 h-full shadow-md border rounded-lg bg-white">
+      <div className="min-h-[350px] p-2 h-full shadow-md border rounded-lg bg-white">
         <div className="relative w-full aspect-[5/4] overflow-hidden rounded-lg mb-3">
           <img
             src={
@@ -51,7 +51,7 @@ export default function RecipeCard({ recipe, isLiked, onToggleLike }) {
         </h2>
 
         {/* DESCRIPTION */}
-        <p className="text mb-3 line-clamp-2">{recipe.description}</p>
+        <p className="min-h-12 mb-3 line-clamp-2">{recipe.description}</p>
 
         {/* FOOTER */}
         <div className="w-full flex justify-aroundx text-sm border-t pt-3 pb-1">

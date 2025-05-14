@@ -6,12 +6,12 @@ import Link from "next/link";
 export default function TopBanner() {
   return (
     <>
-      <Link className="md:hidden" href="/">
+      <Link href="/home">
         <Image
           src={"/images/RecipesHavenLogoGreenBg.svg"}
           width={1}
           height={1}
-          style={{ height: "55px", width: "auto" }}
+          className="h-[55px] md:h-[40px] w-auto"
           alt="Top Banner"
           sizes="55px"
           priority

@@ -1,7 +1,13 @@
 import React from "react";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { usePathname } from "next/navigation";
 
 export default function SearchButton({ handleClick }) {
+  const pathname = usePathname();
+  if (pathname != "/home") {
+    return null;
+  }
+
   return (
     <>
       <button
@@ -10,7 +16,6 @@ export default function SearchButton({ handleClick }) {
           flex
           items-center
           justify-center
-          md:hidden
           w-8
           h-8
           "

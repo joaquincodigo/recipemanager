@@ -106,14 +106,14 @@ export default function Drawer({ closeDrawer, isDrawerOpen }) {
                   Liked recipes
                 </Link>
               </li>
-              <li className="flex items-center" onClick={closeDrawer}>
+              {/* <li className="flex items-center" onClick={closeDrawer}>
                 <span className="me-3">
                   <Cog8ToothIcon className="w-6 h-6" />
                 </span>
                 <Link className="font-semibold" href="/settings">
                   Settings
                 </Link>
-              </li>
+              </li> */}
               <li className="flex items-center">
                 <span className="me-3">
                   <ArrowLeftStartOnRectangleIcon className="w-6 h-6" />

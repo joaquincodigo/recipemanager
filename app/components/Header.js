@@ -2,22 +2,23 @@
 
 import { useRef, useState, useEffect } from "react";
 import { useSearch } from "@/app/context/SearchContext";
-import { usePathname } from "next/navigation";
 import useViewport from "@/app/hooks/useViewport";
 
 import SearchBar from "./SearchBar";
 import TopBanner from "./TopBanner";
 import SearchButton from "./SearchButton";
+import { usePathname } from "next/navigation";
 
 import UserButton from "./UserButton";
+import { handleClientScriptLoad } from "next/script";
 
 export default function Header({ toggleDrawer }) {
-  const pathname = usePathname();
   const isMobile = useViewport(); // Different headers for mobile an desktop
   const { handleSearch } = useSearch();
   const [isSearchInputOpen, setIsSearchInputOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true); // Header hiding when scrolling down and re-appearing when scrolling up
   const searchInputRef = useRef(null);
+  const pathname = usePathname();
 
   const toggleSearchInput = () => {
     setIsSearchInputOpen((prevState) => !prevState);
@@ -39,6 +40,12 @@ export default function Header({ toggleDrawer }) {
   };
 
   const lastScroll = useRef(0);
+
+  useEffect(() => {
+    if (pathname !== "/home") {
+      setIsSearchInputOpen(false);
+    }
+  }, [pathname]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -67,7 +74,8 @@ export default function Header({ toggleDrawer }) {
       flex
       justify-between
       h-14
-      w-screen 
+      md:h-9
+      w-full 
       px-3
       py-0.5
       items-center
@@ -86,6 +94,7 @@ export default function Header({ toggleDrawer }) {
         isSearchInputOpen ? (
           <div className="w-full flex gap-2 justify-center items-center">
             <SearchBar searchInputRef={searchInputRef} />
+
             <button
               onClick={() => {
                 toggleSearchInput();
