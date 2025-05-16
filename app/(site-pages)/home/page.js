@@ -92,7 +92,7 @@ export default function HomePage() {
   }
 
   return (
-    <div className="flex flex-col w-max px-3 md:mx-auto">
+    <div className="flex flex-col w-screen md:w-max px-3 md:mx-auto">
       {content}
       <Footer />
     </div>
