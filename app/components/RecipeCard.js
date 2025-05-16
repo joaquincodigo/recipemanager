@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Link from "next/link";
 import React from "react";
@@ -20,9 +20,9 @@ export default function RecipeCard({ recipe, isLiked, onToggleLike }) {
   };
 
   return (
-    <Link className="w-full" href={`/recipe/${recipe.id}`}>
+    <Link href={`/recipe/${recipe.id}`}>
       {/* IMAGE */}
-      <div className="min-h-[350px] p-2 h-full shadow-md border rounded-lg bg-white">
+      <div className="w-full md:w-[240px] md:h-[250] p-2 shadow-md border rounded-lg bg-white md:hover:shadow-[#7fc37eba]">
         <div className="relative w-full aspect-[5/4] overflow-hidden rounded-lg mb-3">
           <img
             src={
@@ -36,7 +36,7 @@ export default function RecipeCard({ recipe, isLiked, onToggleLike }) {
         </div>
 
         {/* TITLE */}
-        <h2 className="mb-0.5 font-semibold">
+        <h2 className="md:text-sm mb-0.5 font-semibold">
           {recipe?.title
             .split(" ") // Split the title into individual words
             .map(
@@ -51,10 +51,12 @@ export default function RecipeCard({ recipe, isLiked, onToggleLike }) {
         </h2>
 
         {/* DESCRIPTION */}
-        <p className="min-h-12 mb-3 line-clamp-2">{recipe.description}</p>
+        <p className="md:text-sm md:min-h-12 mb-3 line-clamp-2">
+          {recipe.description}
+        </p>
 
         {/* FOOTER */}
-        <div className="w-full flex justify-aroundx text-sm border-t pt-3 pb-1">
+        <div className="md:text-xs w-full flex justify-aroundx text-sm border-t md:min-h-8 md:pt-3 pb-1 ">
           {/* LIKE */}
           <button
             className="flex-1 flex justify-center items-center"
@@ -71,12 +73,12 @@ export default function RecipeCard({ recipe, isLiked, onToggleLike }) {
                     setAnimateLike(false);
                   }}
                 >
-                  <HeartFilledIcon className="w-6 h-6 text-red-500 me-0.5 cursor-pointer" />
+                  <HeartFilledIcon className="w-6 h-6 md:w-5 md:h-5 text-red-500 me-0.5 cursor-pointer" />
                 </motion.div>
-                <HeartFilledIcon className="w-6 h-6 text-red-500 me-0.5 cursor-pointer" />
+                <HeartFilledIcon className="w-6 h-6 md:w-5 md:h-5 text-red-500 me-0.5 cursor-pointer" />
               </div>
             ) : (
-              <HeartIcon className="w-6 h-6 text-slate-500 me-0.5 cursor-pointer" />
+              <HeartIcon className="w-6 h-6 md:w-5 md:h-5 text-slate-500 me-0.5 cursor-pointer" />
             )}
             <p className="font-semibold text-slate-500 leading-none ms-2">
               Like
@@ -85,7 +87,7 @@ export default function RecipeCard({ recipe, isLiked, onToggleLike }) {
 
           {/* PREP TIME */}
           <div className="flex-1 flex justify-center items-center">
-            <ClockIcon className="w-6 h-6 text-slate-500 me-1" />
+            <ClockIcon className="w-6 h-6 md:w-5 md:h-5 text-slate-500 me-1" />
             <p className="font-semibold text-slate-500 leading-none">
               {recipe.preparation_time}'
             </p>
@@ -93,7 +95,7 @@ export default function RecipeCard({ recipe, isLiked, onToggleLike }) {
 
           {/* CATEGORY */}
           <div className="flex-1 flex justify-center items-center">
-            <TagIcon className="w-6 h-6 text-slate-500 me-1" />
+            <TagIcon className="w-6 h-6 md:w-5 md:h-5 text-slate-500 me-1" />
             <p className="font-semibold text-slate-500 leading-none">
               {/* Only first letter must be uppercase */}
               {recipe.category.charAt(0).toUpperCase() +

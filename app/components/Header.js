@@ -75,7 +75,8 @@ export default function Header({ toggleDrawer }) {
       justify-between
       h-14
       md:h-9
-      w-full 
+      w-screen
+      md:w-full
       px-3
       py-0.5
       items-center
