@@ -10,9 +10,10 @@ export default function TextAreaInput({
   value,
 }) {
   const styles = {
-    container: "relative flex flex-col",
+    container: " flex flex-col md:items-center",
+    wrapper: "relative",
     textarea:
-      "bg-white h-32 p-3 rounded-md border focus:outline-none focus:ring-2 focus:ring-[#7FC37E]",
+      "bg-white h-32 p-3 rounded-md border focus:outline-none focus:ring-2 focus:ring-[#7FC37E] md:w-80",
     errorTextarea:
       "bg-white p-3 rounded-md border-2 border-red-700 focus:outline-none focus:ring-2 focus:ring-red-700",
     label: "absolute left-2 -top-3 px-2 z-10 rounded bg-white z-10",
@@ -22,23 +23,25 @@ export default function TextAreaInput({
 
   return (
     <div className={styles.container}>
-      <label
-        htmlFor={fieldName}
-        className={error ? styles.errorLabel : styles.label}
-      >
-        {fieldName} {required ? "*" : ""}
-      </label>
+      <div className={styles.wrapper}>
+        <label
+          htmlFor={fieldName}
+          className={error ? styles.errorLabel : styles.label}
+        >
+          {fieldName} {required ? "*" : ""}
+        </label>
 
-      <textarea
-        type="text"
-        id={fieldName}
-        name={fieldName}
-        className={error ? styles.errorTextarea : styles.textarea}
-        onChange={onChange}
-        onBlur={onBlur}
-        onFocus={onFocus}
-        value={value}
-      ></textarea>
+        <textarea
+          type="text"
+          id={fieldName}
+          name={fieldName}
+          className={error ? styles.errorTextarea : styles.textarea}
+          onChange={onChange}
+          onBlur={onBlur}
+          onFocus={onFocus}
+          value={value}
+        ></textarea>
+      </div>
     </div>
   );
 }

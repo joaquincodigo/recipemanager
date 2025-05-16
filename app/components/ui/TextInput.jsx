@@ -6,9 +6,10 @@ export default forwardRef(function TextInput(
   ref
 ) {
   const styles = {
-    container: "relative flex flex-col",
+    container: "flex flex-col md:items-center",
+    wrapper: "relative",
     input:
-      "bg-white p-3 rounded-md border focus:outline-none focus:ring-2 focus:ring-[#7FC37E]",
+      "bg-white p-3 rounded-md border focus:outline-none focus:ring-2 focus:ring-[#7FC37E] md:w-80",
     errorInput:
       "bg-white p-3 rounded-md border-2 border-red-700 focus:outline-none focus:ring-2 focus:ring-red-700",
     label: "absolute left-2 -top-3 px-2 z-10 rounded bg-white z-10",
@@ -18,25 +19,27 @@ export default forwardRef(function TextInput(
 
   return (
     <div className={styles.container}>
-      <label
-        htmlFor={fieldName}
-        className={error ? styles.errorLabel : styles.label}
-      >
-        {fieldName} {required ? "*" : ""}
-      </label>
-      <input
-        ref={ref}
-        type="text"
-        id={fieldName}
-        name={fieldName}
-        className={error ? styles.errorInput : styles.input}
-        onChange={onChange}
-        onBlur={onBlur}
-        onFocus={onFocus}
-        value={value}
-        onKeyDown={onKeyDown}
-        autoComplete="off"
-      />
+      <div className={styles.wrapper}>
+        <label
+          htmlFor={fieldName}
+          className={error ? styles.errorLabel : styles.label}
+        >
+          {fieldName} {required ? "*" : ""}
+        </label>
+        <input
+          ref={ref}
+          type="text"
+          id={fieldName}
+          name={fieldName}
+          className={error ? styles.errorInput : styles.input}
+          onChange={onChange}
+          onBlur={onBlur}
+          onFocus={onFocus}
+          value={value}
+          onKeyDown={onKeyDown}
+          autoComplete="off"
+        />
+      </div>
     </div>
   );
 });
