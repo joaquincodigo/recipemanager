@@ -1,12 +1,12 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import TextInput from "../ui/TextInput";
 import Button from "../ui/Button";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 
 export default function Step4({ formData, setFormData, setCanMoveFoward }) {
   const inputRefs = useRef([]);
+  const [prevLength, setPrevLength] = useState(0);
 
-  // The first input must always be visible
   useEffect(() => {
     if (formData.preparation_steps.length === 0) {
       setFormData((prev) => ({
@@ -16,7 +16,6 @@ export default function Step4({ formData, setFormData, setCanMoveFoward }) {
     }
   }, []);
 
-  // If there's at least 1 non-empty step, the user can proceed
   useEffect(() => {
     if (
       formData.preparation_steps.length !== 0 &&
@@ -34,8 +33,15 @@ export default function Step4({ formData, setFormData, setCanMoveFoward }) {
   };
 
   useEffect(() => {
-    const lastIndex = formData.preparation_steps.length - 1;
-    inputRefs.current[lastIndex]?.focus();
+    const currentLength = formData.preparation_steps.length;
+    const isNewItemAdded = currentLength > prevLength;
+
+    if (isNewItemAdded) {
+      const lastIndex = currentLength - 1;
+      inputRefs.current[lastIndex]?.focus();
+    }
+
+    setPrevLength(currentLength);
   }, [formData.preparation_steps]);
 
   const handleKeyDown = (e) => {
