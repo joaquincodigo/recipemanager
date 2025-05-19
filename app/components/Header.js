@@ -87,6 +87,7 @@ export default function Header({ toggleDrawer }) {
       top-0
       z-50 
       overflow-hidden
+      md:translate-y-0
       ${isVisible ? "translate-y-0" : "-translate-y-full"}`}
     >
       {/* MOBILE */}
