@@ -78,9 +78,9 @@ export default function RecipeCard({ recipe, isLiked, onToggleLike }) {
                 <HeartFilledIcon className="w-6 h-6 md:w-5 md:h-5 text-red-500 me-0.5 cursor-pointer md:me-0" />
               </div>
             ) : (
-              <HeartIcon className="w-6 h-6 md:w-5 md:h-5 text-slate-500 me-0.5 cursor-pointer" />
+              <HeartIcon className="w-6 h-6 md:w-5 md:h-5 text-slate-500 me-0.5 md:me-0 /cursor-pointer" />
             )}
-            <p className="font-semibold text-slate-500 leading-none ms-2">
+            <p className="font-semibold text-slate-500 leading-none ms-0.5">
               Like
             </p>
           </button>
