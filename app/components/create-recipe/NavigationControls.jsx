@@ -18,7 +18,10 @@ export default function NavigationControls({
   };
 
   const styles = {
-    container: `flex gap-2 w-full ${step === 1 ? "justify-center" : ""}`,
+    // container: `flex gap-2 w-full ${step === 1 ? "justify-center" : ""}`,
+    // TESTING-TESTING-TESTING-TESTING-TESTING-TESTING
+    container: "flex gap-2 w-full justify-center",
+    // TESTING-TESTING-TESTING-TESTING-TESTING-TESTING
   };
 
   return (

@@ -22,7 +22,7 @@ export default function RecipeCard({ recipe, isLiked, onToggleLike }) {
   return (
     <Link href={`/recipe/${recipe.id}`}>
       {/* IMAGE */}
-      <div className="w-full md:w-[240px] md:h-[250] p-2 shadow-md border rounded-lg bg-white md:hover:shadow-[#7fc37eba]">
+      <div className="w-full md:w-[240px] md:h-[250] p-2 shadow-md border rounded-lg bg-white md:hover:shadow-[#7fc37e93]">
         <div className="relative w-full aspect-[5/4] overflow-hidden rounded-lg mb-3">
           <img
             src={
@@ -73,9 +73,9 @@ export default function RecipeCard({ recipe, isLiked, onToggleLike }) {
                     setAnimateLike(false);
                   }}
                 >
-                  <HeartFilledIcon className="w-6 h-6 md:w-5 md:h-5 text-red-500 me-0.5 cursor-pointer" />
+                  <HeartFilledIcon className="w-6 h-6 md:w-5 md:h-5 text-red-500 me-0.5 md:me-0 cursor-pointer" />
                 </motion.div>
-                <HeartFilledIcon className="w-6 h-6 md:w-5 md:h-5 text-red-500 me-0.5 cursor-pointer" />
+                <HeartFilledIcon className="w-6 h-6 md:w-5 md:h-5 text-red-500 me-0.5 cursor-pointer md:me-0" />
               </div>
             ) : (
               <HeartIcon className="w-6 h-6 md:w-5 md:h-5 text-slate-500 me-0.5 cursor-pointer" />

@@ -12,8 +12,8 @@ export default function Button({ label, type, enabled, className, onClick }) {
       disabled: "bg-[#9ead9e] text-slate-500",
     },
     secondary: {
-      enabled: "bg-none text-black hover:bg-slate-200",
-      disabled: "bg-none text-slate-500",
+      enabled: "bg-none text-black border border-[#8cd68b]",
+      disabled: "bg-none text-slate-500 border border-slate-500",
     },
   };
   const buttonStyles = styles[type]?.[enabled ? "enabled" : "disabled"];

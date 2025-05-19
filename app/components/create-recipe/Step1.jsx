@@ -39,13 +39,14 @@ export default function Step1({ formData, setFormData, setCanMoveFoward }) {
   const styles = {
     heading: "text-slate-500 font-bold mb-5 text-center pb-3",
     errorMessage: "text-red-700",
+    wrapper: "text-center"
   };
 
   return (
     <>
       <h2 className={styles.heading}>What are we cooking?</h2>
 
-      <div>
+      <div className={styles.wrapper}>
         {/* Title */}
         <TextInput
           fieldName="Title"
@@ -61,7 +62,7 @@ export default function Step1({ formData, setFormData, setCanMoveFoward }) {
         {titleError && <p className={styles.errorMessage}>{errors.title}</p>}
       </div>
 
-      <div>
+      <div className={styles.wrapper}>
         {/* Description */}
         <TextAreaInput
           fieldName="Description"
