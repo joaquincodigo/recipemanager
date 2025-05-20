@@ -10,7 +10,7 @@ import Step6 from "@/app/components/create-recipe/Step6";
 import Step7 from "@/app/components/create-recipe/Step7";
 import Step8 from "@/app/components/create-recipe/Step8";
 import Step9 from "@/app/components/create-recipe/Step9";
-import NavigationControls from "@/app/components/create-recipe/navigationControls";
+import NavigationControls from "@/app/components/create-recipe/NavigationControls";
 import useStoreNewRecipe from "@/app/hooks/useStoreNewRecipe";
 
 export default function CreateRecipe() {
