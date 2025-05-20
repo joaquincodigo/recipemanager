@@ -1,10 +1,7 @@
 "use client";
-
 import { CubeTransparentIcon } from "@heroicons/react/24/outline";
 
-
 export default function PasswordRecoveryPage() {
-  const { recipes, recipesError } = useFetchRecipes(1);
 
   return (
     <div className="h-full w-full min-h-screen px-12 pt-28 flex flex-col justify-top">
@@ -19,7 +16,6 @@ export default function PasswordRecoveryPage() {
             implemented in this demo yet.
           </p>
           <p className="text-xl">Stay tuned!</p>
-
         </div>
       </div>
     </div>
