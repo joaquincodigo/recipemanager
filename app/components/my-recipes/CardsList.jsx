@@ -11,7 +11,7 @@ export default function CardsList({ recipes }) {
   const { isLiked, toggleLike } = useLikeRecipe(userId);
 
   const handleLike = (recipeId) => {
-    if (!userId) {
+    if (!userId) {  
       router.push("/login");
       return;
     }
@@ -19,7 +19,7 @@ export default function CardsList({ recipes }) {
   };
 
   const styles = {
-    item: "mb-3"
+    list: "grid grid-cols-1 md:grid-cols-[repeat(4,250px)] gap-y-4 md:gap-x-2",
   };
   return (
     <ul className={styles.list}>

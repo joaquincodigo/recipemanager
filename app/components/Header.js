@@ -74,7 +74,7 @@ export default function Header({ toggleDrawer }) {
       flex
       justify-between
       h-14
-      md:h-9
+      md:h-10
       w-screen
       md:w-full
       px-3

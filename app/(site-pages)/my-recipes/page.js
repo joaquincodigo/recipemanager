@@ -19,7 +19,7 @@ async function getUserRecipes() {
 }
 
 const styles = {
-  container: "px-3 pb-10",
+  container: "flex flex-col w-screen px-3 md:w-max  md:mx-auto",
   heading: "text-xl font-bold mt-3",
   subheading: "text-lg mb-5",
 };

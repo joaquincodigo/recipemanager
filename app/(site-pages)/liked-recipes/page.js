@@ -64,8 +64,8 @@ export default function LikedRecipes() {
   } else {
     // LIKED RECIPES LIST
     content = (
-      <>
-        <div className="grid grid-cols-1 w-full gap-4 justify-items-center">
+      <div className="grid grid-cols-1 w-full gap-4 justify-items-center">
+        <div className="grid grid-cols-1 md:grid-cols-[repeat(4,250px)] gap-y-4 md:gap-x-2">
           {pageContents.map((recipe) => (
             <RecipeCard
               key={recipe.id}
@@ -83,14 +83,14 @@ export default function LikedRecipes() {
             totalPages={totalPages}
           />
         </div>
-      </>
+      </div>
     );
   }
 
   return (
     <div
       ref={containerRef}
-      className="p-3 h-screen overflow-y-auto scroll-pt-16"
+      className="flex flex-col w-screen px-3 md:w-max md:mx-auto"
     >
       {content}
       <Footer />

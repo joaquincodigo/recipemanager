@@ -56,10 +56,10 @@ export default function RecipeCard({ recipe, isLiked, onToggleLike }) {
         </p>
 
         {/* FOOTER */}
-        <div className="md:text-xs w-full flex justify-aroundx text-sm border-t md:min-h-8 md:pt-3 pb-1 ">
+        <div className=" md:text-xs w-full flex justify-around text-sm border-t md:min-h-8 md:pt-3 pb-1 pt-2">
           {/* LIKE */}
           <button
-            className="flex-1 flex justify-center items-center"
+            className=" flex justify-center items-center"
             onClick={handleLike}
           >
             {isLiked ? (
@@ -86,7 +86,7 @@ export default function RecipeCard({ recipe, isLiked, onToggleLike }) {
           </button>
 
           {/* PREP TIME */}
-          <div className="flex-1 flex justify-center items-center">
+          <div className="flex justify-center items-center">
             <ClockIcon className="w-6 h-6 md:w-5 md:h-5 text-slate-500 me-1" />
             <p className="font-semibold text-slate-500 leading-none">
               {recipe.preparation_time}'
@@ -94,7 +94,7 @@ export default function RecipeCard({ recipe, isLiked, onToggleLike }) {
           </div>
 
           {/* CATEGORY */}
-          <div className="flex-1 flex justify-center items-center">
+          <div className=" flex justify-center items-center">
             <TagIcon className="w-6 h-6 md:w-5 md:h-5 text-slate-500 me-1" />
             <p className="font-semibold text-slate-500 leading-none">
               {/* Only first letter must be uppercase */}
