@@ -7,7 +7,7 @@ import { useAuth } from "@/app/context/AuthContext";
 import useLogout from "@/app/hooks/useLogout";
 
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import { Cog8ToothIcon } from "@heroicons/react/24/outline";
+import { HomeIcon } from "@heroicons/react/24/outline";
 import { BookOpenIcon } from "@heroicons/react/24/outline";
 import { HeartIcon } from "@heroicons/react/24/outline";
 import { ArrowLeftStartOnRectangleIcon } from "@heroicons/react/24/outline";
@@ -84,6 +84,15 @@ export default function Drawer({ closeDrawer, isDrawerOpen }) {
             <ul className="flex flex-col mx-auto w-max gap-y-6">
               <li className="flex items-center" onClick={closeDrawer}>
                 <span className="me-3">
+                  <HomeIcon className="w-6 h-6" />
+                </span>
+                <Link className="font-semibold" href="/home">
+                  Home
+                </Link>
+              </li>
+
+              <li className="flex items-center" onClick={closeDrawer}>
+                <span className="me-3">
                   <PlusCircleIcon className="w-6 h-6" />
                 </span>
                 <Link className="font-semibold" href="/create-recipe">
@@ -106,14 +115,6 @@ export default function Drawer({ closeDrawer, isDrawerOpen }) {
                   Liked recipes
                 </Link>
               </li>
-              {/* <li className="flex items-center" onClick={closeDrawer}>
-                <span className="me-3">
-                  <Cog8ToothIcon className="w-6 h-6" />
-                </span>
-                <Link className="font-semibold" href="/settings">
-                  Settings
-                </Link>
-              </li> */}
               <li className="flex items-center">
                 <span className="me-3">
                   <ArrowLeftStartOnRectangleIcon className="w-6 h-6" />
