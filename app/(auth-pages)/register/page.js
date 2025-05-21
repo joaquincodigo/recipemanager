@@ -205,6 +205,7 @@ export default function RegisterPage() {
                   onChange={handleChange}
                   onBlur={handleWarning}
                   onClick={resetWarning}
+                  onFocus={resetWarning}
                   value={formData.name}
                 />
               </div>
@@ -259,6 +260,7 @@ export default function RegisterPage() {
                   onChange={handleChange}
                   onBlur={handleWarning}
                   onClick={resetWarning}
+                  onFocus={resetWarning}
                   value={formData.email}
                   ref={emailRef}
                 />
@@ -298,6 +300,7 @@ export default function RegisterPage() {
                   onChange={handleChange}
                   onBlur={handleWarning}
                   onClick={resetWarning}
+                  onFocus={resetWarning}
                   ref={passwordRef}
                 />
 
@@ -346,6 +349,7 @@ export default function RegisterPage() {
                   onChange={handleChange}
                   onBlur={handleWarning}
                   onClick={resetWarning}
+                  onFocus={resetWarning}
                   value={formData["password-verification"]}
                 />
                 {/* REVEAL PASSWORD BUTTON */}
