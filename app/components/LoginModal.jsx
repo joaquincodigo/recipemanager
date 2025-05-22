@@ -1,8 +1,16 @@
-import { XMarkIcon } from "@heroicons/react/24/outline";
-import Link from 'next/link'
+"use client";
 
+import { XMarkIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
+import { useState } from "react";
 
 export default function Modal() {
+  const [isOpen, setIsOpen] = useState(true);
+
+  const handleClosingClick = () => {
+    setIsOpen(false);
+  };
+
   const styles = {
     window:
       "absolute z-50 w-64 h-64 top-6 right-0 translate-x-11 md:translate-x-[300px] rounded-md shadow-lg bg-white bg-[#FEFEE2]",
@@ -15,14 +23,18 @@ export default function Modal() {
     bold: "font-semibold",
   };
 
+  if (!isOpen) {
+    return null;
+  }
+
   return (
     <div className={styles.window}>
       {/* TOP BAR */}
       <div className={styles.topBar}>
         <div>Welcome</div>
-        <div>
+        <button onClick={handleClosingClick}>
           <XMarkIcon className={styles.closeIcon} />
-        </div>
+        </button>
       </div>
 
       {/* CONTENT */}

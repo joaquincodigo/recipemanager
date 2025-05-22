@@ -54,7 +54,7 @@ export default function RecipePage({ params }) {
         <section className="mb-12">
           {recipe.image ? (
             <img
-              className="w-full aspect-square object-cover object-center rounded-lg mb-3"
+              className="w-full md:w-72 aspect-square object-cover object-center rounded-lg mb-3"
               src={recipe.image}
               alt="The finished recipe"
             />

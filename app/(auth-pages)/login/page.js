@@ -12,7 +12,7 @@ import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
 
 import Spinner from "@/app/components/Spinner";
 import useLogin from "@/app/hooks/useLogin";
-import Modal from "@/app/components/Modal";
+import LoginModal from "@/app/components/LoginModal";
 
 export default function LoginPage() {
   const { handleLogin, loginError, isLoginPending, setIsLoginPending } =
@@ -68,7 +68,7 @@ export default function LoginPage() {
         </div>
       ) : (
         <div className="relative">
-          <Modal />
+          <LoginModal />
           <form
             className="pb-24 h-screen overflow-hidden flex flex-col justify-center"
             onSubmit={handleSubmit}
