@@ -12,6 +12,7 @@ import { BookOpenIcon } from "@heroicons/react/24/outline";
 import { HeartIcon } from "@heroicons/react/24/outline";
 import { ArrowLeftStartOnRectangleIcon } from "@heroicons/react/24/outline";
 import { PlusCircleIcon } from "@heroicons/react/24/outline";
+import { UserCircleIcon } from "@heroicons/react/24/outline";
 
 export default function Drawer({ closeDrawer, isDrawerOpen }) {
   const { handleLogout } = useLogout();
@@ -38,6 +39,7 @@ export default function Drawer({ closeDrawer, isDrawerOpen }) {
         `}
       ></div>
 
+      {/* Blurred Drawer for non-logged users */}
       {/* Blurrer */}
       <div
         className={`
@@ -47,11 +49,26 @@ export default function Drawer({ closeDrawer, isDrawerOpen }) {
           right-0
           h-screen
           w-60
-          bg-white/30
+          bg-white/80
           backdrop-blur-sm
           z-[60]
         `}
-      ></div>
+      >
+        {/* Login encouragment content */}
+        <div className="w-full h-full flex flex-col items-center justify-center px-3 pb-20 md:text-sm">
+          <p className="text-center text-xl md:text-lg mb-3">Hi there!</p>
+          <p className="text-center">
+            Want to see <span className="font-semibold">all the features</span>?
+          </p>
+          <p className="text-center mb-3">Just log in !</p>
+          <p className="text-center mb-3">No email confirmation needed</p>
+          <Link href={"/login"}>
+            <button className="p-3 rounded text-white bg-[#7FC37E]">
+              Log in
+            </button>
+          </Link>
+        </div>
+      </div>
 
       {/* Drawer Container */}
       <div
@@ -80,79 +97,72 @@ export default function Drawer({ closeDrawer, isDrawerOpen }) {
           <XMarkIcon className="w-7 h-7 text-gray-600 hover:text-black transition-colors duration-300 ease-in-out" />
         </button>
 
-        {loggedIn ? (
-          <div>
-            {/* User Header */}
-            <div className="flex flex-col items-center gap-y-2">
-              <div className="ring-4 ring-[#7FC37E] rounded-full">
+        <div>
+          {/* User Header */}
+          <div className="flex flex-col items-center gap-y-2">
+            <div className={loggedIn && "ring-4 ring-[#7FC37E] rounded-full"}>
+              {loggedIn ? (
                 <ProfileAvatar size={20} />
-              </div>
-
-              <div className="flex justify-center max-w-40">
-                <h2 className="text-center text-lg font-bold mb-12">
-                  {`Hello ${username || "Loading..."}`}
-                </h2>
-              </div>
+              ) : (
+                <UserCircleIcon
+                  className="w-28 h-28 text-slate-700"
+                  strokeWidth={1}
+                />
+              )}
             </div>
 
-            {/* Option List */}
-            <ul className="flex flex-col mx-auto w-max gap-y-6">
-              <li className="flex items-center" onClick={closeDrawer}>
-                <span className="me-3">
-                  <HomeIcon className="w-6 h-6" />
-                </span>
-                <Link className="font-semibold" href="/home">
-                  Home
-                </Link>
-              </li>
+            <div className="flex justify-center max-w-40">
+              <h2 className="text-center text-lg font-bold mb-12">
+                {loggedIn ? `Hello ${username}` : "Anonymous"}
+              </h2>
+            </div>
+          </div>
 
-              <li className="flex items-center" onClick={closeDrawer}>
-                <span className="me-3">
-                  <PlusCircleIcon className="w-6 h-6" />
-                </span>
-                <Link className="font-semibold" href="/create-recipe">
-                  Create recipe
-                </Link>
-              </li>
-              <li className="flex items-center" onClick={closeDrawer}>
-                <span className="me-3">
-                  <BookOpenIcon className="w-6 h-6" />
-                </span>
-                <Link className="font-semibold" href="/my-recipes">
-                  My recipes
-                </Link>
-              </li>
-              <li className="flex items-center" onClick={closeDrawer}>
-                <span className="me-3">
-                  <HeartIcon className="w-6 h-6" />
-                </span>
-                <Link className="font-semibold" href="/liked-recipes">
-                  Liked recipes
-                </Link>
-              </li>
-              <li className="flex items-center">
-                <span className="me-3">
-                  <ArrowLeftStartOnRectangleIcon className="w-6 h-6" />
-                </span>
-                <button className="font-semibold" onClick={handleLogout}>
-                  Logout
-                </button>
-              </li>
-            </ul>
-          </div>
-        ) : (
-          <div className="w-full h-full flex flex-col items-center justify-center px-3 pb-48">
-            <p className="text-center text-xl mb-3">Hi there!</p>
-            <p className=" text-center mb-6">
-              Log in to explore your account and favorite recipes.
-            </p>
-            <Link href={"/login"}>
-              <button className="p-3 rounded text-white bg-[#7FC37E]">
-                Log in
+          {/* Option List */}
+          <ul className="flex flex-col mx-auto w-max gap-y-6">
+            <li className="flex items-center" onClick={closeDrawer}>
+              <span className="me-3">
+                <HomeIcon className="w-6 h-6" />
+              </span>
+              <Link className="font-semibold" href="/home">
+                Home
+              </Link>
+            </li>
+
+            <li className="flex items-center" onClick={closeDrawer}>
+              <span className="me-3">
+                <PlusCircleIcon className="w-6 h-6" />
+              </span>
+              <Link className="font-semibold" href="/create-recipe">
+                Create recipe
+              </Link>
+            </li>
+            <li className="flex items-center" onClick={closeDrawer}>
+              <span className="me-3">
+                <BookOpenIcon className="w-6 h-6" />
+              </span>
+              <Link className="font-semibold" href="/my-recipes">
+                My recipes
+              </Link>
+            </li>
+            <li className="flex items-center" onClick={closeDrawer}>
+              <span className="me-3">
+                <HeartIcon className="w-6 h-6" />
+              </span>
+              <Link className="font-semibold" href="/liked-recipes">
+                Liked recipes
+              </Link>
+            </li>
+            <li className="flex items-center">
+              <span className="me-3">
+                <ArrowLeftStartOnRectangleIcon className="w-6 h-6" />
+              </span>
+              <button className="font-semibold" onClick={handleLogout}>
+                Logout
               </button>
-            </Link>
-          </div>
-        )}
+            </li>
+          </ul>
+        </div>
       </div>
     </>
   );
