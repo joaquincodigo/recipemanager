@@ -43,7 +43,7 @@ export default function Drawer({ closeDrawer, isDrawerOpen }) {
       {/* Blurrer */}
       <div
         className={`
-          ${isDrawerOpen && !loggedIn ? "fixed" : "hidden"}
+          fixed
           top-0
           right-0
           h-screen
