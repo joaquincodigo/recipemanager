@@ -19,7 +19,7 @@ export default function Modal() {
     closeIcon: "w-5 h-5 border-white border-[1.5px] border-black rounded-md",
     content: "p-2",
     link: "text-[#099107] underline",
-    credential: "w-max",
+    credential: "w-max ps-3 list-inside list-disc",
     bold: "font-semibold",
   };
 

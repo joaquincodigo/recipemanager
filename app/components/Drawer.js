@@ -44,7 +44,6 @@ export default function Drawer({ closeDrawer, isDrawerOpen }) {
       <div
         className={`
           ${isDrawerOpen && !loggedIn ? "fixed" : "hidden"}
-          fixed
           top-0
           right-0
           h-screen
@@ -52,6 +51,9 @@ export default function Drawer({ closeDrawer, isDrawerOpen }) {
           bg-white/80
           backdrop-blur-sm
           z-[60]
+          transform
+          transition-transform
+          ${isDrawerOpen ? "translate-x-0" : "translate-x-full"}
         `}
       >
         {/* Login encouragment content */}
@@ -100,7 +102,11 @@ export default function Drawer({ closeDrawer, isDrawerOpen }) {
         <div>
           {/* User Header */}
           <div className="flex flex-col items-center gap-y-2">
-            <div className={loggedIn && "ring-4 ring-[#7FC37E] rounded-full"}>
+            <div
+              className={
+                loggedIn ? "ring-4 ring-[#7FC37E] rounded-full" : undefined
+              }
+            >
               {loggedIn ? (
                 <ProfileAvatar size={20} />
               ) : (
