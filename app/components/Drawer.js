@@ -38,6 +38,21 @@ export default function Drawer({ closeDrawer, isDrawerOpen }) {
         `}
       ></div>
 
+      {/* Blurrer */}
+      <div
+        className={`
+          ${isDrawerOpen && !loggedIn ? "fixed" : "hidden"}
+          fixed
+          top-0
+          right-0
+          h-screen
+          w-60
+          bg-white/30
+          backdrop-blur-sm
+          z-[60]
+        `}
+      ></div>
+
       {/* Drawer Container */}
       <div
         className={`

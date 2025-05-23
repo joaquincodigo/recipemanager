@@ -45,7 +45,10 @@ export default function RecipePage({ params }) {
     );
   }
 
-  if (error) return <p>An error has ocurred</p>; // TODO ERROR ICON
+  if (error) return;
+  <div>
+    <p>An error has ocurred</p>; // TODO ERROR ICON
+  </div>;
 
   return (
     <div>
