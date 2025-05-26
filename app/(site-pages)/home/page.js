@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useSearch } from "@/app/context/SearchContext";
 import Footer from "@/app/components/Footer";
 import usePagination from "@/app/hooks/usePagination";
@@ -12,12 +12,13 @@ import { useAuth } from "@/app/context/AuthContext";
 import useLikeRecipe from "@/app/hooks/useLikeRecipe";
 import { XCircleIcon } from "@heroicons/react/24/outline";
 import { useRouter } from "next/navigation";
+import NonLoggedModal from "@/app/components/modals/NonLoggedModal";
 
 export default function HomePage() {
   const { query } = useSearch();
   const { recipes, error, loading } = useFetchRecipes(query);
   const router = useRouter();
-  const { userId } = useAuth();
+  const { userId, loggedIn } = useAuth();
   const { isLiked, toggleLike } = useLikeRecipe(userId);
   const {
     paginatedRecipes,
@@ -26,14 +27,30 @@ export default function HomePage() {
     paginationControlsArray,
     totalPages,
   } = usePagination(recipes);
+  const [showNonLoggedModal, setShowNonLoggedModal] = useState(false);
+  const [showLoggedModal, setShowLoggedModal] = useState(false);
 
-  const handleLike = (recipeId) => {
-    if (!userId) {
-      router.push("/login");
-      return;
+  // Handling displaying of NON-LOGGED modal. It must be shown only once per session.
+  useEffect(() => {
+    if (!loggedIn) {
+      const hasSeen = sessionStorage.getItem("seenNonLoggedModal");
+      if (!hasSeen) {
+        setShowNonLoggedModal(true);
+        sessionStorage.setItem("seenNonLoggedModal", "true");
+      }
     }
-    toggleLike(recipeId);
-  };
+  }, [loggedIn]);
+
+  // Handling displaying of LOGGED modal. It must be shown only once per session.
+  useEffect(() => {
+    if (loggedIn) {
+      const hasSeen = sessionStorage.getItem("seenLoggedModal");
+      if (!hasSeen) {
+        setShowLoggedModal(true);
+        sessionStorage.setItem("seenLoggedModal", "true");
+      }
+    }
+  }, [loggedIn]);
 
   // Scroll to the top of the page when the user switches pages
   useEffect(() => {
@@ -42,6 +59,14 @@ export default function HomePage() {
       behavior: "smooth",
     });
   }, [currentPage]);
+
+  const handleLike = (recipeId) => {
+    if (!userId) {
+      router.push("/login");
+      return;
+    }
+    toggleLike(recipeId);
+  };
 
   let content;
 
@@ -93,6 +118,11 @@ export default function HomePage() {
 
   return (
     <div className="flex flex-col w-screen md:w-max px-3 md:mx-auto">
+      {/* {!loggedIn && showNonLoggedModal && <NonLoggedModal />} */}
+      {loggedIn && showLoggedModal && (
+        <div className="bg-green-400">Im logged in modal</div>
+      )}
+       <NonLoggedModal />
       {content}
       <Footer />
     </div>

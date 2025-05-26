@@ -38,11 +38,11 @@ export default function Drawer({ closeDrawer, isDrawerOpen }) {
           }
         `}
       ></div>
-
       {/* Blurred Drawer for non-logged users */}
       {/* Blurrer */}
-      <div
-        className={`
+      {!loggedIn && (
+        <div
+          className={`
           fixed
           top-0
           right-0
@@ -55,22 +55,24 @@ export default function Drawer({ closeDrawer, isDrawerOpen }) {
           transition-transform
           ${isDrawerOpen ? "translate-x-0" : "translate-x-full"}
         `}
-      >
-        {/* Login encouragment content */}
-        <div className="w-full h-full flex flex-col items-center justify-center px-3 pb-20 md:text-sm">
-          <p className="text-center text-xl md:text-lg mb-3">Hi there!</p>
-          <p className="text-center">
-            Want to see <span className="font-semibold">all the features</span>?
-          </p>
-          <p className="text-center mb-3">Just log in !</p>
-          <p className="text-center mb-3">No email confirmation needed</p>
-          <Link href={"/login"}>
-            <button className="p-3 rounded text-white bg-[#7FC37E]">
-              Log in
-            </button>
-          </Link>
+        >
+          {/* Login encouragment content */}
+          <div className="w-full h-full flex flex-col items-center justify-center px-3 pb-20 md:text-sm">
+            <p className="text-center text-xl md:text-lg mb-3">Hi there!</p>
+            <p className="text-center">
+              Want to see{" "}
+              <span className="font-semibold">all the features</span>?
+            </p>
+            <p className="text-center mb-3">Just log in !</p>
+            <p className="text-center mb-3">No email confirmation needed</p>
+            <Link href={"/login"}>
+              <button className="p-3 rounded text-white bg-[#7FC37E]">
+                Log in
+              </button>
+            </Link>
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Drawer Container */}
       <div
@@ -104,7 +106,7 @@ export default function Drawer({ closeDrawer, isDrawerOpen }) {
           <div className="flex flex-col items-center gap-y-2">
             <div
               className={
-                loggedIn ? "ring-4 ring-[#7FC37E] rounded-full" : undefined
+                loggedIn ? "ring-4 ring-[#7FC37E] rounded-full cursor-default" : undefined
               }
             >
               {loggedIn ? (
