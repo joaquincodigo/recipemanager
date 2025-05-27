@@ -2,18 +2,27 @@
 
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
+import Button from "../ui/Button";
 
 export const styles = {
-  window: "fixed z-50 w-64 h-64 rounded-md shadow-lg bg-[#FEFEE2]",
+  window:
+    "flex flex-col fixed z-50 min-w-52 max-w-64 rounded-md shadow-lg bg-[#FEFEE2]",
   topBar: "bg-[#7FC37E] text-white flex justify-between items-center ps-2 pe-1",
   closeIcon: "w-5 h-5 border-white border-[1.5px] border-black rounded-md",
   content: "p-2",
+  footer: "p-2 flex flex-grow items-end justify-end",
   link: "text-[#099107] underline",
   bold: "font-semibold",
   credential: "w-max ps-3 list-inside list-disc",
 };
 
-export default function Modal({ windowTitle, children, xOffset, yOffset }) {
+export default function Modal({
+  windowTitle,
+  children,
+  xOffset,
+  yOffset,
+  transform = "none",
+}) {
   const [isOpen, setIsOpen] = useState(true);
 
   const handleClosingClick = () => {
@@ -43,6 +52,15 @@ export default function Modal({ windowTitle, children, xOffset, yOffset }) {
 
       {/* CONTENT */}
       <div className={styles.content}>{children}</div>
+
+      <div className={styles.footer}>
+        <Button
+          enabled
+          type="primary"
+          label="Close"
+          onClick={handleClosingClick}
+        />
+      </div>
     </div>
   );
 }

@@ -13,6 +13,7 @@ import useLikeRecipe from "@/app/hooks/useLikeRecipe";
 import { XCircleIcon } from "@heroicons/react/24/outline";
 import { useRouter } from "next/navigation";
 import NonLoggedModal from "@/app/components/modals/NonLoggedModal";
+import LoggedModal from "@/app/components/modals/LoggedModal";
 
 export default function HomePage() {
   const { query } = useSearch();
@@ -118,11 +119,9 @@ export default function HomePage() {
 
   return (
     <div className="flex flex-col w-screen md:w-max px-3 md:mx-auto">
-      {/* {!loggedIn && showNonLoggedModal && <NonLoggedModal />} */}
-      {loggedIn && showLoggedModal && (
-        <div className="bg-green-400">Im logged in modal</div>
-      )}
-       <NonLoggedModal />
+      {!loggedIn && showNonLoggedModal && <NonLoggedModal />}
+      {loggedIn && showLoggedModal && <LoggedModal/>}
+
       {content}
       <Footer />
     </div>
