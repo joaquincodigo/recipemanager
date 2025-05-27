@@ -6,7 +6,7 @@ import Button from "../ui/Button";
 
 export const styles = {
   window:
-    "flex flex-col fixed z-50 min-w-52 max-w-64 rounded-md shadow-lg bg-[#FEFEE2]",
+    "flex flex-col fixed z-50 min-w-52 max-w-64 rounded-md shadow-lg  backdrop-blur-sm",
   topBar: "bg-[#7FC37E] text-white flex justify-between items-center ps-2 pe-1",
   closeIcon: "w-5 h-5 border-white border-[1.5px] border-black rounded-md",
   content: "p-2",
@@ -36,7 +36,7 @@ export default function Modal({
   return (
     // WINDOW
     <div
-      className={styles.window}
+      className={`${styles.window} bg-[#fefee2bf]`}
       style={{
         top: yOffset,
         right: xOffset,
@@ -59,6 +59,7 @@ export default function Modal({
           type="primary"
           label="Close"
           onClick={handleClosingClick}
+
         />
       </div>
     </div>

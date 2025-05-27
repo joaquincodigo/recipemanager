@@ -39,7 +39,7 @@ export default function Step1({ formData, setFormData, setCanMoveFoward }) {
   const styles = {
     heading: "text-slate-500 font-bold mb-5 text-center pb-3",
     errorMessage: "text-red-700",
-    wrapper: "text-center"
+    wrapper: "flex justify-center"
   };
 
   return (

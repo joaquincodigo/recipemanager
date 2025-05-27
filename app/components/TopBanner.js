@@ -11,7 +11,7 @@ export default function TopBanner() {
           src={"/images/RecipesHavenLogoGreenBg.svg"}
           width={1}
           height={1}
-          className="h-[55px] md:h-[40px] w-auto"
+          className="h-[50px] md:h-[40px] w-auto"
           alt="Top Banner"
           sizes="55px"
           priority
