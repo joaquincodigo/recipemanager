@@ -44,7 +44,7 @@ export default function CreateRecipe() {
   }, [step]);
 
   const styles = {
-    heading: "text-xl font-bold text-center mt-5 mb-5",
+    heading: "text-xl font-bold text-center mt-5 md:mt-0 mb-5",
     container: "flex flex-col p-3 gap-y-10 min-h-screen justify-center pb-32",
     formContainer:
       "md:w-max md:mx-auto flex flex-col gap-y-5 justify-center pb-10 h-[400px] overflow-hidden overflow-y-auto md:px-1 md:my-7",

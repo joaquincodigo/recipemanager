@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+"use client"
 
 export default function Button({ label, type, enabled, className, onClick }) {
   // Handlers
