@@ -63,7 +63,7 @@ export default function RecipePage({ params }) {
             />
           ) : (
             <img
-              className="w-full rounded-lg mb-3"
+              className="w-full md:w-72 rounded-lg mb-3"
               src="/images/recipe-placeholder-image.gif"
               alt="No image available"
             />
