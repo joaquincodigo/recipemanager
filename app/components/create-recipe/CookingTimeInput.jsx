@@ -1,8 +1,8 @@
 import { useState } from "react";
 
 const styles = {
-  select: "p-2 rounded border",
-  container: "flex gap-2 items-center",
+  select: "p-2 rounded border bg-[#ffffe5] border-slate-400",
+  container: "flex gap-2 items-center bg-[#ffffe5]",
 };
 
 export default function CookingTimeInput({ onChange }) {

@@ -183,7 +183,7 @@ export default function RegisterPage() {
                 <label
                   className={`${
                     warning.field === "name" ? "text-red-500" : ""
-                  } absolute left-2 -top-3 px-2 z-10 rounded bg-white`}
+                  } absolute left-2 -top-3 px-2 z-10 rounded bg-[#ffffe5]`}
                   htmlFor="name"
                 >
                   {warning.field === "name" ? "Invalid name" : "Name *"}
@@ -194,7 +194,7 @@ export default function RegisterPage() {
                       ? "text-red-500 border-red-500 border-2 "
                       : "border-slate-400"
                   }
-                "bg-white w-64 p-3 rounded-md border  focus:outline-none focus:ring-2 focus:ring-[#7FC37E]`}
+                "bg-white w-64 p-3 rounded-md border  focus:outline-none focus:ring-2 focus:ring-[#7FC37E] bg-[#ffffe5]`}
                   placeholder="Enter your name"
                   type="text"
                   id="name"
@@ -212,13 +212,13 @@ export default function RegisterPage() {
               {/* LASTNAME */}
               <div className="relative">
                 <label
-                  className="absolute left-2 -top-3 px-2 z-10 rounded bg-white"
+                  className="absolute left-2 -top-3 px-2 z-10 rounded bg-[#ffffe5]"
                   htmlFor="lastname"
                 >
                   Last name
                 </label>
                 <input
-                  className="bg-white w-64 p-3 rounded-md border border-slate-400 focus:outline-none focus:ring-2 focus:ring-[#7FC37E]"
+                  className="bg-[#ffffe5] w-64 p-3 rounded-md border border-slate-400 focus:outline-none focus:ring-2 focus:ring-[#7FC37E]"
                   placeholder="Enter your last name"
                   type="text"
                   id="lastname"
@@ -240,7 +240,7 @@ export default function RegisterPage() {
                 <label
                   className={`${
                     warning.field === "email" ? "text-red-500" : ""
-                  } absolute left-2 -top-3 px-2 z-10 rounded bg-white`}
+                  } absolute left-2 -top-3 px-2 z-10 rounded bg-[#ffffe5]`}
                   htmlFor="email"
                 >
                   {warning.field === "email" ? "Invalid mail" : "Mail *"}
@@ -251,7 +251,7 @@ export default function RegisterPage() {
                       ? "text-red-500 border-red-500 border-2 "
                       : "border-slate-400"
                   }  
-                "bg-white w-64 p-3 rounded-md border  focus:outline-none focus:ring-2 focus:ring-[#7FC37E]`}
+                "bg-white w-64 p-3 rounded-md border  focus:outline-none focus:ring-2 focus:ring-[#7FC37E] bg-[#ffffe5]`}
                   placeholder="Enter your mail"
                   type="email"
                   id="email"
@@ -277,7 +277,7 @@ export default function RegisterPage() {
                 <label
                   className={`${
                     warning.field === "password" ? "text-red-500" : ""
-                  } absolute left-2 -top-3 px-2 z-10 rounded bg-white`}
+                  } absolute left-2 -top-3 px-2 z-10 rounded bg-[#ffffe5]`}
                   htmlFor="password"
                 >
                   {warning.field === "password"
@@ -290,7 +290,7 @@ export default function RegisterPage() {
                       ? "text-red-500 border-red-500 border-2 "
                       : "border-slate-400"
                   }
-                "bg-white w-64 p-3 rounded-md border  focus:outline-none focus:ring-2 focus:ring-[#7FC37E]`}
+                "bg-white w-64 p-3 rounded-md border  focus:outline-none focus:ring-2 focus:ring-[#7FC37E] bg-[#ffffe5]`}
                   placeholder="Enter your mail"
                   type={showPasswords ? "text" : "password"}
                   id="password"
@@ -327,7 +327,7 @@ export default function RegisterPage() {
                     warning.field === "password-verification"
                       ? "text-red-500"
                       : ""
-                  } absolute left-2 -top-3 px-2 z-10 rounded bg-white`}
+                  } absolute left-2 -top-3 px-2 z-10 rounded bg-[#ffffe5]`}
                   htmlFor="password-verification"
                 >
                   {warning.field === "password-verification"
@@ -340,7 +340,7 @@ export default function RegisterPage() {
                       ? "text-red-500 border-red-500 border-2 "
                       : "border-slate-400"
                   }
-                "bg-white w-64 p-3 rounded-md border  focus:outline-none focus:ring-2 focus:ring-[#7FC37E]`}
+                "bg-white w-64 p-3 rounded-md border  focus:outline-none focus:ring-2 focus:ring-[#7FC37E] bg-[#ffffe5]`}
                   placeholder="Re-enter your password"
                   type={showPasswords ? "text" : "password"}
                   id="password-verfication"

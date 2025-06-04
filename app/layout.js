@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
     <html lang="en" className="schibstedGrotesk.variable h-screen">
       <body
         className={
-          "antialiased bg-white h-full"
+          "antialiased bg-white h-full bg-[#ffffe5]"
         }
       >
         <AuthProvider>

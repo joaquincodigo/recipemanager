@@ -21,7 +21,7 @@ async function getUserRecipes() {
 }
 
 const styles = {
-  container: "flex flex-col w-screen px-3 md:w-max  md:mx-auto",
+  container: "flex flex-col w-screen px-3 md:w-max md:mx-auto",
   heading: "text-xl font-bold mt-3",
   subheading: "text-lg mb-5",
   noRecipesMsg: "mt-10 p-2 rounded-md bg-[#7fc37e21]",

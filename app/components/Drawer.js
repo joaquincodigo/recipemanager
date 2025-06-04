@@ -48,7 +48,7 @@ export default function Drawer({ closeDrawer, isDrawerOpen }) {
           right-0
           h-screen
           w-60
-          bg-white/80
+          bg-[#ffffe5]/80
           backdrop-blur-sm
           z-[60]
           transform
@@ -83,8 +83,7 @@ export default function Drawer({ closeDrawer, isDrawerOpen }) {
           right-0
           h-screen
           w-60
-          bg-white
-          bg-opacity-95
+          bg-[#ffffe5]/95
           text-black
           ${isDrawerOpen ? "shadow-lg shadow-black" : "shadow-none"}
           z-50

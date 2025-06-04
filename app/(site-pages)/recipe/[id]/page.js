@@ -121,7 +121,7 @@ export default function RecipePage({ params }) {
           <section className="mb-6">
             <h2 className="font-bold text-xl mb-3">Preparation Steps</h2>
             <ul className="relative">
-              <div className="absolute left-[14px] top-0 h-full w-1 bg-[#dddddd] z-[0]"></div>
+              <div className="absolute left-[14px] top-0 h-full w-1 bg-[#7FC37E] z-[0]"></div>
 
               {recipe.preparation_steps
                 .filter((step) => step.trim() !== "")
@@ -138,7 +138,7 @@ export default function RecipePage({ params }) {
                     rounded-full
                     border-solid
                     border-4
-                    border-[#dddddd]
+                    border-[#7fc37e]
                     p-3
                     font-bold
                     mr-3

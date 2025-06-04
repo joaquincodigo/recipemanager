@@ -47,12 +47,12 @@ export default function SitePagesLayout({ children }) {
   }, [isDrawerOpen]);
 
   return (
-    <div className="pt-14">
+    <div className="pt-14 bg-[#ffffe5]">
       <Header toggleDrawer={toggleDrawer} />
 
       <Drawer closeDrawer={closeDrawer} isDrawerOpen={isDrawerOpen} />
 
-      <main className="h-screen">{children}</main>
+      <main className="h-full">{children}</main>
     </div>
   );
 }
