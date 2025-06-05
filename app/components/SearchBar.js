@@ -2,14 +2,20 @@
 
 import { useState } from "react";
 import { useSearch } from "../context/SearchContext";
+import { usePathname } from "next/navigation";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 
 export default function SearchBar({ onSearch, searchInputRef }) {
   const { query, handleSearch } = useSearch();
   const [inputLength, setInputLength] = useState(0);
+  const pathname = usePathname();
 
   return (
-    <div className="flex relative items-center w-72 h-9 md:h-7">
+    <div
+      className={`${
+        pathname === "/home" ? "flex" : "hidden"
+      }  relative items-center w-72 h-9 md:h-7`}
+    >
       <input
         ref={searchInputRef}
         type="text"
