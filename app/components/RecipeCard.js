@@ -22,7 +22,7 @@ export default function RecipeCard({ recipe, isLiked, onToggleLike }) {
   return (
     <Link href={`/recipe/${recipe.id}`}>
       {/* IMAGE */}
-      <div className="w-full md:w-[240px] md:h-[250] p-2 shadow-md border rounded-lg bg-[#fdfde5] md:hover:shadow-[#7fc37ea4]">
+      <div className="w-full md:w-[240px] md:h-[250] p-2 shadow-md border rounded-lg bg-[#ffffef] md:hover:shadow-[#7fc37ea4]">
         <div className="relative w-full aspect-[5/4] overflow-hidden rounded-lg mb-3">
           <img
             src={
