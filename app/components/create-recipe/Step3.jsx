@@ -10,19 +10,25 @@ export default function Step3({ formData, setFormData, setCanMoveFoward }) {
   // initialize first input
   useEffect(() => {
     if (formData.ingredients.length === 0) {
-      setFormData(prev => ({ ...prev, ingredients: [""] }));
+      setFormData((prev) => ({ ...prev, ingredients: [""] }));
     }
   }, []);
 
   // enable forward when first is filled
   useEffect(() => {
-    if (formData.ingredients[0] !== "") {
+    // Only advance if theres at least 1 element and is not empty
+    if (formData.ingredients.length !== 0 && formData.ingredients[0] !== "") {
       setCanMoveFoward(true);
+    }
+
+    // If the only remaining element is empty, you can not advance
+    if (formData.ingredients[0] === "") {
+      setCanMoveFoward(false);
     }
   }, [formData]);
 
   const addIngredient = () => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       ingredients: [...prev.ingredients, ""],
     }));
@@ -41,7 +47,7 @@ export default function Step3({ formData, setFormData, setCanMoveFoward }) {
     prevCountRef.current = currCount;
   }, [formData.ingredients]);
 
-  const handleKeyDown = e => {
+  const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
       addIngredient();
@@ -51,16 +57,16 @@ export default function Step3({ formData, setFormData, setCanMoveFoward }) {
   const handleIngredientChange = (i, e) => {
     const newList = [...formData.ingredients];
     newList[i] = e.target.value;
-    const cleaned = newList.filter(v => v.trim() !== "");
-    setFormData(prev => ({
+    const cleaned = newList.filter((v) => v.trim() !== "");
+    setFormData((prev) => ({
       ...prev,
       ingredients: cleaned.length ? newList : [""],
     }));
   };
 
-  const removeIngredient = i => {
+  const removeIngredient = (i) => {
     if (formData.ingredients.length === 1) return;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       ingredients: prev.ingredients.filter((_, idx) => idx !== i),
     }));
@@ -74,10 +80,10 @@ export default function Step3({ formData, setFormData, setCanMoveFoward }) {
       {formData.ingredients.map((ing, i) => (
         <div key={i} className="flex justify-center gap-x-2">
           <TextInput
-            ref={el => (inputRefs.current[i] = el)}
+            ref={(el) => (inputRefs.current[i] = el)}
             fieldName="Ingredient"
             value={ing}
-            onChange={e => handleIngredientChange(i, e)}
+            onChange={(e) => handleIngredientChange(i, e)}
             onKeyDown={handleKeyDown}
           />
           <Button

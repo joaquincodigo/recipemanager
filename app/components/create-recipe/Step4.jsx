@@ -17,11 +17,17 @@ export default function Step4({ formData, setFormData, setCanMoveFoward }) {
   }, []);
 
   useEffect(() => {
+    // Only advance if theres at least 1 element and is not empty
     if (
       formData.preparation_steps.length !== 0 &&
       formData.preparation_steps[0] !== ""
     ) {
       setCanMoveFoward(true);
+    }
+
+    // If the only remaining element is empty, you can not advance 
+    if (formData.preparation_steps[0] === "") {
+      setCanMoveFoward(false)
     }
   }, [formData]);
 
