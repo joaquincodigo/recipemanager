@@ -88,7 +88,7 @@ export default function LoginPage() {
                 {/* MAIL */}
                 <div className="relative">
                   <label
-                    className={`absolute left-2 -top-3 px-2 z-10 rounded bg-[#ffffe5]  ${
+                    className={`absolute left-2 -top-3 px-2 z-10 rounded bg-[#ffffe5] border border-[#BFE1B0]  ${
                       showMailWarning ? "text-red-600" : "text-slate-800"
                     }`}
                     htmlFor="email"
@@ -97,7 +97,7 @@ export default function LoginPage() {
                   </label>
 
                   <input
-                    className={`bg-[#ffffe5] p-3 rounded-md border focus:outline-none focus:ring-2 focus:ring-[#7FC37E] ${
+                    className={`bg-white p-3 rounded-md border focus:outline-none focus:ring-2 focus:ring-[#7FC37E] ${
                       showMailWarning
                         ? "border-red-600 border-2"
                         : "border-slate-400"
@@ -121,7 +121,7 @@ export default function LoginPage() {
                 {/* PASSWORD */}
                 <div className="relative w-full">
                   <label
-                    className="absolute rounded left-2 -top-3 px-2 z-10 text-slate-800 bg-[#ffffe5]"
+                    className="absolute rounded left-2 -top-3 px-2 z-10 text-slate-800 bg-[#ffffe5] border border-[#BFE1B0]"
                     htmlFor="password"
                   >
                     Password
@@ -129,7 +129,7 @@ export default function LoginPage() {
 
                   {/* PASSWORD INPUT */}
                   <input
-                    className="p-3 rounded-md bg-[#ffffe5] border border-slate-400 w-full focus:outline-none focus:ring-2 focus:ring-[#7FC37E]"
+                    className="p-3 rounded-md bg-white border border-slate-400 w-full focus:outline-none focus:ring-2 focus:ring-[#7FC37E] "
                     placeholder="Enter your password"
                     type={showPassword ? "text" : "password"}
                     name="password"
