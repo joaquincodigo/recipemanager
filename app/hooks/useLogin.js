@@ -22,8 +22,8 @@ const useLogin = () => {
     }
 
     // Store userId and username in cookies
-    document.cookie = `userId=${data.id}; path=/;`;
-    document.cookie = `username=${data.name}; path=/;`;
+    document.cookie = `userId=${data.id}; path=/; SameSite=Lax; Secure`;
+    document.cookie = `username=${data.name}; path=/; SameSite=Lax; Secure`;
 
     setLoginError(null);
     setIsLoginPending(false);
