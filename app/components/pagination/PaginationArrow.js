@@ -22,21 +22,23 @@ export default function PaginationArrow({
   };
 
   return (
-    <div
-      className={
-        "flex w-10 h-10 rounded text-slate-500 bg-transparent hover:bg-slate-100"
-      }
-    >
+    <div className={"flex w-10 h-10 text-slate-500 bg-transparent"}>
       {direction === "right" ? (
         <ChevronRightIcon
           className={`${
-            currentPage === totalPages && "text-slate-200"
-          } stroke-[2]`}
+            currentPage === totalPages
+              ? "text-slate-200"
+              : "cursor-pointer hover:bg-slate-100"
+          } stroke-[2] rounded-md`}
           onClick={nextPage}
         />
       ) : (
         <ChevronLeftIcon
-          className={`${currentPage === 1 && "text-slate-200"} stroke-[2]`}
+          className={`${
+            currentPage === 1
+              ? "text-slate-200"
+              : "cursor-pointer hover:bg-slate-100"
+          } stroke-[2] rounded-md`}
           onClick={previousPage}
         />
       )}
