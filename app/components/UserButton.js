@@ -11,7 +11,7 @@ export default function UserButton({ onClick }) {
     container:
       "flex items-center justify-center rounded-full w-8 h-8 md:w-7 md:h-7",
     annonymousUserBtn:
-      "right-3 w-full h-full text-white font-bold text-2xl hover:text-[#619460]",
+      "right-3 text-white w-full h-full font-bold text-2xl hover:text-[#619460]",
   };
 
   return (
