@@ -13,6 +13,7 @@ import { HeartIcon } from "@heroicons/react/24/outline";
 import { ArrowLeftStartOnRectangleIcon } from "@heroicons/react/24/outline";
 import { PlusCircleIcon } from "@heroicons/react/24/outline";
 import { UserCircleIcon } from "@heroicons/react/24/outline";
+import DrawerItem from "./DrawerItem";
 
 export default function Drawer({ closeDrawer, isDrawerOpen }) {
   const { handleLogout } = useLogout();
@@ -105,7 +106,9 @@ export default function Drawer({ closeDrawer, isDrawerOpen }) {
           <div className="flex flex-col items-center gap-y-2">
             <div
               className={
-                loggedIn ? "ring-4 ring-[#7FC37E] rounded-full cursor-default" : undefined
+                loggedIn
+                  ? "ring-4 ring-[#7FC37E] rounded-full cursor-default"
+                  : undefined
               }
             >
               {loggedIn ? (
@@ -126,48 +129,40 @@ export default function Drawer({ closeDrawer, isDrawerOpen }) {
           </div>
 
           {/* Option List */}
-          <ul className="flex flex-col mx-auto w-max gap-y-6">
-            <li className="flex items-center" onClick={closeDrawer}>
-              <span className="me-3">
-                <HomeIcon className="w-6 h-6" />
-              </span>
-              <Link className="font-semibold" href="/home">
-                Home
-              </Link>
-            </li>
+          <ul className="flex flex-col mx-auto w-max gap-y-4">
+            <DrawerItem
+              icon={HomeIcon}
+              href="/home"
+              label="Home"
+              onClick={closeDrawer}
+            />
 
-            <li className="flex items-center" onClick={closeDrawer}>
-              <span className="me-3">
-                <PlusCircleIcon className="w-6 h-6" />
-              </span>
-              <Link className="font-semibold" href="/create-recipe">
-                Create recipe
-              </Link>
-            </li>
-            <li className="flex items-center" onClick={closeDrawer}>
-              <span className="me-3">
-                <BookOpenIcon className="w-6 h-6" />
-              </span>
-              <Link className="font-semibold" href="/my-recipes">
-                My recipes
-              </Link>
-            </li>
-            <li className="flex items-center" onClick={closeDrawer}>
-              <span className="me-3">
-                <HeartIcon className="w-6 h-6" />
-              </span>
-              <Link className="font-semibold" href="/liked-recipes">
-                Liked recipes
-              </Link>
-            </li>
-            <li className="flex items-center">
-              <span className="me-3">
-                <ArrowLeftStartOnRectangleIcon className="w-6 h-6" />
-              </span>
-              <button className="font-semibold" onClick={handleLogout}>
-                Logout
-              </button>
-            </li>
+            <DrawerItem
+              icon={PlusCircleIcon}
+              href="/create-recipe"
+              label="Create recipe"
+              onClick={closeDrawer}
+            />
+
+            <DrawerItem
+              icon={BookOpenIcon}
+              href="/my-recipes"
+              label="My recipes"
+              onClick={closeDrawer}
+            />
+
+            <DrawerItem
+              icon={HeartIcon}
+              href="/liked-recipes"
+              label="Liked recipes"
+              onClick={closeDrawer}
+            />
+
+            <DrawerItem
+              icon={ArrowLeftStartOnRectangleIcon}
+              label="Logout"
+              onClick={handleLogout}
+            />
           </ul>
         </div>
       </div>
