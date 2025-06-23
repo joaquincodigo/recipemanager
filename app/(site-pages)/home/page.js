@@ -118,12 +118,11 @@ export default function HomePage() {
   }
 
   return (
-    <div className="flex flex-col w-screen md:w-max px-3 md:mx-auto">
+    <div className="mt-3 flex-grow w-screen md:w-max px-3 md:mx-auto">
       {!loggedIn && showNonLoggedModal && <NonLoggedModal />}
       {loggedIn && showLoggedModal && <LoggedModal/>}
 
       {content}
-      <Footer />
     </div>
   );
 }

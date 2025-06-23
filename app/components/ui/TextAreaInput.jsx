@@ -13,7 +13,7 @@ export default function TextAreaInput({
     container: " flex flex-col md:items-center",
     wrapper: "relative",
     textarea:
-      "bg-white h-32 p-3 rounded-md border border-slate-400 focus:outline-none focus:ring-2 focus:ring-[#7FC37E] min-w-64 md:w-80 bg-[#ffffe5]",
+      "bg-white h-32 p-3 rounded-md border border-slate-400 focus:outline-none focus:ring-2 focus:ring-[#7FC37E] min-w-64 md:w-80 bg-[#ffffe5] resize-none",
     errorTextarea:
       "bg-white p-3 rounded-md border-2 border-red-700 focus:outline-none focus:ring-2 focus:ring-red-700 md:w-80",
     label:
