@@ -92,6 +92,10 @@ export default function LikedRecipes() {
       ref={containerRef}
       className="flex flex-col w-screen px-3 md:w-max md:mx-auto"
     >
+      <h1 className="text-xl font-bold mt-3">Your liked recipes</h1>
+      <h2 className="text-lg mb-5">
+        Revisit and explore the recipes you enjoyed
+      </h2>
       {content}
       <Footer />
     </div>

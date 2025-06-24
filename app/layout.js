@@ -18,7 +18,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className="schibstedGrotesk.variable h-screen">
-      <body className={"antialiased bg-[#ffffe5] min-h-screen flex flex-col"}>
+      <body className={"bg-[#ffffe5] antialiased  min-h-screen flex flex-col"}>
         <AuthProvider>
           <SearchProvider>{children}</SearchProvider>
         </AuthProvider>

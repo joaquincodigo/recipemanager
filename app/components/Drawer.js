@@ -2,10 +2,8 @@
 
 import Link from "next/link";
 import ProfileAvatar from "./ProfileAvatar";
-
 import { useAuth } from "@/app/context/AuthContext";
 import useLogout from "@/app/hooks/useLogout";
-
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { HomeIcon } from "@heroicons/react/24/outline";
 import { BookOpenIcon } from "@heroicons/react/24/outline";
@@ -39,8 +37,8 @@ export default function Drawer({ closeDrawer, isDrawerOpen }) {
           }
         `}
       ></div>
+
       {/* Blurred Drawer for non-logged users */}
-      {/* Blurrer */}
       {!loggedIn && (
         <div
           className={`
@@ -161,7 +159,10 @@ export default function Drawer({ closeDrawer, isDrawerOpen }) {
             <DrawerItem
               icon={ArrowLeftStartOnRectangleIcon}
               label="Logout"
-              onClick={handleLogout}
+              onClick={() => {
+                handleLogout();
+                closeDrawer();
+              }}
             />
           </ul>
         </div>

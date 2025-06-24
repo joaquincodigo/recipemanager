@@ -192,7 +192,6 @@ export default function RecipePage({ params }) {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 }
