@@ -97,7 +97,6 @@ export default function LikedRecipes() {
         Revisit and explore the recipes you enjoyed
       </h2>
       {content}
-      <Footer />
     </div>
   );
 }
