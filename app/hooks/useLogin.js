@@ -1,36 +1,35 @@
 import { useState, useCallback } from "react";
-import { supabase } from "@/lib/supabase";
 
 const useLogin = () => {
   const [loginError, setLoginError] = useState(null);
   const [isLoginPending, setIsLoginPending] = useState(false);
 
-  const handleLogin = useCallback(async (mail, password) => {
+  const handleLogin = useCallback(async (email, password) => {
     setIsLoginPending(true);
 
-    const { data, error } = await supabase
-      .from("demousers")
-      .select("*")
-      .eq("email", mail)
-      .eq("password", password)
-      .single();
+    const res = await fetch("/api/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
 
-    if (error || !data) {
-      setLoginError("Invalid credentials");
+    const data = await res.json();
+
+    if (!res.ok) {
+      setLoginError(data.error || "Invalid credentials");
       setIsLoginPending(false);
       return false;
     }
 
-    // Store userId and username in cookies
-    document.cookie = `userId=${data.id}; path=/; SameSite=Lax; Secure`;
-    document.cookie = `username=${data.name}; path=/; SameSite=Lax; Secure`;
+    document.cookie = `userId=${data.userId}; path=/; SameSite=Lax`;
+    document.cookie = `username=${data.username}; path=/; SameSite=Lax`;
 
     setLoginError(null);
     setIsLoginPending(false);
     return true;
   }, []);
 
-  return { handleLogin, loginError, isLoginPending, setIsLoginPending };
+  return { handleLogin, loginError, isLoginPending };
 };
 
 export default useLogin;

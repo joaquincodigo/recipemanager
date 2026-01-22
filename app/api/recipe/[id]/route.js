@@ -1,26 +1,34 @@
-import { createClient } from "@supabase/supabase-js";
+import { sql } from "@/lib/neon";
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-const supabase = createClient(supabaseUrl, supabaseKey);
-
-export async function GET(request, { params }) {
+export async function GET(_req, { params }) {
   const id = (await params).id;
 
-  const { data, error } = await supabase
-    .from("recipes")
-    .select("*")
-    .eq("id", id)
-    .single();
+  try {
+    const rows = await sql`
+      SELECT *
+      FROM recipes
+      WHERE id = ${id}
+      LIMIT 1
+    `;
 
-  if (error) {
-    return new Response(JSON.stringify({ error: error.message }), {
-      status: 500,
-    });
+    if (rows.length === 0) {
+      return new Response(
+        JSON.stringify({ error: "Recipe not found" }),
+        { status: 404 }
+      );
+    }
+
+    return new Response(
+      JSON.stringify({ recipe: rows[0] }),
+      {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+  } catch (err) {
+    return new Response(
+      JSON.stringify({ error: err.message }),
+      { status: 500 }
+    );
   }
-
-  return new Response(JSON.stringify({ recipe: data }), {
-    status: 200,
-    headers: { "Content-Type": "application/json" },
-  });
 }

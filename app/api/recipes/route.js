@@ -1,20 +1,25 @@
-import { createClient } from "@supabase/supabase-js";
+import { sql } from "@/lib/neon";
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-const supabase = createClient(supabaseUrl, supabaseKey);
+export async function GET(req) {
+  const { searchParams } = new URL(req.url);
+  const query = searchParams.get("q");
 
-export async function GET() {
-  const { data, error } = await supabase.from("recipes").select("*");
+  try {
+    let rows;
 
-  if (error) {
-    return new Response(JSON.stringify({ error: error.message }), {
-      status: 500,
-    });
+    if (query) {
+      rows = await sql`
+        SELECT *
+        FROM recipes
+        WHERE title ILIKE ${"%" + query + "%"}
+           OR description ILIKE ${"%" + query + "%"}
+      `;
+    } else {
+      rows = await sql`SELECT * FROM recipes`;
+    }
+
+    return Response.json(rows);
+  } catch (err) {
+    return new Response(err.message, { status: 500 });
   }
-
-  return new Response(JSON.stringify({ recipes: data }), {
-    status: 200,
-    headers: { "Content-Type": "application/json" },
-  });
 }

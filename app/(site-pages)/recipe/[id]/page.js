@@ -8,7 +8,6 @@ import { ChartPieIcon } from "@heroicons/react/24/outline";
 import { ChevronDoubleUpIcon } from "@heroicons/react/24/outline";
 import { TagIcon } from "@heroicons/react/24/outline";
 import BackButton from "@/app/components/BackButton";
-import Footer from "@/app/components/Footer";
 
 export default function RecipePage({ params }) {
   const [recipe, setRecipe] = useState(null);

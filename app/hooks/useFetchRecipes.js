@@ -1,43 +1,37 @@
+// hooks/useFetchRecipes.js
 import { useState, useEffect } from "react";
-import { supabase } from "@/lib/supabase";
 
 const useFetchRecipes = (query) => {
+  console.log("use fetch recipes called");
   const [recipes, setRecipes] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let ignore = false;
+
     const fetchRecipes = async () => {
-      // Set loading to true at the start of fetch
       setLoading(true);
       setError(null);
 
       try {
-        let request = supabase.from("recipes").select("*");
-        if (query) {
-          request = request.or(
-            `title.ilike.%${query}%,description.ilike.%${query}%`
-          );
-        }
+        const res = await fetch(
+          `/api/recipes${query ? `?q=${encodeURIComponent(query)}` : ""}`
+        );
 
-        const { data, error } = await request;
+        if (!res.ok) throw new Error("Fetch failed");
 
-        if (error) {
-          setError(error.message);
-          setRecipes([]);
-        } else {
-          setRecipes(data || []);
-        }
+        const data = await res.json();
+        if (!ignore) setRecipes(data);
       } catch (err) {
-        setError(err.message);
-        setRecipes([]);
+        if (!ignore) setError(err.message);
       } finally {
-        // Set loading to false when done
-        setLoading(false);
+        if (!ignore) setLoading(false);
       }
     };
 
     fetchRecipes();
+    return () => (ignore = true);
   }, [query]);
 
   return { recipes, error, loading };

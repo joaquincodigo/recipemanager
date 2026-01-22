@@ -1,33 +1,35 @@
-import { supabase } from "@/lib/supabase";
+import pool from "@/lib/db";
 
 export async function POST(req) {
   try {
     const { email, password } = await req.json();
 
-    // Query user data
-    const { data, error } = await supabase
-      .from("demousers")
-      .select("id, email, password")
-      .eq("email", email)
-      .eq("password", password)
-      .single();
+    const { rows } = await pool.query(
+      `
+      SELECT id, name
+      FROM demousers
+      WHERE email = $1 AND password = $2
+      LIMIT 1
+      `,
+      [email, password]
+    );
 
-    if (error || !data) {
+    if (rows.length === 0) {
       return new Response(JSON.stringify({ error: "Invalid credentials" }), {
         status: 401,
       });
     }
 
-    // Send the user ID back to the client instead of setting a cookie here
-    return new Response(JSON.stringify({ message: "Logged in", userId: data.id }), {
-      status: 200,
-    });
-  } catch (error) {
-    console.error("Server error:", error);
+    return new Response(
+      JSON.stringify({
+        userId: rows[0].id,
+        username: rows[0].name,
+      }),
+      { status: 200 }
+    );
+  } catch (err) {
     return new Response(JSON.stringify({ error: "Internal server error" }), {
       status: 500,
     });
   }
 }
-
-

@@ -1,9 +1,15 @@
-"use client"
+import pool from "@/lib/db";
 
-import Test from "@/app/components/Test"
+export default async function RecipesPage() {
+  const { rows } = await pool.query(
+    "SELECT id, message, created_at FROM connectivity_test"
+  );
 
-export default function TestPage() {
-	return (
-		<Test/>
-	)
+  return (
+    <ul>
+      {rows.map((r) => (
+        <li key={r.id}>{r.message}</li>
+      ))}
+    </ul>
+  );
 }
