@@ -38,6 +38,7 @@ export default function Step1({ formData, setFormData, setCanMoveFoward }) {
 
   const styles = {
     heading: "text-slate-500 font-bold mb-5 text-center pb-3",
+    charMinimun: "text-slate-500  w-full text-right text-sm",
     errorMessage: "text-red-700",
     wrapper: "flex flex-col items-center mb-3",
   };
@@ -72,7 +73,7 @@ export default function Step1({ formData, setFormData, setCanMoveFoward }) {
           error={descriptionError}
           value={formData.description}
         />
-
+        <p className={styles.charMinimun}>10 characteres minimum</p>
         {/* Error Message */}
         {descriptionError && (
           <p className={styles.errorMessage}>{errors.description}</p>

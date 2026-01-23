@@ -1,5 +1,6 @@
-import { supabase } from "@/lib/supabase";
+import pool from "@/lib/db";
 
+/* GET liked recipes */
 export async function GET(request) {
   const url = new URL(request.url);
   const userId = url.searchParams.get("userId");
@@ -12,36 +13,42 @@ export async function GET(request) {
   }
 
   try {
-    const { data, error } = await supabase
-      .from("demousers")
-      .select("liked_recipes")
-      .eq("id", userId)
-      .single();
+    const { rows } = await pool.query(
+      `
+      SELECT liked_recipes
+      FROM demousers
+      WHERE id = $1
+      LIMIT 1
+      `,
+      [userId]
+    );
 
-    if (error) throw error;
+    if (rows.length === 0) {
+      return new Response(JSON.stringify({ likedRecipes: [] }), {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
 
     return new Response(
-      JSON.stringify({ likedRecipes: data?.liked_recipes || [] }),
+      JSON.stringify({ likedRecipes: rows[0].liked_recipes || [] }),
       {
         status: 200,
         headers: { "Content-Type": "application/json" },
       }
     );
-  } catch (error) {
-    console.error("Error fetching liked recipes:", error);
-    return new Response(JSON.stringify({ error: error.message }), {
+  } catch (err) {
+    console.error("Error fetching liked recipes:", err);
+    return new Response(JSON.stringify({ error: "Internal server error" }), {
       status: 500,
       headers: { "Content-Type": "application/json" },
     });
   }
 }
 
+/* POST like / unlike */
 export async function POST(request) {
-  const body = await request.json();
-  const { userId, recipeId, action } = body;
-
-  console.log("IM POST HANDLER IN API");
-  console.log("USER ID, RECIPE ID, ACTION ARE:", userId, recipeId, action);
+  const { userId, recipeId, action } = await request.json();
 
   if (!userId || !recipeId || !action) {
     return new Response(
@@ -54,42 +61,53 @@ export async function POST(request) {
   }
 
   try {
-    // Get current liked recipes
-    const { data: userData, error: fetchError } = await supabase
-      .from("demousers")
-      .select("liked_recipes")
-      .eq("id", userId)
-      .single();
+    /* fetch current array */
+    const { rows } = await pool.query(
+      `
+      SELECT liked_recipes
+      FROM demousers
+      WHERE id = $1
+      LIMIT 1
+      `,
+      [userId]
+    );
 
-    if (fetchError) throw fetchError;
-
-    // Update the liked_recipes array
-    let liked_recipes = userData?.liked_recipes || [];
-
-    if (action === "like" && !liked_recipes.includes(recipeId)) {
-      liked_recipes.push(recipeId);
-    } else if (action === "unlike") {
-      liked_recipes = liked_recipes.filter((id) => id !== recipeId);
+    if (rows.length === 0) {
+      return new Response(JSON.stringify({ error: "User not found" }), {
+        status: 404,
+      });
     }
 
-    // Save the updated array
-    const { error: updateError } = await supabase
-      .from("demousers")
-      .update({ liked_recipes })
-      .eq("id", userId);
+    let likedRecipes = rows[0].liked_recipes || [];
 
-    if (updateError) throw updateError;
+    if (action === "like" && !likedRecipes.includes(recipeId)) {
+      likedRecipes.push(recipeId);
+    }
+
+    if (action === "unlike") {
+      likedRecipes = likedRecipes.filter((id) => id !== recipeId);
+    }
+
+    /* persist update */
+    await pool.query(
+      `
+      UPDATE demousers
+      SET liked_recipes = $1
+      WHERE id = $2
+      `,
+      [likedRecipes, userId]
+    );
 
     return new Response(
-      JSON.stringify({ success: true, likedRecipes: liked_recipes }),
+      JSON.stringify({ success: true, likedRecipes }),
       {
         status: 200,
         headers: { "Content-Type": "application/json" },
       }
     );
-  } catch (error) {
-    console.error("Error updating liked recipes:", error);
-    return new Response(JSON.stringify({ error: error.message }), {
+  } catch (err) {
+    console.error("Error updating liked recipes:", err);
+    return new Response(JSON.stringify({ error: "Internal server error" }), {
       status: 500,
       headers: { "Content-Type": "application/json" },
     });
