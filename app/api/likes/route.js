@@ -1,4 +1,4 @@
-import pool from "@/lib/db";
+import db from "@/lib/db";
 
 /* GET liked recipes */
 export async function GET(request) {
@@ -13,7 +13,7 @@ export async function GET(request) {
   }
 
   try {
-    const { rows } = await pool.query(
+    const { rows } = await db.query(
       `
       SELECT liked_recipes
       FROM demousers
@@ -62,7 +62,7 @@ export async function POST(request) {
 
   try {
     /* fetch current array */
-    const { rows } = await pool.query(
+    const { rows } = await db.query(
       `
       SELECT liked_recipes
       FROM demousers
@@ -89,7 +89,7 @@ export async function POST(request) {
     }
 
     /* persist update */
-    await pool.query(
+    await db.query(
       `
       UPDATE demousers
       SET liked_recipes = $1

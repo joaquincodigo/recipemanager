@@ -1,10 +1,10 @@
-import pool from "@/lib/db";
+import db from "@/lib/db";
 
 export async function POST(req) {
   try {
     const { email, password } = await req.json();
 
-    const { rows } = await pool.query(
+    const { rows } = await db.query(
       `
       SELECT id, name
       FROM demousers
