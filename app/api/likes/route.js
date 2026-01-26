@@ -1,115 +1,72 @@
 import db from "@/lib/db";
 
-/* GET liked recipes */
 export async function GET(request) {
   const url = new URL(request.url);
   const userId = url.searchParams.get("userId");
 
   if (!userId) {
-    return new Response(JSON.stringify({ error: "userId is required" }), {
-      status: 400,
-      headers: { "Content-Type": "application/json" },
-    });
+    return Response.json({ error: "userId is required" }, { status: 400 });
   }
 
   try {
-    const { rows } = await db.query(
-      `
+    const rows = await db`
       SELECT liked_recipes
       FROM demousers
-      WHERE id = $1
+      WHERE id = ${userId}
       LIMIT 1
-      `,
-      [userId]
-    );
+    `;
 
-    if (rows.length === 0) {
-      return new Response(JSON.stringify({ likedRecipes: [] }), {
-        status: 200,
-        headers: { "Content-Type": "application/json" },
-      });
-    }
-
-    return new Response(
-      JSON.stringify({ likedRecipes: rows[0].liked_recipes || [] }),
-      {
-        status: 200,
-        headers: { "Content-Type": "application/json" },
-      }
+    return Response.json(
+      { likedRecipes: rows[0]?.liked_recipes || [] },
+      { status: 200 }
     );
   } catch (err) {
-    console.error("Error fetching liked recipes:", err);
-    return new Response(JSON.stringify({ error: "Internal server error" }), {
-      status: 500,
-      headers: { "Content-Type": "application/json" },
-    });
+    console.error(err);
+    return Response.json({ error: "Internal server error" }, { status: 500 });
   }
 }
 
-/* POST like / unlike */
 export async function POST(request) {
-  const { userId, recipeId, action } = await request.json();
-
-  if (!userId || !recipeId || !action) {
-    return new Response(
-      JSON.stringify({ error: "userId, recipeId, and action are required" }),
-      {
-        status: 400,
-        headers: { "Content-Type": "application/json" },
-      }
-    );
-  }
-
   try {
-    /* fetch current array */
-    const { rows } = await db.query(
-      `
+    const { userId, recipeId, action } = await request.json();
+
+    if (!userId || !recipeId || !action) {
+      return Response.json(
+        { error: "userId, recipeId, and action are required" },
+        { status: 400 }
+      );
+    }
+
+    const rows = await db`
       SELECT liked_recipes
       FROM demousers
-      WHERE id = $1
+      WHERE id = ${userId}
       LIMIT 1
-      `,
-      [userId]
-    );
+    `;
 
     if (rows.length === 0) {
-      return new Response(JSON.stringify({ error: "User not found" }), {
-        status: 404,
-      });
+      return Response.json({ error: "User not found" }, { status: 404 });
     }
 
     let likedRecipes = rows[0].liked_recipes || [];
 
     if (action === "like" && !likedRecipes.includes(recipeId)) {
-      likedRecipes.push(recipeId);
+      likedRecipes = [...likedRecipes, recipeId];
     }
 
     if (action === "unlike") {
       likedRecipes = likedRecipes.filter((id) => id !== recipeId);
     }
 
-    /* persist update */
-    await db.query(
-      `
+    await db`
       UPDATE demousers
-      SET liked_recipes = $1
-      WHERE id = $2
-      `,
-      [likedRecipes, userId]
-    );
+      SET liked_recipes = ${likedRecipes}
+      WHERE id = ${userId}
+    `;
 
-    return new Response(
-      JSON.stringify({ success: true, likedRecipes }),
-      {
-        status: 200,
-        headers: { "Content-Type": "application/json" },
-      }
-    );
+    return Response.json({ success: true, likedRecipes }, { status: 200 });
   } catch (err) {
-    console.error("Error updating liked recipes:", err);
-    return new Response(JSON.stringify({ error: "Internal server error" }), {
-      status: 500,
-      headers: { "Content-Type": "application/json" },
-    });
+    console.error(err);
+    return Response.json({ error: "Internal server error" }, { status: 500 });
   }
 }

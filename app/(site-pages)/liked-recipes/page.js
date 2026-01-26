@@ -17,10 +17,6 @@ export default function LikedRecipes() {
   const { likedRecipes, error, loading } = useLikedRecipes(userId);
   const { isLiked, toggleLike } = useLikeRecipe(userId);
 
-  useEffect(() => {
-    console.log("Loading state changed:", loading);
-  }, [loading]);
-
   const {
     paginatedRecipes,
     currentPage,

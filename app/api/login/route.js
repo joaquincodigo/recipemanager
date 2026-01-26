@@ -4,32 +4,27 @@ export async function POST(req) {
   try {
     const { email, password } = await req.json();
 
-    const { rows } = await db.query(
-      `
+    const rows = await db`
       SELECT id, name
       FROM demousers
-      WHERE email = $1 AND password = $2
+      WHERE email = ${email}
+        AND password = ${password}
       LIMIT 1
-      `,
-      [email, password]
-    );
+    `;
 
     if (rows.length === 0) {
-      return new Response(JSON.stringify({ error: "Invalid credentials" }), {
-        status: 401,
-      });
+      return Response.json({ error: "Invalid credentials" }, { status: 401 });
     }
 
-    return new Response(
-      JSON.stringify({
+    return Response.json(
+      {
         userId: rows[0].id,
         username: rows[0].name,
-      }),
+      },
       { status: 200 }
     );
   } catch (err) {
-    return new Response(JSON.stringify({ error: "Internal server error" }), {
-      status: 500,
-    });
+    console.error(err);
+    return Response.json({ error: "Internal server error" }, { status: 500 });
   }
 }

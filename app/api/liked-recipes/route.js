@@ -1,5 +1,5 @@
+import db from "@/lib/db";
 import { NextResponse } from "next/server";
-import { db } from "@/lib/db";
 
 export async function GET(req) {
   const { searchParams } = new URL(req.url);
@@ -13,46 +13,39 @@ export async function GET(req) {
   }
 
   try {
-    // 1. Get liked recipe IDs
-    const userResult = await db.query(
-      `SELECT liked_recipes FROM demousers WHERE id = $1`,
-      [userId]
-    );
+    // 1) get liked recipe IDs
+    const users = await db`
+      SELECT liked_recipes
+      FROM demousers
+      WHERE id = ${userId}
+      LIMIT 1
+    `;
 
-    if (userResult.rowCount === 0) {
-      return NextResponse.json(
-        { likedRecipes: [] },
-        { status: 200 }
-      );
+    if (users.length === 0) {
+      return NextResponse.json({ likedRecipes: [] }, { status: 200 });
     }
 
-    const likedRecipeIds = userResult.rows[0].liked_recipes || [];
+    const likedRecipeIds = users[0].liked_recipes || [];
 
     if (likedRecipeIds.length === 0) {
-      return NextResponse.json(
-        { likedRecipes: [] },
-        { status: 200 }
-      );
+      return NextResponse.json({ likedRecipes: [] }, { status: 200 });
     }
 
-    // 2. Fetch recipes
-    const recipesResult = await db.query(
-      `
+    // 2) fetch recipes
+    const recipes = await db`
       SELECT id, title, image, description, preparation_time, category
       FROM recipes
-      WHERE id = ANY($1::int[])
-      `,
-      [likedRecipeIds]
-    );
+      WHERE id = ANY(${likedRecipeIds})
+    `;
 
     return NextResponse.json(
-      { likedRecipes: recipesResult.rows },
+      { likedRecipes: recipes },
       { status: 200 }
     );
   } catch (err) {
-    console.error("Error fetching liked recipes:", err);
+    console.error(err);
     return NextResponse.json(
-      { error: err.message },
+      { error: "Internal server error" },
       { status: 500 }
     );
   }

@@ -68,7 +68,7 @@ export default function RecipeCard({ recipe, isLiked, onToggleLike }) {
                   className="absolute inset-0 items-center justify-center"
                   initial={{ scale: 1, opacity: 1 }}
                   animate={animateLike ? { scale: 2, opacity: 0 } : {}}
-                  transition={{ duration: 0.5, ease: "easeOut" }}
+                  transition={{ duration: 0.3, ease: "easeOut" }}
                   onAnimationComplete={() => {
                     setAnimateLike(false);
                   }}
