@@ -5,7 +5,6 @@ import { useState, useRef, useEffect, useContext } from "react";
 import { EyeIcon } from "@heroicons/react/24/outline";
 import { EyeSlashIcon } from "@heroicons/react/24/outline";
 import RegistrationPending from "@/app/components/RegistrationPending";
-import { supabase } from "@/lib/supabase";
 import useLogin from "@/app/hooks/useLogin";
 
 export default function RegisterPage() {
@@ -114,26 +113,24 @@ export default function RegisterPage() {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  async function registerNewUser({ email, password, name, last_name }) {
-    const { error } = await supabase.from("demousers").insert([
-      {
-        email,
-        password,
-        name,
-        last_name,
-        avatar_url: "",
-        liked_recipes: [],
-        uploaded_recipes: [],
-      },
-    ]);
+  async function registerNewUser({ email, password, name, lastname }) {
+    const res = await fetch("/api/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password, name, lastname }),
+    });
 
-    if (error) {
+    const result = await res.json();
+
+    if (!res.ok || !result.success) {
       setRegistrationStatus("error");
-    } else {
-      setRegistrationStatus("success");
-      const loginSuccess = await handleLogin(email, password);
-      if (loginSuccess) window.location.href = "/home";
+      return;
     }
+
+    setRegistrationStatus("success");
+
+    const loginSuccess = await handleLogin(email, password);
+    if (loginSuccess) window.location.href = "/home";
   }
 
   const completeForm = () => {
