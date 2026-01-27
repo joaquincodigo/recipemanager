@@ -51,7 +51,7 @@ export default function RecipeCard({ recipe, isLiked, onToggleLike }) {
         </h2>
 
         {/* DESCRIPTION */}
-        <p className="md:text-sm md:min-h-12 mb-3 line-clamp-2">
+        <p className="md:text-sm mb-3 line-clamp-2 md:min-h-[2.5em]">
           {recipe.description}
         </p>
 
