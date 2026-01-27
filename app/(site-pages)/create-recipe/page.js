@@ -25,6 +25,26 @@ export default function CreateRecipe() {
     preparation_steps: [],
   });
 
+  const buildFormData = (data) => {
+    const fd = new FormData();
+
+    fd.append("title", data.title);
+    fd.append("description", data.description);
+    fd.append("difficulty", data.difficulty);
+    fd.append("category", data.category);
+    fd.append("ingredients", JSON.stringify(data.ingredients));
+    fd.append("preparation_steps", JSON.stringify(data.preparation_steps));
+    fd.append("preparation_time", data.preparation_time);
+    fd.append("servings", data.servings);
+    fd.append("author", data.author);
+
+    if (data.image instanceof File) {
+      fd.append("image", data.image);
+    }
+
+    return fd;
+  };
+
   useEffect(() => {
     const match = document.cookie.match(/(^| )userId=([^;]+)/);
     const userId = match?.[2] || null;
@@ -34,10 +54,11 @@ export default function CreateRecipe() {
   const hasStored = useRef(false); // Prevent multiple posts
   useEffect(() => {
     if (step === 9 && !hasStored.current) {
-      // Prevent multiple posts
       hasStored.current = true;
-      console.log("Recording recipe");
-      recordNewRecipe(formData).then(({ success }) =>
+
+      const fd = buildFormData(formData);
+
+      recordNewRecipe(fd).then(({ success }) =>
         setEndingScreen(success ? "success" : "error")
       );
     }

@@ -20,7 +20,7 @@ export default function useLikeRecipe(userId) {
         if (!response.ok) {
           throw new Error("Failed to fetch liked recipes");
         }
-
+        
         const data = await response.json();
         setLikedRecipes(data.likedRecipes || []);
         setIsLoading(false);
