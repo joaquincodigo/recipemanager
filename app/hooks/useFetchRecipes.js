@@ -1,4 +1,3 @@
-// hooks/useFetchRecipes.js
 import { useState, useEffect } from "react";
 
 const useFetchRecipes = (query) => {
